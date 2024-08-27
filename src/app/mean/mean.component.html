@@ -1,0 +1,19 @@
+<h1>Mean Calculator</h1>
+<form id="setUpForm" [formGroup]="setUpForm">
+    <label>How many numbers are there? </label>
+    <input type="text" id="numberOfInputs" name="numberOfInputs" formControlName="numberOfInputs">
+    <input type="button" id="generateButton" name="generateButton" value="Generate Inputs" (click)="calculateInputs()">
+</form>
+<form id="inputForm" [formGroup]="inputForm">
+<ng-container *ngFor="let number of inputs">
+<input type="text" id="{{number}}" name="{{number}}" class="input" formControlName="{{number}}">
+</ng-container>
+</form>
+<br>
+<ng-container *ngIf="inputs.length > 0">
+<input type="button" id="calcButton" name="calcButton" value="Calculate Mean" (click)="calculateMean()">
+</ng-container>
+<br>
+<ng-container *ngIf="showCalculation">
+    <h1>{{calculation}}</h1>
+</ng-container>
