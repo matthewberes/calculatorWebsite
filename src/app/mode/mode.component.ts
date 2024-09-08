@@ -10,17 +10,12 @@ import { SetUpComponent } from '../set-up/set-up.component';
   templateUrl: './mode.component.html',
   styleUrl: './mode.component.css'
 })
-export class ModeComponent implements OnInit{
-  
-  constructor(public setUpService: SetUpService){}
+export class ModeComponent implements OnInit {
+
+  constructor(public setUpService: SetUpService) { }
 
   ngOnInit(): void {
-  this.setUpService.currentCalc = "Mode"
+    this.setUpService.currentCalc = "Mode"
   }
-
-  calculateMode(){
-
-  }
-
 
 }

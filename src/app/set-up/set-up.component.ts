@@ -36,6 +36,7 @@ export class SetUpComponent {
         this.calculateMean()
         break;
       case "Median":
+        this.calculateMedian()
         break;
       case "Mode":
         this.calculateMode();
@@ -51,6 +52,21 @@ export class SetUpComponent {
     this.calculation = String(sum / this.setUpForm.value.numberOfInputs);
     this.showCalculation = true;
     this.cdr.detectChanges();
+  }
+
+  calculateMedian() {
+    let inputArray: number[] = [];
+    this.inputs.forEach(value => {
+      inputArray.push(this.inputForm.get(String(value))?.value);
+    })
+    let ascendingArray: number[] = inputArray.sort(this.setUpService.numberSorter);
+    if (this.inputs.length % 2 == 0) { //Even
+      this.calculation = String((ascendingArray[ascendingArray.length / 2] + ascendingArray[(ascendingArray.length / 2) - 1]) / 2);
+      this.showCalculation = true;
+    } else { //Odd
+      this.calculation = String(ascendingArray[(ascendingArray.length / 2) - .5]);
+      this.showCalculation = true;
+    }
   }
 
   calculateMode() {
