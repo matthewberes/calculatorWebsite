@@ -1,4 +1,5 @@
 import { Routes } from '@angular/router';
+import { FractionsComponent } from './fractions/fractions.component';
 import { HomeComponent } from './home/home.component';
 import { MeanComponent } from './mean/mean.component';
 import { MedianComponent } from './median/median.component';
@@ -8,5 +9,6 @@ export const routes: Routes = [
     { path: '', component: HomeComponent },
     { path: 'mean', component: MeanComponent },
     { path: 'median', component: MedianComponent },
-    { path: 'mode', component: ModeComponent }
+    { path: 'mode', component: ModeComponent },
+    { path: 'fractions', component: FractionsComponent }
 ];

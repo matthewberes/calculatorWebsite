@@ -1,0 +1,15 @@
+.form {
+    text-align: center;
+}
+
+input {
+    width: 150px;
+}
+
+.margin-left {
+    margin-left: 50px;
+}
+
+.margin-right {
+    margin-right: 50px;
+}
