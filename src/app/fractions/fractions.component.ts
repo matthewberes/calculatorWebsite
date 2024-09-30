@@ -25,6 +25,7 @@ export class FractionsComponent {
     this.showCalculation = false;
     let whole: number;
     let gcf: number;
+    let mixed: string;
     // Add/Subtract
     let commonDenominator: number;
     let num1Large: number;
@@ -41,7 +42,8 @@ export class FractionsComponent {
         let sum = num1Large + num2Large;
         whole = sum / commonDenominator;
         gcf = this.gcf(sum, commonDenominator);
-        this.calculation = String(whole) + " | " + (sum / gcf) + " / " + (commonDenominator / gcf);
+        mixed = this.checkWhole(sum / gcf, commonDenominator / gcf);
+        this.calculation = String(whole) + " | " + (sum / gcf) + " / " + (commonDenominator / gcf) + mixed;
         this.showCalculation = true;
         break;
       case "subtract":
@@ -51,7 +53,8 @@ export class FractionsComponent {
         let difference = num1Large - num2Large;
         whole = difference / commonDenominator;
         gcf = this.gcf(difference, commonDenominator);
-        this.calculation = String(whole) + " | " + (difference / gcf) + " / " + (commonDenominator / gcf);
+        mixed = this.checkWhole(difference / gcf, commonDenominator / gcf);
+        this.calculation = String(whole) + " | " + (difference / gcf) + " / " + (commonDenominator / gcf) + mixed;
         this.showCalculation = true;
         break;
       case "multiply":
@@ -59,7 +62,8 @@ export class FractionsComponent {
         denomTotal = this.fractionsForm.get("denominator1")?.value * this.fractionsForm.get("denominator2")?.value;
         whole = numTotal / denomTotal;
         gcf = this.gcf(numTotal, denomTotal);
-        this.calculation = String(whole) + " | " + (numTotal / gcf) + " / " + (denomTotal / gcf);
+        mixed = this.checkWhole(numTotal / gcf, denomTotal / gcf);
+        this.calculation = String(whole) + " | " + (numTotal / gcf) + " / " + (denomTotal / gcf) + mixed;
         this.showCalculation = true;
         break;
       case "divide":
@@ -67,7 +71,8 @@ export class FractionsComponent {
         denomTotal = this.fractionsForm.get("denominator1")?.value / this.fractionsForm.get("denominator2")?.value;
         whole = numTotal / denomTotal;
         gcf = this.gcf(numTotal, denomTotal);
-        this.calculation = String(whole) + " | " + (numTotal / gcf) + " / " + (denomTotal / gcf);
+        mixed = this.checkWhole(numTotal / gcf, denomTotal / gcf);
+        this.calculation = String(whole) + " | " + (numTotal / gcf) + " / " + (denomTotal / gcf) + mixed;
         this.showCalculation = true;
         break;
     }
@@ -79,5 +84,15 @@ export class FractionsComponent {
     } else {
       return Math.abs(a);
     }
+  }
+
+  checkWhole(num: number, denom: number): string {
+    if (num > denom) {
+      let whole = Math.trunc(num / denom);
+      let newNum = num - (denom * whole);
+      let resp = " | " + whole + " " + newNum + " / " + denom;
+      return resp;
+    }
+    return "";
   }
 }
