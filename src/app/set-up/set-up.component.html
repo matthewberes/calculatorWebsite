@@ -7,6 +7,9 @@
 <ng-container *ngFor="let number of inputs">
 <input type="number" id="{{number}}" name="{{number}}" class="input" formControlName="{{number}}">
 </ng-container>
+<ng-container *ngIf="inputs.length > 0">
+<button style='margin-left:10px;' (click)="clear()">Clear</button>
+</ng-container>
 </form>
 <br>
 <ng-container *ngIf="inputs.length > 0">

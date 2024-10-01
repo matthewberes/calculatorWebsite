@@ -95,4 +95,12 @@ export class FractionsComponent {
     }
     return "";
   }
+
+  clear() {
+    this.showCalculation = false;
+    this.fractionsForm.get('numerator1')?.setValue(null);
+    this.fractionsForm.get('denominator1')?.setValue(null);
+    this.fractionsForm.get('numerator2')?.setValue(null);
+    this.fractionsForm.get('denominator2')?.setValue(null);
+  }
 }

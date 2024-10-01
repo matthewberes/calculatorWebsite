@@ -16,7 +16,8 @@
     <input type="number" id="denominator1" name="denominator1" formControlName="denominator1"class="margin-right">&nbsp;
     <input type="number" id="denominator2" name="denominator2" formControlName="denominator2"class="margin-left">
     <br>
-    <button (click)="calculate()">Calculate</button>
+    <button style='margin-right:10px; margin-top: 10px;' (click)="calculate()">Calculate</button>
+    <button style='margin-left:10px;' (click)="clear()">Clear</button>
 </form>
 <ng-container *ngIf="showCalculation">
     <h2>{{calculation}}</h2>

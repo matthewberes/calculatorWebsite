@@ -97,6 +97,13 @@ export class SetUpComponent {
     this.cdr.detectChanges();
   }
 
+  clear() {
+    this.showCalculation = false;
+    this.inputs.forEach(value => {
+      this.inputForm.get(String(value))?.setValue(null);
+    })
+  }
+
 
   //Not needed since I switched to number box inputs
   nullCheck(): boolean {
