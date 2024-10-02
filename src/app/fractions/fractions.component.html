@@ -20,5 +20,5 @@
     <button style='margin-left:10px;' (click)="clear()">Clear</button>
 </form>
 <ng-container *ngIf="showCalculation">
-    <h2>{{calculation}}</h2>
+    <h2><span [innerHTML]="calculation"></span></h2>
 </ng-container>

@@ -43,7 +43,7 @@ export class FractionsComponent {
         whole = sum / commonDenominator;
         gcf = this.gcf(sum, commonDenominator);
         mixed = this.checkWhole(sum / gcf, commonDenominator / gcf);
-        this.calculation = String(whole) + " | " + (sum / gcf) + " / " + (commonDenominator / gcf) + mixed;
+        this.calculation = String(whole) + " | <sup>" + (sum / gcf) + "<\/sup>&frasl;<sub>" + (commonDenominator / gcf) + "<\/sub>" + mixed;
         this.showCalculation = true;
         break;
       case "subtract":
@@ -54,7 +54,7 @@ export class FractionsComponent {
         whole = difference / commonDenominator;
         gcf = this.gcf(difference, commonDenominator);
         mixed = this.checkWhole(difference / gcf, commonDenominator / gcf);
-        this.calculation = String(whole) + " | " + (difference / gcf) + " / " + (commonDenominator / gcf) + mixed;
+        this.calculation = String(whole) + " | <sup>" + (difference / gcf) + "<\/sup>&frasl;<sub>" + (commonDenominator / gcf) + "<\/sub>" + mixed;
         this.showCalculation = true;
         break;
       case "multiply":
@@ -63,7 +63,7 @@ export class FractionsComponent {
         whole = numTotal / denomTotal;
         gcf = this.gcf(numTotal, denomTotal);
         mixed = this.checkWhole(numTotal / gcf, denomTotal / gcf);
-        this.calculation = String(whole) + " | " + (numTotal / gcf) + " / " + (denomTotal / gcf) + mixed;
+        this.calculation = String(whole) + " | <sup>" + (numTotal / gcf) + "<\/sup>&frasl;<sub>" + (denomTotal / gcf) + "<\/sub>" + mixed;
         this.showCalculation = true;
         break;
       case "divide":
@@ -72,7 +72,7 @@ export class FractionsComponent {
         whole = numTotal / denomTotal;
         gcf = this.gcf(numTotal, denomTotal);
         mixed = this.checkWhole(numTotal / gcf, denomTotal / gcf);
-        this.calculation = String(whole) + " | " + (numTotal / gcf) + " / " + (denomTotal / gcf) + mixed;
+        this.calculation = String(whole) + " | <sup>" + (numTotal / gcf) + "<\/sup>&frasl;<sub>" + (denomTotal / gcf) + "<\/sub>" + mixed;
         this.showCalculation = true;
         break;
     }
@@ -90,7 +90,7 @@ export class FractionsComponent {
     if (num > denom) {
       let whole = Math.trunc(num / denom);
       let newNum = num - (denom * whole);
-      let resp = " | " + whole + " " + newNum + " / " + denom;
+      let resp = " | " + whole + "<sup>" + newNum + "<\/sup>&frasl;<sub>" + denom + "<\/sub>";
       return resp;
     }
     return "";
