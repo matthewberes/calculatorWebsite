@@ -21,6 +21,9 @@ export class FractionsComponent {
   })
 
   calculate() {
+    if (!this.fractionsForm.get("numerator1")?.value || !this.fractionsForm.get("numerator2")?.value || !this.fractionsForm.get("denominator1")?.value || !this.fractionsForm.get("denominator2")?.value) {
+      return
+    }
     this.calculation = "";
     this.showCalculation = false;
     let whole: number;
