@@ -7,9 +7,14 @@ input {
 }
 
 .margin-left {
-    margin-left: 50px;
+    margin-left: 25px;
 }
 
 .margin-right {
-    margin-right: 50px;
+    margin-right: 25px;
+}
+
+.grid-container {
+    display: inline-grid;
+    grid-template-columns: auto auto auto;
 }
