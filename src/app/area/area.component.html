@@ -1,3 +1,5 @@
+<h1>Area Calculator</h1>
+
 <div style="text-align:center">
     <label>What kind of shape? </label>
     <select #shape id="shape" name="shape" (change)="selectChange()">
@@ -27,8 +29,8 @@
     <ng-container *ngIf="currShape == 'circle'">
         <form id="circleForm" [formGroup]="circleForm" style='margin-top: 15px;'>
             <select #inputType id="inputType" name="inputType">
-                <option value="add">Radius</option>
-                <option value="subtract">Diameter</option>
+                <option value="radius">Radius</option>
+                <option value="diameter">Diameter</option>
             </select>
             <input type="number" id="circleValue" name="circleValue" formControlName="circleValue">
         </form>

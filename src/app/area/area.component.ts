@@ -25,6 +25,7 @@ export class AreaComponent implements OnInit {
     circleValue: new FormControl()
   })
   @ViewChild('shape') shape!: ElementRef;
+  @ViewChild('inputType') inputType!: ElementRef;
 
   ngOnInit(): void {
     this.currShape = 'rectangle';
@@ -35,6 +36,22 @@ export class AreaComponent implements OnInit {
   }
 
   calculate() {
-
+    this.showCalculation = false;
+    switch (this.currShape) {
+      case "rectangle":
+        this.calculation = String(this.rectangleForm.get("length")?.value * this.rectangleForm.get("width")?.value);
+        break;
+      case "triangle":
+        this.calculation = String((this.triangleForm.get("base")?.value * this.triangleForm.get("height")?.value) / 2);
+        break;
+      case "circle":
+        if (this.inputType.nativeElement.value == "radius") {
+          this.calculation = String(Math.pow(this.circleForm.get("circleValue")?.value, 2) * Math.PI);
+        } else {
+          this.calculation = String(Math.pow(this.circleForm.get("circleValue")?.value / 2, 2) * Math.PI);
+        }
+        break;
+    }
+    this.showCalculation = true;
   }
 }
