@@ -33,6 +33,7 @@ export class AreaComponent implements OnInit {
 
   selectChange() {
     this.currShape = this.shape.nativeElement.value;
+    this.clear();
   }
 
   calculate() {
@@ -53,5 +54,15 @@ export class AreaComponent implements OnInit {
         break;
     }
     this.showCalculation = true;
+  }
+
+  clear() {
+    this.rectangleForm.get("length")?.setValue(null);
+    this.rectangleForm.get("width")?.setValue(null);
+    this.triangleForm.get("base")?.setValue(null);
+    this.triangleForm.get("height")?.setValue(null);
+    this.circleForm.get("circleValue")?.setValue(null);
+    this.calculation = "";
+    this.showCalculation = false;
   }
 }
