@@ -33,6 +33,7 @@ export class AreaComponent implements OnInit {
 
   selectChange() {
     this.currShape = this.shape.nativeElement.value;
+    this.showCalculation = false;
     this.clear();
   }
 
