@@ -16,8 +16,8 @@
             <option value="octahedron">Octahedron</option>
             <option value="pentagonalPrism">Pentagonal Prism</option>
             <option value="pentagonalPyramid">Pentagonal Pyramid</option>
-            <option value="pentagrammicPrism">Pentagrammic Prism</option>
-            <option value="pentagrammicPyramid">Pentagrammic Pyramid</option>
+            <!-- <option value="pentagrammicPrism">Pentagrammic Prism</option>
+            <option value="pentagrammicPyramid">Pentagrammic Pyramid</option> -->
             <option value="rectangularPrism">Rectangular Prism</option>
             <option value="semisphere">Semisphere</option>
             <option value="sphere">Sphere</option>
@@ -63,6 +63,14 @@
         </form>
     </ng-container>
 
+    <ng-container *ngIf="currShape == 'dodecahedron' || currShape == 'octahedron' || currShape == 'icosahedron' || currShape == 'tetrahedron'">
+    <form id="hedronForm" [formGroup]="hedronForm" style='margin-top: 15px;'>
+        <label>Side Length: </label>
+        <input type="number" id="length" name="length" formControlName="length">
+        <button style='margin-left: 15px;' (click)="clear()">Clear</button>
+    </form>
+</ng-container>
+
     <ng-container *ngIf="currShape == 'sphere' || currShape == 'semisphere'">
         <form id="sphereForm" [formGroup]="sphereForm" style='margin-top: 15px;'>
                 <select #sphereMeasurementType id="sphereMeasurementType" name="sphereMeasurementType">
@@ -96,6 +104,28 @@
             <input type="number" id="baseHeight" name="baseHeight" formControlName="baseHeight" style='margin-right: 15px;'>
             <label  style='margin-left: 15px;'>Pyramid Height: </label>
             <input type="number" id="pyramidHeight" name="pyramidHeight" formControlName="pyramidHeight">
+            <button style='margin-left: 15px;' (click)="clear()">Clear</button>
+        </form>
+    </ng-container>
+
+    <ng-container *ngIf="currShape == 'ellipsoid'">
+        <form id="ellipsoidForm" [formGroup]="ellipsoidForm" style='margin-top: 15px;'>
+            <label>Major: </label>
+            <input type="number" id="major" name="major" formControlName="major" style='margin-right: 15px;'>
+            <label  style='margin-left: 15px;'>Semi Major: </label>
+            <input type="number" id="semiMajor" name="semiMajor" formControlName="semiMajor" style='margin-right: 15px;'>
+            <label  style='margin-left: 15px;'>Minor: </label>
+            <input type="number" id="minor" name="minor" formControlName="minor">
+            <button style='margin-left: 15px;' (click)="clear()">Clear</button>
+        </form>
+    </ng-container>
+
+    <ng-container *ngIf="currShape == 'torus'">
+        <form id="torusForm" [formGroup]="torusForm" style='margin-top: 15px;'>
+            <label>Major: </label>
+            <input type="number" id="major" name="major" formControlName="major" style='margin-right: 15px;'>
+            <label  style='margin-left: 15px;'>Minor: </label>
+            <input type="number" id="minor" name="minor" formControlName="minor">
             <button style='margin-left: 15px;' (click)="clear()">Clear</button>
         </form>
     </ng-container>
