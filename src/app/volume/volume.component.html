@@ -4,31 +4,31 @@
     <label>What kind of shape? </label>
     <select #shape id="shape" name="shape" (change)="selectChange()">
             <option value="cone">Cone</option>
-            <option value="prism">Cube</option>
+            <option value="rectangularPrism">Cube</option>
             <option value="cylinder">Cylinder</option>
             <option value="dodecahedron">Dodecahedron</option>
             <option value="ellipsoid">Ellipsoid</option>
-            <option value="prism">Hexagonal Prism</option>
+            <option value="hexagonalPrism">Hexagonal Prism</option>
             <option value="hexagonalPyramid">Hexagonal Pyramid</option>
             <option value="icosahedron">Icosahedron</option>
-            <option value="prism">Octagonal Prism</option>
+            <option value="octagonalPrism">Octagonal Prism</option>
             <option value="octagonalPyramid">Octagonal Pyramid</option>
             <option value="octahedron">Octahedron</option>
-            <option value="prism">Pentagonal Prism</option>
+            <option value="pentagonalPrism">Pentagonal Prism</option>
             <option value="pentagonalPyramid">Pentagonal Pyramid</option>
-            <option value="prism">Pentagrammic Prism</option>
+            <option value="pentagrammicPrism">Pentagrammic Prism</option>
             <option value="pentagrammicPyramid">Pentagrammic Pyramid</option>
-            <option value="prism">Rectangular Prism</option>
+            <option value="rectangularPrism">Rectangular Prism</option>
             <option value="semisphere">Semisphere</option>
             <option value="sphere">Sphere</option>
             <option value="squarePyramid">Square Pyramid</option>
             <option value="tetrahedron">Tetrahedron</option>
             <option value="torus">Torus</option>
-            <option value="prism">Triangular Prism</option>
+            <option value="triangularPrism">Triangular Prism</option>
     </select>
 
-    <ng-container *ngIf="currShape == 'prism'">
-        <form id="prismForm" [formGroup]="prismForm" style='margin-top: 15px;'>
+    <ng-container *ngIf="currShape == 'rectangularPrism'">
+        <form id="rectangularPrismForm" [formGroup]="rectangularPrismForm" style='margin-top: 15px;'>
             <label>Length: </label>
             <input type="number" id="length" name="length" formControlName="length" style='margin-right: 15px;'>
             <label  style='margin-left: 15px;'>Width: </label>
@@ -39,6 +39,53 @@
         </form>
     </ng-container>
 
+    <ng-container *ngIf="currShape == 'cone' || currShape == 'cylinder'">
+        <form id="circularForm" [formGroup]="circularForm" style='margin-top: 15px;'>
+            <select #circleMeasurementType id="circleMeasurementType" name="circleMeasurementType">
+                <option value="radius">Radius</option>
+                <option value="diameter">Diameter</option>
+            </select>
+            <input type="number" id="circleValue" name="circleValue" formControlName="circleValue" style='margin-right: 15px;'>
+            <label style='margin-left: 15px;'>Height: </label>
+            <input type="number" id="height" name="height" formControlName="height">
+            <button style='margin-left: 15px;' (click)="clear()">Clear</button>
+        </form>
+    </ng-container>
+
+    <ng-container *ngIf="currShape == 'hexagonalPrism' || currShape == 'octagonalPrism' || currShape == 'pentagonalPrism'">
+        <form id="gonalPrismForm" [formGroup]="gonalPrismForm" style='margin-top: 15px;'>
+            <label>Side Length: </label>
+            <input type="number" id="length" name="length" formControlName="length" style='margin-right: 15px;'>
+            <label style='margin-left: 15px;'>Height: </label>
+            <input type="number" id="height" name="height" formControlName="height">
+            <button style='margin-left: 15px;' (click)="clear()">Clear</button>
+        </form>
+    </ng-container>
+
+    <ng-container *ngIf="currShape == 'sphere' || currShape == 'semisphere'">
+        <form id="sphereForm" [formGroup]="sphereForm" style='margin-top: 15px;'>
+                <select #sphereMeasurementType id="sphereMeasurementType" name="sphereMeasurementType">
+                    <option value="radius">Radius</option>
+                    <option value="diameter">Diameter</option>
+                </select>
+            <input type="number" id="circleValue" name="circleValue" formControlName="circleValue" style='margin-right: 15px;'>
+            <button style='margin-left: 15px;' (click)="clear()">Clear</button>
+        </form>
+    </ng-container>
+
+    <ng-container *ngIf="currShape == 'triangularPrism'">
+        <form id="triangularPrismForm" [formGroup]="triangularPrismForm" style='margin-top: 15px;'>
+            <label>Side 1: </label>
+            <input type="number" id="side1" name="side1" formControlName="side1" style='margin-right: 15px;'>
+            <label  style='margin-left: 15px;'>Side 2: </label>
+            <input type="number" id="side2" name="side2" formControlName="side2" style='margin-right: 15px;'>
+            <label  style='margin-left: 15px;'>Side 3: </label>
+            <input type="number" id="side3" name="side3" formControlName="side3" style='margin-right: 15px;'>
+            <label  style='margin-left: 15px;'>Height: </label>
+            <input type="number" id="height" name="height" formControlName="height">
+            <button style='margin-left: 15px;' (click)="clear()">Clear</button>
+        </form>
+    </ng-container>
     
     <button style='margin-top: 15px;' (click)="calculate()">Calculate</button>
 
