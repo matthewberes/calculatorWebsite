@@ -39,6 +39,11 @@ export class VolumeComponent implements OnInit {
     side3: new FormControl(),
     height: new FormControl()
   })
+  triangularPyramidForm = new FormGroup({
+    base: new FormControl(),
+    baseHeight: new FormControl(),
+    pyramidHeight: new FormControl()
+  })
 
   ngOnInit(): void {
     this.currShape = 'cone';
@@ -46,6 +51,7 @@ export class VolumeComponent implements OnInit {
 
   selectChange() {
     this.currShape = this.shape.nativeElement.value;
+    this.calculation = "";
     this.showCalculation = false;
     this.clear();
   }
@@ -82,6 +88,10 @@ export class VolumeComponent implements OnInit {
         this.showCalculation = true;
         break;
       case "hexagonalPyramid":
+        base = ((3 * Math.sqrt(3)) / 2) * (Math.pow(this.gonalPrismForm.get("length")?.value, 2));
+        this.calculation = String((base * this.gonalPrismForm.get("height")?.value) / 3);
+        this.showCalculation = true;
+        break;
         break;
       case "icosahedron":
         break;
@@ -91,6 +101,9 @@ export class VolumeComponent implements OnInit {
         this.showCalculation = true;
         break;
       case "octagonalPyramid":
+        base = (2 * (1 + Math.sqrt(2))) * (Math.pow(this.gonalPrismForm.get("length")?.value, 2));
+        this.calculation = String((base * this.gonalPrismForm.get("height")?.value) / 3);
+        this.showCalculation = true;
         break;
       case "octahedron":
         break;
@@ -100,6 +113,9 @@ export class VolumeComponent implements OnInit {
         this.showCalculation = true;
         break;
       case "pentagonalPyramid":
+        base = (((1 / 4) * Math.sqrt(5 * (5 + (2 * Math.sqrt(5)))))) * (Math.pow(this.gonalPrismForm.get("length")?.value, 2));
+        this.calculation = String((base * this.gonalPrismForm.get("height")?.value) / 3);
+        this.showCalculation = true;
         break;
       case "pentagrammicPrism":
         break;
@@ -129,6 +145,9 @@ export class VolumeComponent implements OnInit {
         this.showCalculation = true;
         break;
       case "squarePyramid":
+        base = this.rectangularPrismForm.get("length")?.value * this.rectangularPrismForm.get("width")?.value;
+        this.calculation = String((base * this.rectangularPrismForm.get("height")?.value) / 3);
+        this.showCalculation = true;
         break;
       case "tetrahedron":
         break;
@@ -136,6 +155,11 @@ export class VolumeComponent implements OnInit {
         break;
       case "triangularPrism":
         this.calculation = String(((1 / 4) * this.triangularPrismForm.get("height")?.value) * Math.sqrt((-1 * Math.pow(this.triangularPrismForm.get("side1")?.value, 4)) + (2 * Math.pow(this.triangularPrismForm.get("side1")?.value * this.triangularPrismForm.get("side2")?.value, 2)) + (2 * Math.pow(this.triangularPrismForm.get("side1")?.value * this.triangularPrismForm.get("side3")?.value, 2)) - (Math.pow(this.triangularPrismForm.get("side2")?.value, 4)) + (2 * Math.pow(this.triangularPrismForm.get("side2")?.value * this.triangularPrismForm.get("side3")?.value, 2)) - Math.pow(this.triangularPrismForm.get("side3")?.value, 4)));
+        this.showCalculation = true;
+        break;
+      case "triangularPyramid":
+        base = (this.triangularPyramidForm.get("base")?.value * this.triangularPyramidForm.get("baseHeight")?.value) / 2;
+        this.calculation = String((base * this.triangularPyramidForm.get("pyramidHeight")?.value) / 3);
         this.showCalculation = true;
         break;
     }

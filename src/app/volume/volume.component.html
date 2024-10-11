@@ -25,9 +25,10 @@
             <option value="tetrahedron">Tetrahedron</option>
             <option value="torus">Torus</option>
             <option value="triangularPrism">Triangular Prism</option>
+            <option value="triangularPyramid">Triangular Pyramid</option>
     </select>
 
-    <ng-container *ngIf="currShape == 'rectangularPrism'">
+    <ng-container *ngIf="currShape == 'rectangularPrism' || currShape == 'squarePyramid'">
         <form id="rectangularPrismForm" [formGroup]="rectangularPrismForm" style='margin-top: 15px;'>
             <label>Length: </label>
             <input type="number" id="length" name="length" formControlName="length" style='margin-right: 15px;'>
@@ -52,7 +53,7 @@
         </form>
     </ng-container>
 
-    <ng-container *ngIf="currShape == 'hexagonalPrism' || currShape == 'octagonalPrism' || currShape == 'pentagonalPrism'">
+    <ng-container *ngIf="currShape == 'hexagonalPrism' || currShape == 'hexagonalPyramid' || currShape == 'octagonalPrism' || currShape == 'octagonalPyramid' || currShape == 'pentagonalPrism' || currShape == 'pentagonalPyramid'">
         <form id="gonalPrismForm" [formGroup]="gonalPrismForm" style='margin-top: 15px;'>
             <label>Side Length: </label>
             <input type="number" id="length" name="length" formControlName="length" style='margin-right: 15px;'>
@@ -83,6 +84,18 @@
             <input type="number" id="side3" name="side3" formControlName="side3" style='margin-right: 15px;'>
             <label  style='margin-left: 15px;'>Height: </label>
             <input type="number" id="height" name="height" formControlName="height">
+            <button style='margin-left: 15px;' (click)="clear()">Clear</button>
+        </form>
+    </ng-container>
+
+    <ng-container *ngIf="currShape == 'triangularPyramid'">
+        <form id="triangularPyramidForm" [formGroup]="triangularPyramidForm" style='margin-top: 15px;'>
+            <label>Base: </label>
+            <input type="number" id="base" name="base" formControlName="base" style='margin-right: 15px;'>
+            <label  style='margin-left: 15px;'>Base Height: </label>
+            <input type="number" id="baseHeight" name="baseHeight" formControlName="baseHeight" style='margin-right: 15px;'>
+            <label  style='margin-left: 15px;'>Pyramid Height: </label>
+            <input type="number" id="pyramidHeight" name="pyramidHeight" formControlName="pyramidHeight">
             <button style='margin-left: 15px;' (click)="clear()">Clear</button>
         </form>
     </ng-container>
