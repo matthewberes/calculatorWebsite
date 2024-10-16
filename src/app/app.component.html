@@ -1,12 +1,54 @@
-<h1>Calculators</h1>
-<nav>
-  <ul>
-    <li><a routerLink="/area" routerLinkActive="active" ariaCurrentWhenActive="page">Area</a></li>
-    <li><a routerLink="/fractions" routerLinkActive="active" ariaCurrentWhenActive="page">Fractions</a></li>
-    <li><a routerLink="/mean" routerLinkActive="active" ariaCurrentWhenActive="page">Mean</a></li>
-    <li><a routerLink="/median" routerLinkActive="active" ariaCurrentWhenActive="page">Median</a></li>
-    <li><a routerLink="/mode" routerLinkActive="active" ariaCurrentWhenActive="page">Mode</a></li>
-    <li><a routerLink="/volume" routerLinkActive="active" ariaCurrentWhenActive="page">Volume</a></li>
-    </ul>
-</nav>
+<h1 style="text-align: center; font-family: arial;">Calculators</h1>
+<div class="navbar">
+  <div class="navItems">
+    <div class="dropdown">
+      <button class="dropbtn">Math
+        <i class="fa fa-caret-down"></i>
+      </button>
+      <div class="dropdown-content">
+        <a routerLink="/fractions" routerLinkActive="active" ariaCurrentWhenActive="page">Fractions</a>
+        <a routerLink="/mean" routerLinkActive="active" ariaCurrentWhenActive="page">Mean</a>
+        <a routerLink="/median" routerLinkActive="active" ariaCurrentWhenActive="page">Median</a>
+        <a routerLink="/mode" routerLinkActive="active" ariaCurrentWhenActive="page">Mode</a>
+      </div>
+    </div>
+    <div class="dropdown">
+      <button class="dropbtn">Geometry
+        <i class="fa fa-caret-down"></i>
+      </button>
+      <div class="dropdown-content">
+        <a routerLink="/area" routerLinkActive="active" ariaCurrentWhenActive="page">Area</a>
+        <a routerLink="/volume" routerLinkActive="active" ariaCurrentWhenActive="page">Volume</a>
+      </div>
+    </div>
+    <div class="dropdown">
+      <button class="dropbtn">Physics
+        <i class="fa fa-caret-down"></i>
+      </button>
+      <div class="dropdown-content">
+      </div>
+    </div>
+    <div class="dropdown">
+      <button class="dropbtn">Finance
+        <i class="fa fa-caret-down"></i>
+      </button>
+      <div class="dropdown-content">
+      </div>
+    </div>  
+    <div class="dropdown">
+      <button class="dropbtn">Calculus
+        <i class="fa fa-caret-down"></i>
+      </button>
+      <div class="dropdown-content">
+      </div>
+    </div>
+    <div class="dropdown">
+      <button class="dropbtn">Algebra
+        <i class="fa fa-caret-down"></i>
+      </button>
+      <div class="dropdown-content">
+      </div>
+    </div>
+  </div>
+</div>
 <router-outlet></router-outlet>
