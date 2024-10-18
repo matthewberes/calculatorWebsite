@@ -1,4 +1,4 @@
-<h1>Fractions Calculator</h1>
+<h1 style="text-align: center;">Fractions Calculator</h1>
 
 <form id="fractionsForm" [formGroup]="fractionsForm" class="form">
     <div class="grid-container">
@@ -36,5 +36,7 @@
     </div>
 </form>
 <ng-container *ngIf="showCalculation">
-    <h2 style="text-align: center;"><span [innerHTML]="calculation"></span></h2>
+    <div class="answer-div">
+        <h2 style="text-align: center;"><span [innerHTML]="calculation"></span></h2>
+    </div>
 </ng-container>

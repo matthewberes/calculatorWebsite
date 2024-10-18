@@ -18,3 +18,7 @@ input {
     display: inline-grid;
     grid-template-columns: auto auto auto;
 }
+
+.answer-div {
+    background-color: lightyellow;
+}

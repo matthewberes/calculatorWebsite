@@ -1,4 +1,4 @@
-<h1>Volume Calculator</h1>
+<h1 style="text-align: center;">Volume Calculator</h1>
 
 <div style="text-align:center">
     <label>What kind of shape? </label>
@@ -133,6 +133,8 @@
     <button style='margin-top: 15px;' (click)="calculate()">Calculate</button>
 
     <ng-container style="margin-top: 25px;" *ngIf="showCalculation">
-        <h2>{{calculation}}</h2>
+        <div class="answer-div">
+            <h2>{{calculation}}</h2>
+        </div>
     </ng-container>
 </div>
