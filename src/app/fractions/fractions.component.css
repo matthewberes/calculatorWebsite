@@ -1,3 +1,28 @@
+.body {
+    display: flex;
+}
+
+.left-margin {
+    float: left;
+    width: 15%;
+    min-height: 82vh;
+    height: 100%;
+    background-color: lightgray;
+}
+
+.main {
+    justify-content: center;
+    width: 70%;
+}
+
+.right-margin {
+    float: right;
+    width: 15%;
+    min-height: 82vh;
+    height: 100%;
+    background-color: lightgray;
+}
+
 .form {
     text-align: center;
 }
