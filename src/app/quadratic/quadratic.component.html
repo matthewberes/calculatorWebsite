@@ -1,0 +1,30 @@
+<div style="text-align: center;">
+    <h1>Quadratic Formula Calculator</h1>
+    <h2 style="font-family: arial;"><i>a</i>x<sup>2</sup> + <i>b</i>x + <i>c</i></h2>
+    <form id="inputForm" [formGroup]="inputForm">
+        <div class="grid-container">
+            <div class="item1">
+                <label>a: </label>
+                <input type="number" id="a" name="a" formControlName="a" class="margin-right">
+            </div> 
+            <div class="item2">
+                <label>b: </label>
+                <input type="number" id="b" name="b" formControlName="b" class="margin-right">
+            </div>
+            <div class="item3">
+                <label>c: </label>
+                <input type="number" id="c" name="c" formControlName="c">
+            </div>
+            <div class="item4"></div>
+            <div class="item5"></div>
+            <div class="item6"><button style='float: right; margin-top: 10px;' (click)="clear()">Clear</button></div>
+        </div>
+    </form>
+    <button style='margin-top: 10px;' (click)="calculate()">Calculate</button>
+    <ng-container *ngIf="showCalculation">
+        <div class="answer-div">
+            <h2 style="text-align: center; font-family: consolas;"><span [innerHTML]="calculation"></span></h2>
+        </div>
+    </ng-container>
+</div>
+
