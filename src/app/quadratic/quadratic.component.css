@@ -1,3 +1,11 @@
+.formula-container {
+    display: inline-grid;
+    grid-template-columns: auto auto;
+    font-family: arial;
+    align-items: flex-end;
+    margin-top: -20px;
+}
+
 .grid-container {
     display: inline-grid;
     grid-template-columns: auto auto auto;

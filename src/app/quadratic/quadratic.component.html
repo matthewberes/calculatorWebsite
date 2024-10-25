@@ -1,6 +1,25 @@
 <div style="text-align: center;">
     <h1>Quadratic Formula Calculator</h1>
-    <h2 style="font-family: arial;"><i>a</i>x<sup>2</sup> + <i>b</i>x + <i>c</i></h2>
+    <div class="formula-container">
+        <div style="padding-right: 30px; transform: translateY(-13px);">
+            <h2><i>a</i>x<sup>2</sup> + <i>b</i>x + <i>c</i></h2>
+        </div>
+        <div style="padding-left: 30px; display: flex;">
+            <div style="transform: translateY(20px) translateX(-10px);">
+                <h2>x =</h2>
+            </div>
+            <div>
+                <h2>
+                <span style="border-bottom: 2px solid;">
+                    b ±&radic;<span style="border-top: 1px solid; padding-top: 1px;">&nbsp;b<sup>2</sup> - 4ac&nbsp;</span>
+                </span>
+                <br>
+                2a
+            </h2>
+            </div>
+            
+        </div>
+    </div>
     <form id="inputForm" [formGroup]="inputForm">
         <div class="grid-container">
             <div class="item1">
