@@ -43,13 +43,25 @@ export class QuadraticComponent {
   change(box: string, event: Event) {
     switch (box) {
       case "a":
-        this.aInput = String(this.inputForm.get('a')?.value);
+        if (!this.inputForm.get('a')?.value) {
+          this.aInput = "";
+        } else {
+          this.aInput = String(this.inputForm.get('a')?.value);
+        }
         break;
       case "b":
-        this.bInput = String(this.inputForm.get('b')?.value);
+        if (!this.inputForm.get('b')?.value) {
+          this.bInput = "";
+        } else {
+          this.bInput = String(this.inputForm.get('b')?.value);
+        }
         break;
       case "c":
-        this.cInput = String(this.inputForm.get('c')?.value);
+        if (!this.inputForm.get('c')?.value) {
+          this.cInput = "";
+        } else {
+          this.cInput = String(this.inputForm.get('c')?.value);
+        }
         break;
     }
   }

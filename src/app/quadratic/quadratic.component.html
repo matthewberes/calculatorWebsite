@@ -3,12 +3,12 @@
     <div class="formula-container">
         <div style="padding-right: 30px; transform: translateY(-13px);">
             <h2>
-                <span *ngIf="aInput == '' || aInput == 'null'"><i>a</i></span>
-                <span *ngIf="aInput != '' && aInput != 'null'">{{aInput}}</span>x<sup>2</sup> + 
-                <span *ngIf="bInput == '' || bInput == 'null'"><i>b</i></span>
-                <span *ngIf="bInput != '' && bInput != 'null'">{{bInput}}</span>x + 
-                <span *ngIf="cInput == '' || cInput == 'null'"><i>c</i></span>
-                <span *ngIf="cInput != '' && cInput != 'null'">{{cInput}}</span>
+                <span *ngIf="aInput == ''"><i>a</i></span>
+                <span *ngIf="aInput != ''">{{aInput}}</span>x<sup>2</sup> + 
+                <span *ngIf="bInput == ''"><i>b</i></span>
+                <span *ngIf="bInput != ''">{{bInput}}</span>x + 
+                <span *ngIf="cInput == ''"><i>c</i></span>
+                <span *ngIf="cInput != ''">{{cInput}}</span>
             </h2>
         </div>
         <div style="padding-left: 30px; display: flex;">
@@ -18,21 +18,21 @@
             <div>
                 <h2>
                 <span style="border-bottom: 2px solid;">
-                    <span *ngIf="bInput == '' || bInput == 'null'">b</span>
-                    <span *ngIf="bInput != '' && bInput != 'null'">{{bInput}}</span>
+                    <span *ngIf="bInput == ''">b</span>
+                    <span *ngIf="bInput != ''">{{bInput}}</span>
                     ±&radic;<span style="border-top: 1px solid; padding-top: 1px;">&nbsp;
-                        <span *ngIf="bInput == '' || bInput == 'null'">b</span>
-                        <span *ngIf="bInput != '' && bInput != 'null'">{{bInput}}</span><sup>2</sup>
-                         - <span *ngIf="aInput == '' || aInput == 'null' && cInput == '' || cInput == 'null'">4ac</span>
-                        <span *ngIf="aInput != '' && aInput != 'null' && cInput == '' || cInput == 'null'">4 * {{aInput}} * c</span>
-                        <span *ngIf="cInput != '' && cInput != 'null' && aInput == '' || aInput == 'null'">4a * {{cInput}}</span>
-                        <span *ngIf="aInput != '' && aInput != 'null' && cInput != '' && cInput != 'null'">4 * {{aInput}} * {{cInput}}</span>
+                        <span *ngIf="bInput == ''">b</span>
+                        <span *ngIf="bInput != ''">{{bInput}}</span><sup>2</sup>
+                         - <span *ngIf="aInput == '' && cInput == ''">4ac</span>
+                        <span *ngIf="aInput != '' && cInput == ''">4 * {{aInput}} * c</span>
+                        <span *ngIf="cInput != '' && aInput == ''">4a * {{cInput}}</span>
+                        <span *ngIf="aInput != '' && cInput != ''">4 * {{aInput}} * {{cInput}}</span>
                         &nbsp;
                     </span>
                 </span>
                 <br>
-                2<span *ngIf="aInput == '' || aInput == 'null'">a</span>
-                <span *ngIf="aInput != '' && aInput != 'null'"> * {{aInput}}</span>
+                2<span *ngIf="aInput == ''">a</span>
+                <span *ngIf="aInput != ''"> * {{aInput}}</span>
             </h2>
             </div>
             
