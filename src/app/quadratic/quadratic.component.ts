@@ -15,6 +15,9 @@ export class QuadraticComponent {
     b: new FormControl(),
     c: new FormControl()
   })
+  aInput: string = "";
+  bInput: string = "";
+  cInput: string = "";
   calculation: string = "";
   showCalculation: boolean = false;
 
@@ -35,5 +38,19 @@ export class QuadraticComponent {
     this.inputForm.get('a')?.setValue(null);
     this.inputForm.get('b')?.setValue(null);
     this.inputForm.get('c')?.setValue(null);
+  }
+
+  change(box: string, event: Event) {
+    switch (box) {
+      case "a":
+        this.aInput = String(this.inputForm.get('a')?.value);
+        break;
+      case "b":
+        this.bInput = String(this.inputForm.get('b')?.value);
+        break;
+      case "c":
+        this.cInput = String(this.inputForm.get('c')?.value);
+        break;
+    }
   }
 }

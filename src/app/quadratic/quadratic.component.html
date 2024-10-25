@@ -2,7 +2,14 @@
     <h1>Quadratic Formula Calculator</h1>
     <div class="formula-container">
         <div style="padding-right: 30px; transform: translateY(-13px);">
-            <h2><i>a</i>x<sup>2</sup> + <i>b</i>x + <i>c</i></h2>
+            <h2>
+                <span *ngIf="aInput == '' || aInput == 'null'"><i>a</i></span>
+                <span *ngIf="aInput != '' && aInput != 'null'">{{aInput}}</span>x<sup>2</sup> + 
+                <span *ngIf="bInput == '' || bInput == 'null'"><i>b</i></span>
+                <span *ngIf="bInput != '' && bInput != 'null'">{{bInput}}</span>x + 
+                <span *ngIf="cInput == '' || cInput == 'null'"><i>c</i></span>
+                <span *ngIf="cInput != '' && cInput != 'null'">{{cInput}}</span>
+            </h2>
         </div>
         <div style="padding-left: 30px; display: flex;">
             <div style="transform: translateY(20px) translateX(-10px);">
@@ -11,10 +18,21 @@
             <div>
                 <h2>
                 <span style="border-bottom: 2px solid;">
-                    b ±&radic;<span style="border-top: 1px solid; padding-top: 1px;">&nbsp;b<sup>2</sup> - 4ac&nbsp;</span>
+                    <span *ngIf="bInput == '' || bInput == 'null'">b</span>
+                    <span *ngIf="bInput != '' && bInput != 'null'">{{bInput}}</span>
+                    ±&radic;<span style="border-top: 1px solid; padding-top: 1px;">&nbsp;
+                        <span *ngIf="bInput == '' || bInput == 'null'">b</span>
+                        <span *ngIf="bInput != '' && bInput != 'null'">{{bInput}}</span><sup>2</sup>
+                         - <span *ngIf="aInput == '' || aInput == 'null' && cInput == '' || cInput == 'null'">4ac</span>
+                        <span *ngIf="aInput != '' && aInput != 'null' && cInput == '' || cInput == 'null'">4 * {{aInput}} * c</span>
+                        <span *ngIf="cInput != '' && cInput != 'null' && aInput == '' || aInput == 'null'">4a * {{cInput}}</span>
+                        <span *ngIf="aInput != '' && aInput != 'null' && cInput != '' && cInput != 'null'">4 * {{aInput}} * {{cInput}}</span>
+                        &nbsp;
+                    </span>
                 </span>
                 <br>
-                2a
+                2<span *ngIf="aInput == '' || aInput == 'null'">a</span>
+                <span *ngIf="aInput != '' && aInput != 'null'"> * {{aInput}}</span>
             </h2>
             </div>
             
@@ -24,15 +42,15 @@
         <div class="grid-container">
             <div class="item1">
                 <label>a: </label>
-                <input type="number" id="a" name="a" formControlName="a" class="margin-right">
+                <input type="number" id="a" name="a" formControlName="a" class="margin-right" (input)="change('a', $event)">
             </div> 
             <div class="item2">
                 <label>b: </label>
-                <input type="number" id="b" name="b" formControlName="b" class="margin-right">
+                <input type="number" id="b" name="b" formControlName="b" class="margin-right" (input)="change('b', $event)">
             </div>
             <div class="item3">
                 <label>c: </label>
-                <input type="number" id="c" name="c" formControlName="c">
+                <input type="number" id="c" name="c" formControlName="c" (input)="change('c', $event)">
             </div>
             <div class="item4"></div>
             <div class="item5"></div>
