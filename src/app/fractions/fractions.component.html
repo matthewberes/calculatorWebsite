@@ -1,47 +1,41 @@
-<div class="body">
-    <div class="left-margin"></div>
-    <div class="main">
-        <h1 style="text-align: center;">Fractions Calculator</h1>
-        <form id="fractionsForm" [formGroup]="fractionsForm" class="form">
-            <div class="grid-container">
-                <div class="item1">
-                    <input type="number" id="numerator1" name="numerator1" formControlName="numerator1" class="margin-right">
-                </div> 
-                <div class="item2"></div>
-                <div class="item3">
-                    <input type="number" id="numerator2" name="numerator2" formControlName="numerator2" class="margin-left">
-                </div>
-                <div class="item4">
-                    <hr style='display:inline-block; width:156px;' class="margin-right" />
-                </div>
-                <div class="item5">
-                    <select #operator id="operator" name="operator">
-                        <option value="add">+</option>
-                        <option value="subtract">-</option>
-                        <option value="multiply">x</option>
-                        <option value="divide">/</option>
-                    </select>
-                </div>
-                <div class="item6">
-                    <hr style='display:inline-block; width:156px;' class="margin-left" />
-                </div>
-                <div class="item7">
-                    <input type="number" id="denominator1" name="denominator1" formControlName="denominator1"class="margin-right"></div>
-                <div class="item8"></div>
-                <div class="item9">
-                    <input type="number" id="denominator2" name="denominator2" formControlName="denominator2"class="margin-left"></div>
-                <div class="item10"></div>
-                <div class="item11">
-                    <button style='margin-top: 10px;' (click)="calculate()">Calculate</button></div>
-                <div class="item12">
-                    <button style='float: right; margin-top: 10px;' (click)="clear()">Clear</button></div>
-            </div>
-        </form>
-        <ng-container *ngIf="showCalculation">
-            <div class="answer-div">
-                <h2 style="text-align: center;"><span [innerHTML]="calculation"></span></h2>
-            </div>
-        </ng-container>
+<h1 style="text-align: center;">Fractions Calculator</h1>
+<form id="fractionsForm" [formGroup]="fractionsForm" class="form">
+    <div class="grid-container">
+        <div class="item1">
+            <input type="number" id="numerator1" name="numerator1" formControlName="numerator1" class="margin-right">
+        </div> 
+        <div class="item2"></div>
+        <div class="item3">
+            <input type="number" id="numerator2" name="numerator2" formControlName="numerator2" class="margin-left">
+        </div>
+        <div class="item4">
+            <hr style='display:inline-block; width:156px;' class="margin-right" />
+        </div>
+        <div class="item5">
+            <select #operator id="operator" name="operator">
+                <option value="add">+</option>
+                <option value="subtract">-</option>
+                <option value="multiply">x</option>
+                <option value="divide">/</option>
+            </select>
+        </div>
+        <div class="item6">
+            <hr style='display:inline-block; width:156px;' class="margin-left" />
+        </div>
+        <div class="item7">
+            <input type="number" id="denominator1" name="denominator1" formControlName="denominator1"class="margin-right"></div>
+        <div class="item8"></div>
+        <div class="item9">
+            <input type="number" id="denominator2" name="denominator2" formControlName="denominator2"class="margin-left"></div>
+        <div class="item10"></div>
+        <div class="item11">
+            <button style='margin-top: 10px;' (click)="calculate()">Calculate</button></div>
+        <div class="item12">
+            <button style='float: right; margin-top: 10px;' (click)="clear()">Clear</button></div>
     </div>
-    <div class="right-margin"></div>
-</div>
+</form>
+<ng-container *ngIf="showCalculation">
+    <div class="answer-div">
+        <h2 style="text-align: center;"><span [innerHTML]="calculation"></span></h2>
+    </div>
+</ng-container>

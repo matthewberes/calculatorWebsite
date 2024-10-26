@@ -1,11 +1,12 @@
 import { NgIf } from '@angular/common';
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
+import { MarginComponent } from '../margin/margin.component';
 
 @Component({
   selector: 'app-area',
   standalone: true,
-  imports: [NgIf, ReactiveFormsModule],
+  imports: [NgIf, ReactiveFormsModule, MarginComponent],
   templateUrl: './area.component.html',
   styleUrl: './area.component.css'
 })
