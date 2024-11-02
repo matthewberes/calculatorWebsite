@@ -1,0 +1,48 @@
+<h1 style="text-align: center;">Combined Probability Calculator</h1>
+<div style="text-align: center;">
+    <form id="setUpForm" [formGroup]="setUpForm">
+        <label>How many trials are there? </label>
+        <input type="number" id="numberOfInputs" name="numberOfInputs" formControlName="numberOfInputs">
+        <input type="button" id="generateButton" name="generateButton" value="Generate Inputs" (click)="calculateInputs()" style="margin-left: 5px;">
+    </form>
+    <form id="inputForm" [formGroup]="inputForm">
+        <div style="display: flex; justify-content: center;">
+            <ng-container *ngFor="let number of inputs">
+                <div style="padding: 10px;">
+                    <select #selection id="selection" name="selection" (change)="updateBoxes()" style="width: 108px;">
+                        <option value="percentage">Percentage</option>
+                        <option value="fraction">Fraction</option>
+                        <option value="decimal">Decimal</option>
+                    </select>
+                    <br>
+                    <ng-container *ngIf="selection.value == 'percentage' || selection.value == 'decimal'">
+                        <input type="number" id="{{number}}" name="{{number}}" class="input" formControlName="{{number}}" style="margin-top: 5px; width: 100px;">
+                    </ng-container>
+                    <ng-container *ngIf="selection.value=='fraction'">
+                        <div>
+                            <input type="number" id="{{number}}Numerator" name="{{number}}Numerator" class="input" formControlName="{{number}}Numerator" style="margin-top: 5px; width: 100px;">
+                        </div>                            
+                        <div>
+                            <hr style='width:105px;' class="margin-right" />
+                        </div>                            
+                        <div>
+                            <input type="number" id="{{number}}Denominator" name="{{number}}Denominator" class="input" formControlName="{{number}}Denominator" style="width: 100px;">
+                        </div>
+                    </ng-container>
+                    <ng-container *ngIf="number + 1 == this.setUpForm.get('numberOfInputs')?.value">
+                        <br>
+                        <button style='margin-top: 5px; float:right' (click)="clear()">Clear</button>
+                    </ng-container>
+                </div>
+            </ng-container>
+        </div>
+        <ng-container *ngIf="inputs.length > 0">
+            <input type="button" id="calcButton" name="calcButton" value="Calculate" (click)="calculate()">
+        </ng-container>
+    </form>
+    <ng-container *ngIf="showCalculation">
+        <div class="answer-div">
+            <h2>{{calculation}}</h2>
+        </div>
+    </ng-container>
+</div>

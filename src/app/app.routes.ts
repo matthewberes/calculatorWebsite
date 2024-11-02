@@ -1,5 +1,6 @@
 import { Routes } from '@angular/router';
 import { AreaComponent } from './area/area.component';
+import { CombinedProbabilityComponent } from './combined-probability/combined-probability.component';
 import { FractionsComponent } from './fractions/fractions.component';
 import { HomeComponent } from './home/home.component';
 import { MeanComponent } from './mean/mean.component';
@@ -16,5 +17,6 @@ export const routes: Routes = [
     { path: 'fractions', component: FractionsComponent },
     { path: 'area', component: AreaComponent },
     { path: 'volume', component: VolumeComponent },
-    { path: 'quadratic', component: QuadraticComponent }
+    { path: 'quadratic', component: QuadraticComponent },
+    { path: 'combined-probability', component: CombinedProbabilityComponent }
 ];
