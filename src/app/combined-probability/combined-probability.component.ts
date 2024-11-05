@@ -17,13 +17,15 @@ export class CombinedProbabilityComponent {
   setUpForm = new FormGroup({
     numberOfInputs: new FormControl()
   })
+  totalInputs: number = 0;
   inputOptions: string[] = [];
 
   constructor(private cdr: ChangeDetectorRef) { }
 
   calculateInputs() {
     this.showCalculation = false;
-    this.inputs = Array.from(Array(Number(this.setUpForm.value.numberOfInputs)).keys())
+    this.totalInputs = Number(this.setUpForm.value.numberOfInputs);
+    this.inputs = Array.from(Array(this.totalInputs).keys())
     let i: number = 0;
     this.inputs.forEach(x => {
       this.inputForm.addControl(String(x), new FormControl())
@@ -36,7 +38,19 @@ export class CombinedProbabilityComponent {
   }
 
   calculate() {
-    console.log(this.inputForm)
+    this.showCalculation = false;
+    let sum: number = 1;
+    for (let i = 0; i < this.totalInputs; i++) {
+      if (this.inputOptions[i] == "percentage") {
+        sum = sum * (this.inputForm.get(String(i))?.value / 100);
+      } else if (this.inputOptions[i] == "fraction") {
+        sum = sum * (this.inputForm.get(String(i) + "Numerator")?.value / this.inputForm.get(String(i) + "Denominator")?.value);
+      } else if (this.inputOptions[i] == "decimal") {
+        sum = sum * this.inputForm.get(String(i))?.value;
+      }
+      this.calculation = String(sum);
+      this.showCalculation = true;
+    }
   }
 
   clear() {
@@ -44,7 +58,7 @@ export class CombinedProbabilityComponent {
   }
 
   updateBoxes(num: number, val: any) {
-    console.log(val.value)
+    this.inputOptions[num] = val;
     this.cdr.detectChanges();
   }
 }
