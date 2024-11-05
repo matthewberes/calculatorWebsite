@@ -1,5 +1,5 @@
 import { NgFor, NgIf } from '@angular/common';
-import { ChangeDetectorRef, Component } from '@angular/core';
+import { ChangeDetectorRef, Component, ElementRef, ViewChild } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 
 @Component({
@@ -17,27 +17,34 @@ export class CombinedProbabilityComponent {
   setUpForm = new FormGroup({
     numberOfInputs: new FormControl()
   })
+  inputOptions: string[] = [];
 
   constructor(private cdr: ChangeDetectorRef) { }
 
   calculateInputs() {
     this.showCalculation = false;
     this.inputs = Array.from(Array(Number(this.setUpForm.value.numberOfInputs)).keys())
+    let i: number = 0;
     this.inputs.forEach(x => {
       this.inputForm.addControl(String(x), new FormControl())
+      this.inputForm.addControl(String(x) + "Numerator", new FormControl())
+      this.inputForm.addControl(String(x) + "Denominator", new FormControl())
+      this.inputOptions[i] = "percentage"
+      i++;
     })
     this.cdr.detectChanges();
   }
 
   calculate() {
-
+    console.log(this.inputForm)
   }
 
   clear() {
 
   }
 
-  updateBoxes() {
+  updateBoxes(num: number, val: any) {
+    console.log(val.value)
     this.cdr.detectChanges();
   }
 }

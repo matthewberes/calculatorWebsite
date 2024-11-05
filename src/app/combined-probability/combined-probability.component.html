@@ -9,7 +9,7 @@
         <div style="display: flex; justify-content: center;">
             <ng-container *ngFor="let number of inputs">
                 <div style="padding: 10px;">
-                    <select #selection id="selection" name="selection" (change)="updateBoxes()" style="width: 108px;">
+                    <select #selection id="selection" name="selection" (change)="updateBoxes(number, selection.value)" style="width: 108px;">
                         <option value="percentage">Percentage</option>
                         <option value="fraction">Fraction</option>
                         <option value="decimal">Decimal</option>
