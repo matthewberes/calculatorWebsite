@@ -42,7 +42,7 @@
     </form>
     <ng-container *ngIf="showCalculation">
         <div class="answer-div">
-            <h2>{{calculation}}</h2>
+            <h2 style="text-align: center;"><span [innerHTML]="calculation"></span></h2>
         </div>
     </ng-container>
 </div>

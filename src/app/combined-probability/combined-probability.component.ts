@@ -48,8 +48,28 @@ export class CombinedProbabilityComponent {
       } else if (this.inputOptions[i] == "decimal") {
         sum = sum * this.inputForm.get(String(i))?.value;
       }
-      this.calculation = String(sum);
-      this.showCalculation = true;
+    }
+    let fraction = this.buildFraction(sum);
+    this.calculation = String(sum) + " | " + fraction;
+    this.showCalculation = true;
+  }
+
+  buildFraction(num: number): string {
+    let decimalPoints = String(num).split(".");
+    let mulitplier = "1";
+    for (let i = 0; i < decimalPoints[1].length; i++) {
+      mulitplier += "0";
+    }
+    let numerator = num * Number(mulitplier);
+    let gcf = this.gcf(numerator, Number(mulitplier));
+    return "<sup>" + String(numerator / gcf) + "<\/sup>&frasl;<sub>" + String(Number(mulitplier) / gcf) + "<\/sub>";
+  }
+
+  gcf(a: number, b: number): number {
+    if (b) {
+      return this.gcf(b, a % b);
+    } else {
+      return Math.abs(a);
     }
   }
 
