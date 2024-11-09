@@ -13,27 +13,29 @@ export class CombinedProbabilityComponent {
   calculation: string = "";
   showCalculation: boolean = false;
   inputs: number[] = [];
-  inputForm = new FormGroup({})
+  inputForm = new FormGroup({});
   setUpForm = new FormGroup({
     numberOfInputs: new FormControl()
   })
   totalInputs: number = 0;
   inputOptions: string[] = [];
+  clearPlacement: number = 0;
 
   constructor(private cdr: ChangeDetectorRef) { }
 
   calculateInputs() {
     this.showCalculation = false;
     this.totalInputs = Number(this.setUpForm.value.numberOfInputs);
-    this.inputs = Array.from(Array(this.totalInputs).keys())
+    this.inputs = Array.from(Array(this.totalInputs).keys());
     let i: number = 0;
     this.inputs.forEach(x => {
-      this.inputForm.addControl(String(x), new FormControl())
-      this.inputForm.addControl(String(x) + "Numerator", new FormControl())
-      this.inputForm.addControl(String(x) + "Denominator", new FormControl())
-      this.inputOptions[i] = "percentage"
+      this.inputForm.addControl(String(x), new FormControl());
+      this.inputForm.addControl(String(x) + "Numerator", new FormControl());
+      this.inputForm.addControl(String(x) + "Denominator", new FormControl());
+      this.inputOptions[i] = "percentage";
       i++;
     })
+    this.clearPlacement = this.setUpForm.get('numberOfInputs')?.value;
     this.cdr.detectChanges();
   }
 
@@ -74,7 +76,11 @@ export class CombinedProbabilityComponent {
   }
 
   clear() {
-
+    for (let i = 0; i < this.totalInputs; i++) {
+      this.inputForm.get(String(i))?.setValue(null);
+      this.inputForm.get(String(i) + "Numerator")?.setValue(null);
+      this.inputForm.get(String(i) + "Denominator")?.setValue(null);
+    }
   }
 
   updateBoxes(num: number, val: any) {

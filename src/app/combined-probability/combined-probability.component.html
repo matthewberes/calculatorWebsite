@@ -29,7 +29,7 @@
                             <input type="number" id="{{number}}Denominator" name="{{number}}Denominator" class="input" formControlName="{{number}}Denominator" style="width: 100px;">
                         </div>
                     </ng-container>
-                    <ng-container *ngIf="number + 1 == this.setUpForm.get('numberOfInputs')?.value">
+                    <ng-container *ngIf="number + 1 == this.clearPlacement">
                         <br>
                         <button style='margin-top: 5px; float:right' (click)="clear()">Clear</button>
                     </ng-container>
