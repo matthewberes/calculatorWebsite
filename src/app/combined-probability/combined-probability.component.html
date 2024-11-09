@@ -6,7 +6,7 @@
         <input type="button" id="generateButton" name="generateButton" value="Generate Inputs" (click)="calculateInputs()" style="margin-left: 5px;">
     </form>
     <form id="inputForm" [formGroup]="inputForm">
-        <div style="display: flex; justify-content: center;">
+        <div style="display: flex; justify-content: center; flex-wrap: wrap;">
             <ng-container *ngFor="let number of inputs">
                 <div style="padding: 10px;">
                     <select #selection id="selection" name="selection" (change)="updateBoxes(number, selection.value)" style="width: 108px;">
