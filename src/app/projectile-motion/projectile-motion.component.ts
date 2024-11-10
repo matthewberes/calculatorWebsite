@@ -28,24 +28,26 @@ export class ProjectileMotionComponent {
   }
 
   calculate() {
+    if (!this.projectileForm.get('velocity')?.value || !this.projectileForm.get('angle')?.value || (this.cliffToggle && !this.projectileForm.get('height')?.value)) {
+      return;
+    }
     this.showCalculation = false;
-    let time: number = 0;
-    let distance: number = 0;
-    let finalVelocity: number = 0;
-    let finalAngle: number = 0
-    let maxHeight: number = 0;
-    time = this.solveTime();
-    distance = this.solveDistanceX(time);
-    finalVelocity = this.solveFinalVelocity(time);
-    finalAngle = this.solveFinalAngle(time);
-    maxHeight = this.solveMaxHeight();
+    let time: number = this.solveTime();
+    let distance: number = this.solveDistanceX(time);
+    let finalVelocity: number = this.solveFinalVelocity(time);
+    let finalAngle: number = this.solveFinalAngle(time);
+    let maxHeight: number = this.solveMaxHeight();
     this.calculation = "Time: " + String(time) + "<i>s<\/i><br>Range: " + String(distance) + "<i>m<\/i><br>Final Velocity: " + String(finalVelocity) + "<i>m/s<\/i><br>Final Angle: " + String(finalAngle) + "<i>°<\/i><br>Max Height: " + String(maxHeight) + "<i>m<\/i>";
     this.showCalculation = true;
   }
 
   solveTime(): number {
     let yVelocity = this.projectileForm.get("velocity")?.value * Math.sin(this.projectileForm.get("angle")?.value * (Math.PI / 180));
-    return Math.round((this.quadraticFormula(-4.9, yVelocity, this.cliffToggle ? this.projectileForm.get("height")?.value : 0) + Number.EPSILON) * 100) / 100;
+    if (this.cliffToggle) {
+      return Math.round((this.quadraticFormula(-4.9, yVelocity, this.cliffToggle ? this.projectileForm.get("height")?.value : 0) + Number.EPSILON) * 100) / 100;
+    } else {
+      return Math.round(((yVelocity / 9.8) * 2 + Number.EPSILON) * 100) / 100;
+    }
   }
 
   solveDistanceX(time: number): number {
@@ -58,10 +60,6 @@ export class ProjectileMotionComponent {
     let yVelocity = this.projectileForm.get("velocity")?.value * Math.sin(this.projectileForm.get("angle")?.value * (Math.PI / 180));
     let yVelocityFinal = yVelocity - (9.8 * time);
     let hypotenuse = Math.sqrt(Math.pow(xVelocity, 2) + Math.pow(yVelocityFinal, 2));
-
-    var angleRad = Math.atan(yVelocityFinal / xVelocity);
-    var angleDeg = angleRad * 180 / Math.PI;
-
     return Math.round((hypotenuse + Number.EPSILON) * 100) / 100;
   }
 
@@ -69,14 +67,13 @@ export class ProjectileMotionComponent {
     let xVelocity = this.projectileForm.get("velocity")?.value * Math.cos(this.projectileForm.get("angle")?.value * (Math.PI / 180));
     let yVelocity = this.projectileForm.get("velocity")?.value * Math.sin(this.projectileForm.get("angle")?.value * (Math.PI / 180));
     let yVelocityFinal = yVelocity - (9.8 * time);
-
-    return Math.round((Math.abs(Math.atan(yVelocityFinal / xVelocity) * (180 / Math.PI)) + Number.EPSILON) * 100) / 100;
+    return Math.round((Math.abs(Math.atan(yVelocityFinal / xVelocity) * (180 / Math.PI)) + Number.EPSILON) * 1) / 1;
   }
 
   solveMaxHeight(): number {
     let yVelocity = this.projectileForm.get("velocity")?.value * Math.sin(this.projectileForm.get("angle")?.value * (Math.PI / 180));
     let t = yVelocity / 9.8;
-    let solvedQuadratic = (this.cliffToggle ? this.projectileForm.get("height")?.value : 0) + (yVelocity * t) - (4.9 * Math.pow(t, 2))
+    let solvedQuadratic = (this.cliffToggle ? this.projectileForm.get("height")?.value : 0) + (yVelocity * t) - (4.9 * Math.pow(t, 2));
     return Math.round((solvedQuadratic + Number.EPSILON) * 100) / 100;
   }
 
@@ -91,6 +88,9 @@ export class ProjectileMotionComponent {
   }
 
   clear() {
-
+    this.showCalculation = false;
+    this.projectileForm.get('velocity')?.setValue(null);
+    this.projectileForm.get('angle')?.setValue(null);
+    this.projectileForm.get('height')?.setValue(null);
   }
 }
