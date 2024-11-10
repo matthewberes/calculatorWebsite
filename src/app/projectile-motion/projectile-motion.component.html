@@ -2,19 +2,31 @@
 
 <div style="text-align:center">
 
-    <form id="projectileForm" [formGroup]="projectileForm">
-        <label>Velocity (v): </label>
-        <input type="number" id="velocity" name="velocity" formControlName="velocity" style='margin-right: 15px;'>
+    <label>Is your projectile thrown off a cliff? </label>
+    <select #cliff id="cliff" name="cliff" (change)="selectChange()">
+        <option value=0>No</option>
+        <option value=1>Yes</option>
+    </select>
+
+    <form id="projectileForm" [formGroup]="projectileForm" style="margin-top: 15px">
+        <label>Velocity (v <i>m/s</i>): </label>
+        <input type="number" id="velocity" name="velocity" formControlName="velocity">
         <label  style='margin-left: 15px;'>Launch angle (θ): </label>
         <input type="number" id="angle" name="angle" formControlName="angle">
-        <button style='margin-left: 15px;' (click)="clear()">Clear</button>
+        <ng-container *ngIf="cliffToggle == true">
+            <label  style='margin-left: 15px;'>Height (h <i>m</i>): </label>
+            <input type="number" id="height" name="height" formControlName="height">
+        </ng-container>
+        <button style='margin-left: 20px;' (click)="clear()">Clear</button>
     </form>
 
     <button style='margin-top: 15px;' (click)="calculate()">Calculate</button>
-
+</div>
     <ng-container style="margin-top: 25px;" *ngIf="showCalculation">
         <div class="answer-div">
-            <h2>{{calculation}}</h2>
+            <h2 style="
+            width: 40%;
+            margin-left: auto;
+            margin-right: auto;"><span [innerHTML]="calculation"></span></h2>
         </div>
     </ng-container>
-</div>
