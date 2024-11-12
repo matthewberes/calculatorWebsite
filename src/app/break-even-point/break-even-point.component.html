@@ -1,0 +1,15 @@
+<h1 style="text-align: center;">Break-even Calculator</h1>
+
+<div style="text-align:center">
+
+    
+    <button style='margin-left: 20px;' (click)="clear()">Clear</button>
+
+    <button style='margin-top: 15px;' (click)="calculate()">Calculate</button>
+
+    <ng-container style="margin-top: 25px;" *ngIf="showCalculation">
+        <div class="answer-div">
+            <h2 style="width: 30%; margin-left: auto; margin-right: auto;"><span [innerHTML]="calculation"></span></h2>
+        </div>
+    </ng-container>
+</div>
