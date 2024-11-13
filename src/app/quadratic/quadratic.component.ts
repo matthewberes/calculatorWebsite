@@ -38,6 +38,9 @@ export class QuadraticComponent {
     this.inputForm.get('a')?.setValue(null);
     this.inputForm.get('b')?.setValue(null);
     this.inputForm.get('c')?.setValue(null);
+    this.aInput = "";
+    this.bInput = "";
+    this.cInput = "";
   }
 
   change(box: string, event: Event) {
