@@ -3,5 +3,9 @@
 }
 
 input {
-    width: 50px;
+    width: 75px;
+}
+
+label {
+    width: 75px;
 }

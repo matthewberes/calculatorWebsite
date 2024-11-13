@@ -2,10 +2,30 @@
 
 <div style="text-align:center">
 
-    
-    <button style='margin-left: 20px;' (click)="clear()">Clear</button>
+    <div style="display: flex; justify-content: center; margin-right: 100px;">        
+        <form id="costForm" [formGroup]="costForm">
+            <div style='text-align:right; margin-right: 15px;'>
+                <label>Initial cost: </label>
+                <input type="number" id="initial" name="initial" formControlName="initial">
+                <br>
+                <label style='margin-left: 15px;'>Cost per interval / unit: </label>
+                <input style="margin-top: 5px;" type="number" id="cost" name="cost" formControlName="cost">
+            </div>
+        </form>
+        <form id="profitForm" [formGroup]="profitForm">
+            <div style='text-align:right; margin-left: 15px;'>
+                <label>Initial profit: </label>
+                <input type="number" id="initial" name="initial" formControlName="initial" placeholder="0">
+                <br>
+                <label style='margin-left: 15px;'>Profit per interval / unit: </label>
+                <input style="margin-top: 5px;" type="number" id="cost" name="cost" formControlName="cost">
+                <br>
+                <button style='margin-top: 5px; margin-left: 20px;' (click)="clear()">Clear</button>
+            </div>
+        </form>
+    </div>
 
-    <button style='margin-top: 15px;' (click)="calculate()">Calculate</button>
+    <button style='margin-top: 5px;' (click)="calculate()">Calculate</button>
 
     <ng-container style="margin-top: 25px;" *ngIf="showCalculation">
         <div class="answer-div">
