@@ -22,15 +22,17 @@ export class BreakEvenPointComponent {
   })
 
   calculate() {
-    console.log(this)
+    let answer: number = (this.costForm.get("initial")?.value - (!this.profitForm.get("initial")?.value ? 0 : this.profitForm.get("initial")?.value)) / (this.profitForm.get("cost")?.value - this.costForm.get("cost")?.value);
+    let amount: number = answer * this.profitForm.get("cost")?.value;
+    this.calculation = "Break-even point: " + String(answer) + " intervals / units, at $" + String(amount);
+    this.showCalculation = true;
   }
 
   clear() {
     this.showCalculation = false;
-    this.profitForm.get('initial')?.setValue(null);
-    this.profitForm.get('cost')?.setValue(null);
     this.costForm.get('initial')?.setValue(null);
     this.costForm.get('cost')?.setValue(null);
-
+    this.profitForm.get('initial')?.setValue(null);
+    this.profitForm.get('cost')?.setValue(null);
   }
 }

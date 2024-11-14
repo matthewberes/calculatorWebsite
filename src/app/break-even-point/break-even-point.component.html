@@ -17,7 +17,7 @@
                 <label>Initial profit: </label>
                 <input type="number" id="initial" name="initial" formControlName="initial" placeholder="0">
                 <br>
-                <label style='margin-left: 15px;'>Profit per interval / unit: </label>
+                <label style='margin-left: 15px;'>Revenue per interval / unit: </label>
                 <input style="margin-top: 5px;" type="number" id="cost" name="cost" formControlName="cost">
                 <br>
                 <button style='margin-top: 5px; margin-left: 20px;' (click)="clear()">Clear</button>
@@ -29,7 +29,7 @@
 
     <ng-container style="margin-top: 25px;" *ngIf="showCalculation">
         <div class="answer-div">
-            <h2 style="width: 30%; margin-left: auto; margin-right: auto;"><span [innerHTML]="calculation"></span></h2>
+            <h2><span [innerHTML]="calculation"></span></h2>
         </div>
     </ng-container>
 </div>
