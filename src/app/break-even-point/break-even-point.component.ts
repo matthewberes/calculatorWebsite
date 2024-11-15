@@ -15,43 +15,29 @@ export class BreakEvenPointComponent implements OnInit {
   constructor(private cdr: ChangeDetectorRef) { }
 
   chart: any;
+  test: number[] = [];
   public config: any = {
     type: 'line',
     data: {
-      labels: [
-        'January',
-        'February',
-        'March',
-        'April',
-        'May',
-        'June',
-        'July',
-        'August',
-        'September',
-        'October',
-        'November',
-        'December'
-      ],
+      labels: [],
       datasets: [{
-        label: 'My First Dataset',
-        data: [65, 59, 80, 81, 56, 55, 40],
+        label: 'Cost',
+        data: [],
         backgroundColor: [
-          'rgba(255, 99, 132, 0.2)',
-          'rgba(255, 159, 64, 0.2)',
-          'rgba(255, 205, 86, 0.2)',
-          'rgba(75, 192, 192, 0.2)',
-          'rgba(54, 162, 235, 0.2)',
-          'rgba(153, 102, 255, 0.2)',
-          'rgba(201, 203, 207, 0.2)'
+          'rgba(255, 99, 132, 0.2)'
         ],
         borderColor: [
-          'rgb(255, 99, 132)',
-          'rgb(255, 159, 64)',
-          'rgb(255, 205, 86)',
-          'rgb(75, 192, 192)',
-          'rgb(54, 162, 235)',
-          'rgb(153, 102, 255)',
-          'rgb(201, 203, 207)'
+          'rgb(255, 99, 132)'
+        ],
+        borderWidth: 1
+      }, {
+        label: 'Revenue',
+        data: [],
+        backgroundColor: [
+          'rgba(124, 252, 0, 0.2)'
+        ],
+        borderColor: [
+          'rgb(124, 252, 0)'
         ],
         borderWidth: 1
       }]
@@ -80,7 +66,9 @@ export class BreakEvenPointComponent implements OnInit {
     let answer: number = (this.costForm.get("initial")?.value - (!this.profitForm.get("initial")?.value ? 0 : this.profitForm.get("initial")?.value)) / (this.profitForm.get("cost")?.value - this.costForm.get("cost")?.value);
     let amount: number = answer * this.profitForm.get("cost")?.value;
     this.calculation = "Break-even point: " + String(answer) + " intervals / units, at $" + String(amount);
+    this.populateGraph(answer);
     this.showCalculation = true;
+    this.chart.update();
   }
 
   clear() {
@@ -89,6 +77,20 @@ export class BreakEvenPointComponent implements OnInit {
     this.costForm.get('cost')?.setValue(null);
     this.profitForm.get('initial')?.setValue(null);
     this.profitForm.get('cost')?.setValue(null);
+  }
+
+  populateGraph(intervals: number) {
+    let costData = [];
+    let profitData = [];
+    let labelData = [];
+    for (let i = 0; i < intervals + 5; i++) {
+      labelData.push(i);
+      costData.push((i * this.costForm.get('cost')?.value) + this.costForm.get('initial')?.value);
+      profitData.push((i * this.profitForm.get('cost')?.value) + this.profitForm.get('initial')?.value);
+    }
+    this.config.data.labels = labelData;
+    this.config.data.datasets[0].data = costData;
+    this.config.data.datasets[1].data = profitData;
   }
 
   ngOnInit(): void {
