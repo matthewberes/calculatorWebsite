@@ -25,11 +25,15 @@
         </form>
     </div>
 
-    <button style='margin-top: 5px;' (click)="calculate()">Calculate</button>
+    <button style='margin-top: 5px; margin-bottom: 25px;' (click)="calculate()">Calculate</button>
 
-    <ng-container style="margin-top: 25px;" *ngIf="showCalculation">
+    <ng-container *ngIf="showCalculation">
         <div class="answer-div">
             <h2><span [innerHTML]="calculation"></span></h2>
         </div>
     </ng-container>
+
+    <div class="graph">
+        <canvas id="myChart">{{ chart }}</canvas>
+    </div>
 </div>
