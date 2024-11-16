@@ -32,8 +32,9 @@
             <h2><span [innerHTML]="calculation"></span></h2>
         </div>
     </ng-container>
-
-    <div class="graph">
-        <canvas id="myChart">{{ chart }}</canvas>
+    <div [class.hidden]="!showCalculation">
+        <div class="graph">
+            <canvas #myChart id="myChart">{{ chart }}</canvas>
+        </div>
     </div>
 </div>

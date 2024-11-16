@@ -1,5 +1,5 @@
 import { NgIf } from '@angular/common';
-import { ChangeDetectorRef, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { Chart, registerables } from 'chart.js';
 Chart.register(...registerables);
@@ -12,10 +12,9 @@ Chart.register(...registerables);
   styleUrl: './break-even-point.component.css'
 })
 export class BreakEvenPointComponent implements OnInit {
-  constructor(private cdr: ChangeDetectorRef) { }
+  constructor() { }
 
   chart: any;
-  test: number[] = [];
   public config: any = {
     type: 'line',
     data: {
@@ -83,7 +82,7 @@ export class BreakEvenPointComponent implements OnInit {
     let costData = [];
     let profitData = [];
     let labelData = [];
-    for (let i = 0; i < intervals + 5; i++) {
+    for (let i = 0; i < (intervals * 2) + 1; i++) {
       labelData.push(i);
       costData.push((i * this.costForm.get('cost')?.value) + this.costForm.get('initial')?.value);
       profitData.push((i * this.profitForm.get('cost')?.value) + this.profitForm.get('initial')?.value);
@@ -94,7 +93,6 @@ export class BreakEvenPointComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.chart = new Chart('myChart', this.config)
-    this.cdr.detectChanges();
+    this.chart = new Chart('myChart', this.config);
   }
 }
