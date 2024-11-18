@@ -1,0 +1,62 @@
+<h1 style="text-align: center;">Derivative Calculator</h1>
+
+<div style="text-align:center">
+    <label>What rule? </label>
+    <select #rule id="rule" name="rule" (change)="selectChange()">
+        <option value="constant">Constant</option>
+        <option value="constantMultiple">Constant Multiple</option>
+        <option value="power">Power</option>
+        <option value="sum">Sum</option>
+        <option value="difference">Difference</option>
+        <option value="product">Product</option>
+        <option value="quotient">Quotient</option>
+        <option value="chain">Chain</option>
+    </select>
+
+    <ng-container *ngIf="currRule == 'constant'">
+    </ng-container>
+
+    <ng-container *ngIf="currRule == 'constantMultiple'">
+    </ng-container>
+
+    <ng-container *ngIf="currRule == 'power'">
+        <h2>
+            f(x) = <span *ngIf="powerM == ''"><i>m</i></span>
+            <span *ngIf="powerM != ''">{{powerM}}</span>x<span *ngIf="powerN == ''"><sup><i>n</i></sup></span>
+            <span *ngIf="powerN != ''"><sup>{{powerN}}</sup></span> → f'(x) = <span *ngIf="powerN == ''"><i>n</i></span>
+            <span *ngIf="powerN != ''">{{powerN}}<span *ngIf="powerM != ''"> * </span></span>
+            <span *ngIf="powerM == ''"><i>m</i></span><span *ngIf="powerM != ''">{{powerM}}</span>x<span *ngIf="powerN == ''"><sup><i>n</i>-1</sup></span>
+            <span *ngIf="powerN != ''"><sup>{{powerN}}-1</sup></span>
+        </h2>
+
+        <form id="powerForm" [formGroup]="powerForm">
+            <label>n: </label>
+            <input type="number" id="n" name="n" formControlName="n" style="margin-right: 10px" (input)="change('powerN', $event)">
+            <label style="margin-left: 10px">m: </label>            
+            <input type="number" id="m" name="m" formControlName="m" placeholder="1" (input)="change('powerM', $event)">
+        </form>
+    </ng-container>
+
+    <ng-container *ngIf="currRule == 'sum'">
+    </ng-container>
+
+    <ng-container *ngIf="currRule == 'difference'">
+    </ng-container>
+
+    <ng-container *ngIf="currRule == 'product'">
+    </ng-container>
+
+    <ng-container *ngIf="currRule == 'quotient'">
+    </ng-container>
+
+    <ng-container *ngIf="currRule == 'chain'">
+    </ng-container>
+
+    <button style='margin-top: 20px;' (click)="calculate()">Calculate</button>
+
+    <ng-container *ngIf="showCalculation">
+        <div class="answer-div">
+            <h2><span [innerHTML]="calculation"></span></h2>
+        </div>
+    </ng-container>
+</div>

@@ -2,6 +2,7 @@ import { Routes } from '@angular/router';
 import { AreaComponent } from './area/area.component';
 import { BreakEvenPointComponent } from './break-even-point/break-even-point.component';
 import { CombinedProbabilityComponent } from './combined-probability/combined-probability.component';
+import { DerivativeComponent } from './derivative/derivative.component';
 import { FractionsComponent } from './fractions/fractions.component';
 import { HomeComponent } from './home/home.component';
 import { MeanComponent } from './mean/mean.component';
@@ -22,5 +23,7 @@ export const routes: Routes = [
     { path: 'quadratic', component: QuadraticComponent },
     { path: 'combined-probability', component: CombinedProbabilityComponent },
     { path: 'projectile-motion', component: ProjectileMotionComponent },
-    { path: 'break-even-point', component: BreakEvenPointComponent }
+    { path: 'break-even-point', component: BreakEvenPointComponent },
+    { path: 'derivative', component: DerivativeComponent },
+
 ];
