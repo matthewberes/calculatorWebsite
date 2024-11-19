@@ -15,6 +15,11 @@ export class DerivativeComponent {
   currRule: string = "constant";
   @ViewChild('rule') rule!: ElementRef;
 
+  constantForm = new FormGroup({
+    c: new FormControl()
+  });
+  constantC: string = "";
+
   powerForm = new FormGroup({
     n: new FormControl(),
     m: new FormControl()
@@ -30,6 +35,13 @@ export class DerivativeComponent {
 
   change(box: string, event: Event) {
     switch (box) {
+      case "constantC":
+        if (!this.constantForm.get('c')?.value) {
+          this.constantC = "";
+        } else {
+          this.constantC = String(this.constantForm.get('c')?.value);
+        }
+        break;
       case "powerN":
         if (!this.powerForm.get('n')?.value) {
           this.powerN = "";
@@ -51,6 +63,7 @@ export class DerivativeComponent {
     this.showCalculation = false;
     switch (this.currRule) {
       case "constant":
+        this.calculation = String(0);
         break;
       case "constantMultiple":
         break;
