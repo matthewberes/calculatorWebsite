@@ -20,6 +20,15 @@ export class DerivativeComponent {
   });
   constantC: string = "";
 
+  constantMultipleForm = new FormGroup({
+    c: new FormControl(),
+    m: new FormControl,
+    n: new FormControl
+  })
+  constantMultipleC: string = "";
+  constantMultipleN: string = "";
+  constantMultipleM: string = "";
+
   powerForm = new FormGroup({
     n: new FormControl(),
     m: new FormControl()
@@ -40,6 +49,27 @@ export class DerivativeComponent {
           this.constantC = "";
         } else {
           this.constantC = String(this.constantForm.get('c')?.value);
+        }
+        break;
+      case "constantMultipleC":
+        if (!this.constantMultipleForm.get('c')?.value) {
+          this.constantMultipleC = "";
+        } else {
+          this.constantMultipleC = String(this.constantMultipleForm.get('c')?.value);
+        }
+        break;
+      case "constantMultipleN":
+        if (!this.constantMultipleForm.get('n')?.value) {
+          this.constantMultipleN = "";
+        } else {
+          this.constantMultipleN = String(this.constantMultipleForm.get('n')?.value);
+        }
+        break;
+      case "constantMultipleM":
+        if (!this.constantMultipleForm.get('m')?.value) {
+          this.constantMultipleM = "";
+        } else {
+          this.constantMultipleM = String(this.constantMultipleForm.get('m')?.value);
         }
         break;
       case "powerN":
@@ -63,9 +93,10 @@ export class DerivativeComponent {
     this.showCalculation = false;
     switch (this.currRule) {
       case "constant":
-        this.calculation = String(0);
+        this.calculation = "f'(x) = " + String(0);
         break;
       case "constantMultiple":
+        this.calculation = "f'(x) = " + String((this.constantMultipleForm.get('c')?.value * this.constantMultipleForm.get('n')?.value * (this.constantMultipleForm.get('m')?.value ? this.constantMultipleForm.get('m')?.value : 1)) + "x<sup>" + (this.constantMultipleForm.get('n')?.value - 1) + "</sup>");
         break;
       case "power":
         this.calculation = String("f'(x) = " + this.powerForm.get('n')?.value * (this.powerForm.get('m')?.value ? this.powerForm.get('m')?.value : 1) + "x<sup>" + (this.powerForm.get('n')?.value - 1) + "</sup>");
