@@ -6,8 +6,7 @@
         <option value="constant">Constant</option>
         <option value="constantMultiple">Constant Multiple</option>
         <option value="power">Power</option>
-        <option value="sum">Sum</option>
-        <option value="difference">Difference</option>
+        <option value="sum">Sum / Difference</option>
         <option value="product">Product</option>
         <option value="quotient">Quotient</option>
         <option value="chain">Chain</option>
@@ -43,9 +42,9 @@
         
          <form id="constantMultipleForm" [formGroup]="constantMultipleForm">
             <label>c: </label>
-            <input type="number" id="c" name="c" formControlName="c" (input)="change('constantMultipleC', $event)">
-            <label style="margin-left: 10px">n: </label>
-            <input type="number" id="n" name="n" formControlName="n" style="margin-left: 10px; margin-right: 10px" (input)="change('constantMultipleN', $event)">
+            <input type="number" id="c" name="c" formControlName="c" (input)="change('constantMultipleC', $event)" style="margin-right: 10px">
+            <label style="margin-left: 10px;">n: </label>
+            <input type="number" id="n" name="n" formControlName="n" style="margin-right: 10px" (input)="change('constantMultipleN', $event)">
             <label style="margin-left: 10px">m: </label>            
             <input type="number" id="m" name="m" formControlName="m" placeholder="1" (input)="change('constantMultipleM', $event)">
         </form>
@@ -70,9 +69,58 @@
     </ng-container>
 
     <ng-container *ngIf="currRule == 'sum'">
-    </ng-container>
-
-    <ng-container *ngIf="currRule == 'difference'">
+        <br>
+        <form id="sumSetUpForm" [formGroup]="sumSetUpForm">
+            <label style="margin-top: 15px;">How many functions are there? </label>   
+            <input type="number" id="numberOfInputs" name="numberOfInputs" formControlName="numberOfInputs" style="margin-top: 15px; margin-right: 2.5px;">
+            <button (click)="calculateInputs()" style="margin-top: 15px; margin-left: 2.5px;">Generate Inputs</button>
+        </form>
+        <br>
+        <form id="sumInputForm" [formGroup]="sumInputForm">
+            <div style="display: flex; justify-content: center; flex-wrap: wrap;">
+                <ng-container *ngFor="let number of inputs">
+                    <div style="padding: 10px; text-align: right;">
+                        <select #selection id="selection" name="selection" (change)="updateRules(number, selection.value)" style="width: 108px;">
+                            <option value="constant">Constant</option>
+                            <option value="constantMultiple">Constant Multiple</option>
+                            <option value="power">Power</option>
+                        </select>
+                        <br>
+                        <ng-container *ngIf="selection.value == 'constant'">
+                            <label>c: </label>
+                            <input type="number" id="{{number}}C" name="{{number}}C" formControlName="{{number}}C" (input)="change(number+'C', $event)">
+                        </ng-container> 
+                        <ng-container *ngIf="selection.value == 'constantMultiple'">
+                            <label>c: </label>
+                            <input type="number" id="{{number}}C" name="{{number}}C" formControlName="{{number}}C" (input)="change(number+'C', $event)">
+                            <br>
+                            <label>n: </label>
+                            <input type="number" id="{{number}}N" name="{{number}}N" formControlName="{{number}}N" (input)="change(number+'N', $event)">
+                            <br>
+                            <label>m: </label>            
+                            <input type="number" id="{{number}}M" name="{{number}}M" formControlName="{{number}}M" placeholder="1" (input)="change(number+'M', $event)">        
+                        </ng-container> 
+                        <ng-container *ngIf="selection.value == 'power'">
+                            <label>n: </label>
+                            <input type="number" id="{{number}}N" name="{{number}}N" formControlName="{{number}}N" (input)="change(number+'N', $event)">
+                            <br>
+                            <label>m: </label>            
+                            <input type="number" id="{{number}}M" name="{{number}}M" formControlName="{{number}}M" placeholder="1" (input)="change(number+'M', $event)">            
+                        </ng-container>                
+                        <ng-container *ngIf="number + 1 == this.inputs.length">                    
+                                <br>
+                                <button style='margin-top: 5px; float:right' (click)="clear()">Clear</button>
+                        </ng-container>
+                    </div>
+                    <ng-container *ngIf="number + 1 != this.inputs.length">
+                        <select #operator id="operator" name="operator" (change)="updateOperators(number, operator.value)" style="margin-top:10px;width:35px; height:20px">
+                        <option value="plus">+</option>
+                        <option value="minus">-</option>
+                        </select>
+                    </ng-container>
+                </ng-container>
+            </div>
+        </form>
     </ng-container>
 
     <ng-container *ngIf="currRule == 'product'">
@@ -84,7 +132,7 @@
     <ng-container *ngIf="currRule == 'chain'">
     </ng-container>
 
-    <button style='margin-top: 20px;' (click)="calculate()">Calculate</button>
+    <button style='margin-top: 15px;' (click)="calculate()">Calculate</button>
 
     <ng-container *ngIf="showCalculation">
         <div class="answer-div">

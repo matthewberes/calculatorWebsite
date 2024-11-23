@@ -1,15 +1,17 @@
-import { NgIf } from '@angular/common';
-import { Component, ElementRef, ViewChild } from '@angular/core';
+import { NgFor, NgIf } from '@angular/common';
+import { ChangeDetectorRef, Component, ElementRef, ViewChild } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-derivative',
   standalone: true,
-  imports: [NgIf, ReactiveFormsModule],
+  imports: [NgFor, NgIf, ReactiveFormsModule],
   templateUrl: './derivative.component.html',
   styleUrl: './derivative.component.css'
 })
 export class DerivativeComponent {
+  constructor(private cdr: ChangeDetectorRef) { }
+
   calculation: string = "";
   showCalculation: boolean = false;
   currRule: string = "constant";
@@ -35,6 +37,14 @@ export class DerivativeComponent {
   });
   powerN: string = "";
   powerM: string = "";
+
+  sumSetUpForm = new FormGroup({
+    numberOfInputs: new FormControl()
+  })
+  inputs: number[] = [];
+  inputOptions: string[] = [];
+  operators: string[] = [];
+  sumInputForm = new FormGroup({})
 
   selectChange() {
     this.currRule = this.rule.nativeElement.value;
@@ -89,6 +99,31 @@ export class DerivativeComponent {
     }
   }
 
+  calculateInputs() {
+    this.showCalculation = false;
+    this.inputs = Array.from(Array(Number(this.sumSetUpForm.value.numberOfInputs)).keys());
+    let i: number = 0;
+    this.inputs.forEach(x => {
+      this.sumInputForm.addControl(String(x), new FormControl());
+      this.sumInputForm.addControl(String(x) + "C", new FormControl());
+      this.sumInputForm.addControl(String(x) + "M", new FormControl());
+      this.sumInputForm.addControl(String(x) + "N", new FormControl());
+      this.inputOptions[i] = "constant";
+      this.operators[i] = "plus";
+      i++;
+    })
+    this.cdr.detectChanges();
+  }
+
+  updateRules(num: number, val: any) {
+    this.inputOptions[num] = val;
+    this.cdr.detectChanges();
+  }
+
+  updateOperators(num: number, val: any) {
+    this.operators[num] = val;
+  }
+
   calculate() {
     this.showCalculation = false;
     switch (this.currRule) {
@@ -99,7 +134,7 @@ export class DerivativeComponent {
         this.calculation = "f'(x) = " + String((this.constantMultipleForm.get('c')?.value * this.constantMultipleForm.get('n')?.value * (this.constantMultipleForm.get('m')?.value ? this.constantMultipleForm.get('m')?.value : 1)) + "x<sup>" + (this.constantMultipleForm.get('n')?.value - 1) + "</sup>");
         break;
       case "power":
-        this.calculation = String("f'(x) = " + this.powerForm.get('n')?.value * (this.powerForm.get('m')?.value ? this.powerForm.get('m')?.value : 1) + "x<sup>" + (this.powerForm.get('n')?.value - 1) + "</sup>");
+        this.calculation = "f'(x) = " + String(this.powerForm.get('n')?.value * (this.powerForm.get('m')?.value ? this.powerForm.get('m')?.value : 1) + "x<sup>" + (this.powerForm.get('n')?.value - 1) + "</sup>");
         break;
       case "sum":
         break;
