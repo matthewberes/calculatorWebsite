@@ -114,8 +114,8 @@
                     </div>
                     <ng-container *ngIf="number + 1 != this.inputs.length">
                         <select #operator id="operator" name="operator" (change)="updateOperators(number, operator.value)" style="margin-top:10px;width:35px; height:20px">
-                        <option value="plus">+</option>
-                        <option value="minus">-</option>
+                            <option value="plus">+</option>
+                            <option value="minus">-</option>
                         </select>
                     </ng-container>
                 </ng-container>

@@ -104,12 +104,14 @@ export class DerivativeComponent {
     this.inputs = Array.from(Array(Number(this.sumSetUpForm.value.numberOfInputs)).keys());
     let i: number = 0;
     this.inputs.forEach(x => {
-      this.sumInputForm.addControl(String(x), new FormControl());
-      this.sumInputForm.addControl(String(x) + "C", new FormControl());
-      this.sumInputForm.addControl(String(x) + "M", new FormControl());
-      this.sumInputForm.addControl(String(x) + "N", new FormControl());
-      this.inputOptions[i] = "constant";
-      this.operators[i] = "plus";
+      if (!this.sumInputForm.get(String(i))) {
+        this.sumInputForm.addControl(String(x), new FormControl());
+        this.sumInputForm.addControl(String(x) + "C", new FormControl());
+        this.sumInputForm.addControl(String(x) + "M", new FormControl());
+        this.sumInputForm.addControl(String(x) + "N", new FormControl());
+        this.inputOptions[i] = "constant";
+        this.operators[i] = "plus";
+      }
       i++;
     })
     this.cdr.detectChanges();
@@ -137,8 +139,29 @@ export class DerivativeComponent {
         this.calculation = "f'(x) = " + String(this.powerForm.get('n')?.value * (this.powerForm.get('m')?.value ? this.powerForm.get('m')?.value : 1) + "x<sup>" + (this.powerForm.get('n')?.value - 1) + "</sup>");
         break;
       case "sum":
-        break;
-      case "difference":
+        this.calculation = "f'(x) = "
+        let i: number = 0;
+        this.inputs.forEach(x => {
+          switch (this.inputOptions[i]) {
+            case "constantMultiple":
+              this.calculation += String((this.sumInputForm.get(String(i) + 'C')?.value * this.sumInputForm.get(String(i) + 'N')?.value * (this.sumInputForm.get(String(i) + 'M')?.value ? this.sumInputForm.get(String(i) + 'M')?.value : 1)) + "x<sup>" + (this.sumInputForm.get(String(i) + 'N')?.value - 1) + "</sup>");
+              break;
+            case "power":
+              this.calculation += String(this.sumInputForm.get(String(i) + 'N')?.value * (this.sumInputForm.get(String(i) + 'M')?.value ? this.sumInputForm.get(String(i) + 'M')?.value : 1) + "x<sup>" + (this.sumInputForm.get(String(i) + 'N')?.value - 1) + "</sup>");;
+              break;
+          }
+          if (i + 1 != this.inputs.length) {
+            switch (this.operators[i]) {
+              case "plus":
+                this.calculation += " + ";
+                break;
+              case "minus":
+                this.calculation += " - ";
+                break;
+            }
+          }
+          i++;
+        })
         break;
       case "product":
         break;
