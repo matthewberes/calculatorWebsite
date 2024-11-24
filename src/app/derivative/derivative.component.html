@@ -84,31 +84,29 @@
                  → f'(x) =
                  <ng-container *ngFor="let number of inputs"> 
                     <span *ngIf="this.inputOptions[number] == 'constant'">
-                        <span *ngIf="this.sumInputsC[number] == null">
+                        <span *ngIf="this.sumInputsC[number] == ''">
                             <i>c</i>
                         </span>
-                        <span *ngIf="this.sumInputsC[number] != null">
+                        <span *ngIf="this.sumInputsC[number] != ''">
                             {{this.sumInputsC[number]}}
                         </span>
                     </span>
 
                     <span *ngIf="this.inputOptions[number] == 'constantMultiple'">
-                        <!-- c * mnx<sup>n-1</sup> -->
-
-                        <span *ngIf="this.sumInputsC[number] == null"><i>c</i></span>
-                        <span *ngIf="this.sumInputsC[number] != null">{{this.sumInputsC[number]}}</span>
+                        <span *ngIf="this.sumInputsC[number] == ''"><i>c</i></span>
+                        <span *ngIf="this.sumInputsC[number] != ''">{{this.sumInputsC[number]}}</span>
                         <span> * </span>
-                        <span *ngIf="this.sumInputsN[number] == null"><i>n</i></span>
-                        <span *ngIf="this.sumInputsN[number] != null">{{this.sumInputsN[number]}}<span *ngIf="this.sumInputsM[number] != null"> * </span></span>
-                        <span *ngIf="this.sumInputsM[number] == null"><i>m</i></span><span *ngIf="this.sumInputsM[number] != null">{{this.sumInputsM[number]}}</span>x<span *ngIf="this.sumInputsN[number] == null"><sup><i>n</i>-1</sup></span>
-                        <span *ngIf="this.sumInputsN[number] != null"><sup>{{this.sumInputsN[number]}}-1</sup></span>
+                        <span *ngIf="this.sumInputsN[number] == ''"><i>n</i></span>
+                        <span *ngIf="this.sumInputsN[number] != ''">{{this.sumInputsN[number]}}<span *ngIf="this.sumInputsM[number] != ''"> * </span></span>
+                        <span *ngIf="this.sumInputsM[number] == ''"><i>m</i></span><span *ngIf="this.sumInputsM[number] != ''">{{this.sumInputsM[number]}}</span>x<span *ngIf="this.sumInputsN[number] == ''"><sup><i>n</i>-1</sup></span>
+                        <span *ngIf="this.sumInputsN[number] != ''"><sup>{{this.sumInputsN[number]}}-1</sup></span>
                     </span>
 
                     <span *ngIf="this.inputOptions[number] == 'power'">
-                        <span *ngIf="this.sumInputsN[number] == null"><i>n</i></span>
-                        <span *ngIf="this.sumInputsN[number] != null">{{this.sumInputsN[number]}}<span *ngIf="this.sumInputsM[number] != null"> * </span></span>
-                        <span *ngIf="this.sumInputsM[number] == null"><i>m</i></span><span *ngIf="this.sumInputsM[number] != null">{{this.sumInputsM[number]}}</span>x<span *ngIf="this.sumInputsN[number] == null"><sup><i>n</i>-1</sup></span>
-                        <span *ngIf="this.sumInputsN[number] != null"><sup>{{this.sumInputsN[number]}}-1</sup></span>
+                        <span *ngIf="this.sumInputsN[number] == ''"><i>n</i></span>
+                        <span *ngIf="this.sumInputsN[number] != ''">{{this.sumInputsN[number]}}<span *ngIf="this.sumInputsM[number] != ''"> * </span></span>
+                        <span *ngIf="this.sumInputsM[number] == ''"><i>m</i></span><span *ngIf="this.sumInputsM[number] != ''">{{this.sumInputsM[number]}}</span>x<span *ngIf="this.sumInputsN[number] == ''"><sup><i>n</i>-1</sup></span>
+                        <span *ngIf="this.sumInputsN[number] != ''"><sup>{{this.sumInputsN[number]}}-1</sup></span>
                     </span>
 
                     <span *ngIf="number + 1 != this.inputs.length">
@@ -120,18 +118,8 @@
                         </span>
                     </span>
                 </ng-container>
-
-
-                <!-- f(x) = <span *ngIf="powerM == ''"><i>m</i></span>
-                <span *ngIf="powerM != ''">{{powerM}}</span>x<span *ngIf="powerN == ''"><sup><i>n</i></sup></span>
-                <span *ngIf="powerN != ''"><sup>{{powerN}}</sup></span> <span *ngIf="powerN == ''"><i>n</i></span>
-                <span *ngIf="powerN != ''">{{powerN}}<span *ngIf="powerM != ''"> * </span></span>
-                <span *ngIf="powerM == ''"><i>m</i></span><span *ngIf="powerM != ''">{{powerM}}</span>x<span *ngIf="powerN == ''"><sup><i>n</i>-1</sup></span>
-                <span *ngIf="powerN != ''"><sup>{{powerN}}-1</sup></span> -->
             </h2>
         </ng-container>
-        
-
         <br>
         <form id="sumInputForm" [formGroup]="sumInputForm">
             <div style="display: flex; justify-content: center; flex-wrap: wrap;">
@@ -145,24 +133,24 @@
                         <br>
                         <ng-container *ngIf="selection.value == 'constant'">
                             <label>c: </label>
-                            <input type="number" id="{{number}}C" name="{{number}}C" formControlName="{{number}}C" (input)="change(number+'C', $event)">
+                            <input type="number" id="{{number}}C" name="{{number}}C" formControlName="{{number}}C" (input)="change('C', $event, number)">
                         </ng-container> 
                         <ng-container *ngIf="selection.value == 'constantMultiple'">
                             <label>c: </label>
-                            <input type="number" id="{{number}}C" name="{{number}}C" formControlName="{{number}}C" (input)="change(number+'C', $event)">
+                            <input type="number" id="{{number}}C" name="{{number}}C" formControlName="{{number}}C" (input)="change('C', $event, number)">
                             <br>
                             <label>n: </label>
-                            <input type="number" id="{{number}}N" name="{{number}}N" formControlName="{{number}}N" (input)="change(number+'N', $event)">
+                            <input type="number" id="{{number}}N" name="{{number}}N" formControlName="{{number}}N" (input)="change('N', $event, number)">
                             <br>
                             <label>m: </label>            
-                            <input type="number" id="{{number}}M" name="{{number}}M" formControlName="{{number}}M" placeholder="1" (input)="change(number+'M', $event)">        
+                            <input type="number" id="{{number}}M" name="{{number}}M" formControlName="{{number}}M" placeholder="1" (input)="change('M', $event, number)">        
                         </ng-container> 
                         <ng-container *ngIf="selection.value == 'power'">
                             <label>n: </label>
-                            <input type="number" id="{{number}}N" name="{{number}}N" formControlName="{{number}}N" (input)="change(number+'N', $event)">
+                            <input type="number" id="{{number}}N" name="{{number}}N" formControlName="{{number}}N" (input)="change('N', $event, number)">
                             <br>
                             <label>m: </label>            
-                            <input type="number" id="{{number}}M" name="{{number}}M" formControlName="{{number}}M" placeholder="1" (input)="change(number+'M', $event)">            
+                            <input type="number" id="{{number}}M" name="{{number}}M" formControlName="{{number}}M" placeholder="1" (input)="change('M', $event, number)">            
                         </ng-container>                
                         <ng-container *ngIf="number + 1 == this.inputs.length">                    
                                 <br>
