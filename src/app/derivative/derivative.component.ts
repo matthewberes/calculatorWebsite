@@ -45,6 +45,9 @@ export class DerivativeComponent {
   inputOptions: string[] = [];
   operators: string[] = [];
   sumInputForm = new FormGroup({})
+  sumInputsC: string[] = [];
+  sumInputsN: string[] = [];
+  sumInputsM: string[] = [];
 
   selectChange() {
     this.currRule = this.rule.nativeElement.value;
@@ -96,6 +99,21 @@ export class DerivativeComponent {
           this.powerM = String(this.powerForm.get('m')?.value);
         }
         break;
+    }
+    if (this.currRule == "sum") {
+      switch (box.substring(1)) {
+        case "C":
+          this.sumInputsC[Number(box.substring(0, 1))] = String(this.sumInputForm.get(box)?.value);
+          break;
+        case "N":
+          this.sumInputsN[Number(box.substring(0, 1))] = String(this.sumInputForm.get(box)?.value);
+          break;
+        case "M":
+          this.sumInputsM[Number(box.substring(0, 1))] = String(this.sumInputForm.get(box)?.value);
+          break;
+      }
+      console.log()
+      console.log(box.substring(1))
     }
   }
 
@@ -150,7 +168,7 @@ export class DerivativeComponent {
               this.calculation += String(this.sumInputForm.get(String(i) + 'N')?.value * (this.sumInputForm.get(String(i) + 'M')?.value ? this.sumInputForm.get(String(i) + 'M')?.value : 1) + "x<sup>" + (this.sumInputForm.get(String(i) + 'N')?.value - 1) + "</sup>");;
               break;
           }
-          if (i + 1 != this.inputs.length) {
+          if (i + 1 != this.inputs.length && this.inputOptions[i] != "constant" && this.inputOptions[i + 1] != "constant") {
             switch (this.operators[i]) {
               case "plus":
                 this.calculation += " + ";

@@ -75,6 +75,63 @@
             <input type="number" id="numberOfInputs" name="numberOfInputs" formControlName="numberOfInputs" style="margin-top: 15px; margin-right: 2.5px;">
             <button (click)="calculateInputs()" style="margin-top: 15px; margin-left: 2.5px;">Generate Inputs</button>
         </form>
+
+        <ng-container *ngIf="this.inputs.length > 0">
+            <h2>f(x) = 
+                <ng-container *ngFor="let number of inputs"> 
+                    <span>f{{number}}(x)<span *ngIf="number + 1 != this.inputs.length"> ± </span></span>
+                </ng-container>
+                 → f'(x) =
+                 <ng-container *ngFor="let number of inputs"> 
+                    <span *ngIf="this.inputOptions[number] == 'constant'">
+                        <span *ngIf="this.sumInputsC[number] == null">
+                            <i>c</i>
+                        </span>
+                        <span *ngIf="this.sumInputsC[number] != null">
+                            {{this.sumInputsC[number]}}
+                        </span>
+                    </span>
+
+                    <span *ngIf="this.inputOptions[number] == 'constantMultiple'">
+                        <!-- c * mnx<sup>n-1</sup> -->
+
+                        <span *ngIf="this.sumInputsC[number] == null"><i>c</i></span>
+                        <span *ngIf="this.sumInputsC[number] != null">{{this.sumInputsC[number]}}</span>
+                        <span> * </span>
+                        <span *ngIf="this.sumInputsN[number] == null"><i>n</i></span>
+                        <span *ngIf="this.sumInputsN[number] != null">{{this.sumInputsN[number]}}<span *ngIf="this.sumInputsM[number] != null"> * </span></span>
+                        <span *ngIf="this.sumInputsM[number] == null"><i>m</i></span><span *ngIf="this.sumInputsM[number] != null">{{this.sumInputsM[number]}}</span>x<span *ngIf="this.sumInputsN[number] == null"><sup><i>n</i>-1</sup></span>
+                        <span *ngIf="this.sumInputsN[number] != null"><sup>{{this.sumInputsN[number]}}-1</sup></span>
+                    </span>
+
+                    <span *ngIf="this.inputOptions[number] == 'power'">
+                        <span *ngIf="this.sumInputsN[number] == null"><i>n</i></span>
+                        <span *ngIf="this.sumInputsN[number] != null">{{this.sumInputsN[number]}}<span *ngIf="this.sumInputsM[number] != null"> * </span></span>
+                        <span *ngIf="this.sumInputsM[number] == null"><i>m</i></span><span *ngIf="this.sumInputsM[number] != null">{{this.sumInputsM[number]}}</span>x<span *ngIf="this.sumInputsN[number] == null"><sup><i>n</i>-1</sup></span>
+                        <span *ngIf="this.sumInputsN[number] != null"><sup>{{this.sumInputsN[number]}}-1</sup></span>
+                    </span>
+
+                    <span *ngIf="number + 1 != this.inputs.length">
+                        <span *ngIf="this.operators[number] == 'plus'">
+                            +
+                        </span>
+                        <span *ngIf="this.operators[number] == 'minus'">
+                            -
+                        </span>
+                    </span>
+                </ng-container>
+
+
+                <!-- f(x) = <span *ngIf="powerM == ''"><i>m</i></span>
+                <span *ngIf="powerM != ''">{{powerM}}</span>x<span *ngIf="powerN == ''"><sup><i>n</i></sup></span>
+                <span *ngIf="powerN != ''"><sup>{{powerN}}</sup></span> <span *ngIf="powerN == ''"><i>n</i></span>
+                <span *ngIf="powerN != ''">{{powerN}}<span *ngIf="powerM != ''"> * </span></span>
+                <span *ngIf="powerM == ''"><i>m</i></span><span *ngIf="powerM != ''">{{powerM}}</span>x<span *ngIf="powerN == ''"><sup><i>n</i>-1</sup></span>
+                <span *ngIf="powerN != ''"><sup>{{powerN}}-1</sup></span> -->
+            </h2>
+        </ng-container>
+        
+
         <br>
         <form id="sumInputForm" [formGroup]="sumInputForm">
             <div style="display: flex; justify-content: center; flex-wrap: wrap;">
@@ -131,8 +188,10 @@
 
     <ng-container *ngIf="currRule == 'chain'">
     </ng-container>
-
-    <button style='margin-top: 15px;' (click)="calculate()">Calculate</button>
+    
+    <ng-container *ngIf="currRule != 'sum' || (currRule == 'sum' && this.inputs.length > 0)">
+        <button style='margin-top: 15px;' (click)="calculate()">Calculate</button>
+    </ng-container>
 
     <ng-container *ngIf="showCalculation">
         <div class="answer-div">
