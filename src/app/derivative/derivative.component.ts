@@ -49,6 +49,9 @@ export class DerivativeComponent {
   sumInputsN: string[] = [];
   sumInputsM: string[] = [];
 
+
+  productInputForm = new FormGroup({})
+
   selectChange() {
     this.currRule = this.rule.nativeElement.value;
     this.showCalculation = false;
@@ -100,7 +103,6 @@ export class DerivativeComponent {
         }
         break;
       case "C":
-        console.log(String((num ? num : 0) + box))
         if (!this.sumInputForm.get(String((num ? num : 0) + box))?.value) {
           this.sumInputsC[num ? num : 0] = "";
         } else {

@@ -169,6 +169,88 @@
     </ng-container>
 
     <ng-container *ngIf="currRule == 'product'">
+
+
+
+
+            <h2>f(x) = g(x) * h(x) - >
+                <span>g(x) * h'(x)</span>                
+                <!-- <span>g(x)</span> -->
+                +
+                <span>h(x) * g'(x)</span>
+                <!-- <span>h(x)</span> -->
+                
+            </h2>
+        <br>
+        <form id="productInputForm" [formGroup]="productInputForm">
+            <div style="display: flex; justify-content: center; flex-wrap: wrap;">
+                    <div style="padding: 10px; text-align: right;">
+                        <select #selectionG id="selectionG" name="selectionG" (change)="clear()" style="width: 108px;">
+                            <option value="constant">Constant</option>
+                            <option value="constantMultiple">Constant Multiple</option>
+                            <option value="power">Power</option>
+                        </select>
+                        <br>
+                        <ng-container *ngIf="selectionG.value == 'constant'">
+                            <label>c: </label>
+                            <input type="number" id="gC" name="gC" formControlName="gC" (input)="change('gC', $event)">
+                        </ng-container> 
+                        <ng-container *ngIf="selectionG.value == 'constantMultiple'">
+                            <label>c: </label>
+                            <input type="number" id="gC" name="gC" formControlName="gC" (input)="change('gC', $event)">
+                            <br>
+                            <label>n: </label>
+                            <input type="number" id="gN" name="gN" formControlName="gN" (input)="change('gN', $event)">
+                            <br>
+                            <label>m: </label>            
+                            <input type="number" id="gM" name="gM" formControlName="gM" placeholder="1" (input)="change('gM', $event)">        
+                        </ng-container> 
+                        <ng-container *ngIf="selectionG.value == 'power'">
+                            <label>n: </label>
+                            <input type="number" id="gN" name="gN" formControlName="gN" (input)="change('gN', $event)">
+                            <br>
+                            <label>m: </label>            
+                            <input type="number" id="gM" name="gM" formControlName="gM" placeholder="1" (input)="change('gM', $event)">            
+                        </ng-container>
+                    </div>
+                    
+                    <div style="padding: 10px; text-align: right;">    
+                        <select #selectionH id="selectionH" name="selectionH" (change)="clear()" style="width: 108px;">
+                            <option value="constant">Constant</option>
+                            <option value="constantMultiple">Constant Multiple</option>
+                            <option value="power">Power</option>
+                        </select>
+                        <br>
+                        <ng-container *ngIf="selectionH.value == 'constant'">
+                            <label>c: </label>
+                            <input type="number" id="hC" name="hC" formControlName="hC" (input)="change('hC', $event)">
+                        </ng-container> 
+                        <ng-container *ngIf="selectionH.value == 'constantMultiple'">
+                            <label>c: </label>
+                            <input type="number" id="hC" name="hC" formControlName="hC" (input)="change('hC', $event)">
+                            <br>
+                            <label>n: </label>
+                            <input type="number" id="hN" name="hN" formControlName="hN" (input)="change('hN', $event)">
+                            <br>
+                            <label>m: </label>            
+                            <input type="number" id="hM" name="hM" formControlName="hM" placeholder="1" (input)="change('hM', $event)">        
+                        </ng-container> 
+                        <ng-container *ngIf="selectionH.value == 'power'">
+                            <label>n: </label>
+                            <input type="number" id="hN" name="hN" formControlName="hN" (input)="change('hN', $event)">
+                            <br>
+                            <label>m: </label>            
+                            <input type="number" id="hM" name="hM" formControlName="hM" placeholder="1" (input)="change('hM', $event)">            
+                        </ng-container>
+                                <br>
+                                <button style='margin-top: 5px; float:right' (click)="clear()">Clear</button>
+                    </div>
+            </div>
+        </form>
+
+
+
+
     </ng-container>
 
     <ng-container *ngIf="currRule == 'quotient'">
