@@ -174,10 +174,10 @@
 
 
             <h2>f(x) = g(x) * h(x) - >
-                <span>g(x) * h'(x)</span>                
+                <span>g'(x) * h(x)</span>                
                 <!-- <span>g(x)</span> -->
                 +
-                <span>h(x) * g'(x)</span>
+                <span>h'(x) * g(x)</span>
                 <!-- <span>h(x)</span> -->
                 
             </h2>
@@ -185,12 +185,48 @@
         <form id="productInputForm" [formGroup]="productInputForm">
             <div style="display: flex; justify-content: center; flex-wrap: wrap;">
                     <div style="padding: 10px; text-align: right;">
+                        <label>g(x): </label>
                         <select #selectionG id="selectionG" name="selectionG" (change)="clear()" style="width: 108px;">
+                            <option value="binomial">Binomial</option>
                             <option value="constant">Constant</option>
                             <option value="constantMultiple">Constant Multiple</option>
                             <option value="power">Power</option>
                         </select>
                         <br>
+                        <ng-container *ngIf="selectionH.value == 'binomial'">
+                            <label>a: </label>
+                            <input type="number" id="gA" name="gA" formControlName="gA" (input)="change('gA', $event)">
+                            <ng-container *ngIf="this.gBinomialAPower">
+                                <br>
+                                <label>n: </label>
+                                <input type="number" id="gNA" name="gNA" formControlName="gNA" (input)="change('gNA', $event)">
+                            </ng-container>
+                            <br>
+                            <label>Does it contain x? </label>
+                            <input type="checkbox" id="gAXBox" name="gAXBox" formControlName="gAXBox" (input)="setX('g', 'a', $event)">
+                            <ng-container *ngIf="this.gBinomialAX == true">
+                                <br>
+                                <label>Does x have a power? </label>
+                                <input type="checkbox" id="gAPowerBox" name="gAPowerBox" formControlName="gAPowerBox" (input)="setPower('g', 'a', $event)">
+                            </ng-container>
+                            <br>
+                            <br>
+                            <label>b: </label>
+                            <input type="number" id="gB" name="gB" formControlName="gB" (input)="change('gB', $event)">
+                            <ng-container *ngIf="this.gBinomialBPower">
+                                <br>
+                                <label>n: </label>
+                                <input type="number" id="gNB" name="gNB" formControlName="gNB" (input)="change('gNB', $event)">
+                            </ng-container>
+                            <br>
+                            <label>Does it contain x? </label>
+                            <input type="checkbox" id="gBXBox" name="gBXBox" formControlName="gBXBox" (input)="setX('g', 'b', $event)">
+                            <ng-container *ngIf="this.gBinomialBX == true">
+                                <br>
+                                <label>Does x have a power? </label>
+                                <input type="checkbox" id="gBPowerBox" name="gBPowerBox" formControlName="gBPowerBox" (input)="setPower('g', 'b', $event)">
+                            </ng-container>
+                        </ng-container>
                         <ng-container *ngIf="selectionG.value == 'constant'">
                             <label>c: </label>
                             <input type="number" id="gC" name="gC" formControlName="gC" (input)="change('gC', $event)">
@@ -214,13 +250,49 @@
                         </ng-container>
                     </div>
                     
-                    <div style="padding: 10px; text-align: right;">    
+                    <div style="padding: 10px; text-align: right;">  
+                        <label>h(x): </label>  
                         <select #selectionH id="selectionH" name="selectionH" (change)="clear()" style="width: 108px;">
+                            <option value="binomial">Binomial</option>
                             <option value="constant">Constant</option>
                             <option value="constantMultiple">Constant Multiple</option>
                             <option value="power">Power</option>
                         </select>
                         <br>
+                        <ng-container *ngIf="selectionH.value == 'binomial'">
+                            <label>a: </label>
+                            <input type="number" id="hA" name="hA" formControlName="hA" (input)="change('hA', $event)">
+                            <ng-container *ngIf="this.hBinomialAPower">
+                                <br>
+                                <label>n: </label>
+                                <input type="number" id="hNA" name="hNA" formControlName="hNA" (input)="change('hNA', $event)">
+                            </ng-container>
+                            <br>
+                            <label>Does it contain x? </label>
+                            <input type="checkbox" id="hAXBox" name="hAXBox" formControlName="hAXBox" (input)="setX('h', 'a', $event)">
+                            <ng-container *ngIf="this.hBinomialAX == true">
+                                <br>
+                                <label>Does x have a power? </label>
+                                <input type="checkbox" id="hAPowerBox" name="hAPowerBox" formControlName="hAPowerBox" (input)="setPower('h', 'a', $event)">
+                            </ng-container>
+                            <br>
+                            <br>
+                            <label>b: </label>
+                            <input type="number" id="hB" name="hB" formControlName="hB" (input)="change('hB', $event)">
+                            <ng-container *ngIf="this.hBinomialBPower">
+                                <br>
+                                <label>n: </label>
+                                <input type="number" id="hNB" name="hNB" formControlName="hNB" (input)="change('hNB', $event)">
+                            </ng-container>
+                            <br>
+                            <label>Does it contain x? </label>
+                            <input type="checkbox" id="hBXBox" name="hBXBox" formControlName="hBXBox" (input)="setX('h', 'b', $event)">
+                            <ng-container *ngIf="this.hBinomialBX == true">
+                                <br>
+                                <label>Does x have a power? </label>
+                                <input type="checkbox" id="hBPowerBox" name="hBPowerBox" formControlName="hBPowerBox" (input)="setPower('h', 'b', $event)">
+                            </ng-container>
+                        </ng-container>
                         <ng-container *ngIf="selectionH.value == 'constant'">
                             <label>c: </label>
                             <input type="number" id="hC" name="hC" formControlName="hC" (input)="change('hC', $event)">

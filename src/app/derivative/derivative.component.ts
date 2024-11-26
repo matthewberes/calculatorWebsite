@@ -49,8 +49,40 @@ export class DerivativeComponent {
   sumInputsN: string[] = [];
   sumInputsM: string[] = [];
 
-
-  productInputForm = new FormGroup({})
+  productInputForm = new FormGroup({
+    gA: new FormControl(),
+    gB: new FormControl(),
+    gC: new FormControl(),
+    gM: new FormControl(),
+    gN: new FormControl(),
+    gNA: new FormControl(),
+    gNB: new FormControl(),
+    gAXBox: new FormControl(),
+    gBXBox: new FormControl(),
+    gAPowerBox: new FormControl(),
+    gBPowerBox: new FormControl(),
+    hA: new FormControl(),
+    hB: new FormControl(),
+    hC: new FormControl(),
+    hM: new FormControl(),
+    hN: new FormControl(),
+    hNA: new FormControl(),
+    hNB: new FormControl(),
+    hAXBox: new FormControl(),
+    hBXBox: new FormControl(),
+    hAPowerBox: new FormControl(),
+    hBPowerBox: new FormControl(),
+  })
+  selectG: string = "binomial";
+  selectH: string = "binomial";
+  gBinomialAX: boolean = false;
+  gBinomialBX: boolean = false;
+  gBinomialAPower: boolean = false;
+  gBinomialBPower: boolean = false;
+  hBinomialAX: boolean = false;
+  hBinomialBX: boolean = false;
+  hBinomialAPower: boolean = false;
+  hBinomialBPower: boolean = false;
 
   selectChange() {
     this.currRule = this.rule.nativeElement.value;
@@ -156,6 +188,83 @@ export class DerivativeComponent {
     this.operators[num] = val;
   }
 
+  updateProductRule(letter: string, val: any) {
+    switch (letter) {
+      case "G":
+        this.selectG = val;
+        break;
+      case "H":
+        this.selectH = val;
+        break;
+    }
+  }
+
+  setX(func: string, variable: string, event: any) {
+    switch (func) {
+      case "g":
+        switch (variable) {
+          case "a":
+            this.gBinomialAX = event.currentTarget.checked;
+            if (!event.currentTarget.checked) {
+              this.gBinomialAPower = false;
+              this.productInputForm.get('gAPowerBox')?.setValue(false);
+            }
+            break;
+          case "b":
+            this.gBinomialBX = event.currentTarget.checked;
+            if (!event.currentTarget.checked) {
+              this.gBinomialBPower = false;
+              this.productInputForm.get('gBPowerBox')?.setValue(false);
+            }
+            break
+        }
+        break;
+      case "h":
+        switch (variable) {
+          case "a":
+            this.hBinomialAX = event.currentTarget.checked;
+            if (!event.currentTarget.checked) {
+              this.hBinomialAPower = false;
+              this.productInputForm.get('hAPowerBox')?.setValue(false);
+            }
+            break;
+          case "b":
+            this.hBinomialBX = event.currentTarget.checked;
+            if (!event.currentTarget.checked) {
+              this.hBinomialBPower = false;
+              this.productInputForm.get('hBPowerBox')?.setValue(false);
+            }
+            break
+        }
+        break;
+    }
+  }
+
+  setPower(func: string, variable: string, event: any) {
+    switch (func) {
+      case "g":
+        switch (variable) {
+          case "a":
+            this.gBinomialAPower = event.currentTarget.checked;
+            break;
+          case "b":
+            this.gBinomialBPower = event.currentTarget.checked;
+            break
+        }
+        break;
+      case "h":
+        switch (variable) {
+          case "a":
+            this.hBinomialAPower = event.currentTarget.checked;
+            break;
+          case "b":
+            this.hBinomialBPower = event.currentTarget.checked;
+            break
+        }
+        break;
+    }
+  }
+
   calculate() {
     this.showCalculation = false;
     switch (this.currRule) {
@@ -194,6 +303,29 @@ export class DerivativeComponent {
         })
         break;
       case "product":
+        this.calculation = "f'(x) = ";
+        let g: string; //lol
+        let gDerivative: string;
+        let h: string;
+        let hDerivative: string;
+        switch (this.selectG) {
+          case "constant":
+            g = String(this.productInputForm.get('gC')?.value);
+            gDerivative = "0";
+            break;
+          case "constantMultiple":
+            break;
+          case "power":
+            break;
+        }
+        switch (this.selectH) {
+          case "constant":
+            break;
+          case "constantMultiple":
+            break;
+          case "power":
+            break;
+        }
         break;
       case "quotient":
         break;
