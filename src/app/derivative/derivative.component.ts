@@ -68,10 +68,10 @@ export class DerivativeComponent {
     hN: new FormControl(),
     hNA: new FormControl(),
     hNB: new FormControl(),
-    hAXBox: new FormControl(),
-    hBXBox: new FormControl(),
-    hAPowerBox: new FormControl(),
-    hBPowerBox: new FormControl(),
+    hAXBox: new FormControl(false),
+    hBXBox: new FormControl(false),
+    hAPowerBox: new FormControl(false),
+    hBPowerBox: new FormControl(false),
   })
   selectG: string = "binomial";
   selectH: string = "binomial";
@@ -83,6 +83,10 @@ export class DerivativeComponent {
   hBinomialBX: boolean = false;
   hBinomialAPower: boolean = false;
   hBinomialBPower: boolean = false;
+  gTemp: string = "";
+  gDerivativeTemp: string = "";
+  hTemp: string = "";
+  hDerivativeTemp: string = "";
 
   selectChange() {
     this.currRule = this.rule.nativeElement.value;
@@ -308,7 +312,37 @@ export class DerivativeComponent {
         let gDerivative: string;
         let h: string;
         let hDerivative: string;
+        this.gTemp = "";
+        this.gDerivativeTemp = "";
+        this.hTemp = "";
+        this.hDerivativeTemp = "";
         switch (this.selectG) {
+          case "binomial":
+            if (this.productInputForm.get('gAXBox')?.value && !this.productInputForm.get('gAPowerBox')?.value) {
+              this.gTemp += String(this.productInputForm.get('gA')?.value + "x");
+              this.gDerivativeTemp += String(this.productInputForm.get('gA')?.value);
+            } else if (this.productInputForm.get('gAXBox')?.value && this.productInputForm.get('gAPowerBox')?.value) {
+              this.gTemp += String(this.productInputForm.get('gA')?.value + "x<sup>" + this.productInputForm.get('gNA')?.value + "</sup>");
+              this.gDerivativeTemp += String(this.productInputForm.get('gNA')?.value * this.productInputForm.get('gA')?.value + "x<sup>" + (this.productInputForm.get('gNA')?.value - 1) + "</sup>");
+            } else if (!this.productInputForm.get('gAXBox')?.value) {
+              this.gTemp += String(this.productInputForm.get('gA')?.value);
+              this.gDerivativeTemp += "0";
+            }
+            this.gTemp += " + " //change to users chosen operator
+            this.gDerivativeTemp += " + " //change to users chosen operator
+            if (this.productInputForm.get('gBXBox')?.value && !this.productInputForm.get('gBPowerBox')?.value) {
+              this.gTemp += String(this.productInputForm.get('gB')?.value + "x");
+              this.gDerivativeTemp += String(this.productInputForm.get('gB')?.value);
+            } else if (this.productInputForm.get('gBXBox')?.value && this.productInputForm.get('gBPowerBox')?.value) {
+              this.gTemp += String(this.productInputForm.get('gB')?.value + "x<sup>" + this.productInputForm.get('gNB')?.value + "</sup>");
+              this.gDerivativeTemp += String(this.productInputForm.get('gNB')?.value * this.productInputForm.get('gB')?.value + "x<sup>" + (this.productInputForm.get('gNB')?.value - 1) + "</sup>");
+            } else if (!this.productInputForm.get('gBXBox')?.value) {
+              this.gTemp += String(this.productInputForm.get('gB')?.value);
+              this.gDerivativeTemp += "0";
+            }
+            g = this.gTemp;
+            gDerivative = this.gDerivativeTemp;
+            break;
           case "constant":
             g = String(this.productInputForm.get('gC')?.value);
             gDerivative = "0";
@@ -319,13 +353,42 @@ export class DerivativeComponent {
             break;
         }
         switch (this.selectH) {
+          case "binomial":
+            if (this.productInputForm.get('hAXBox')?.value && !this.productInputForm.get('hAPowerBox')?.value) {
+              this.hTemp += String(this.productInputForm.get('hA')?.value + "x");
+              this.hDerivativeTemp += String(this.productInputForm.get('hA')?.value);
+            } else if (this.productInputForm.get('hAXBox')?.value && this.productInputForm.get('hAPowerBox')?.value) {
+              this.hTemp += String(this.productInputForm.get('hA')?.value + "x<sup>" + this.productInputForm.get('hNA')?.value + "</sup>");
+              this.hDerivativeTemp += String(this.productInputForm.get('hNA')?.value * this.productInputForm.get('hA')?.value + "x<sup>" + (this.productInputForm.get('hNA')?.value - 1) + "</sup>");
+            } else if (!this.productInputForm.get('hAXBox')?.value) {
+              this.hTemp += String(this.productInputForm.get('hA')?.value);
+              this.hDerivativeTemp += "0";
+            }
+            this.hTemp += " + " //change to users chosen operator
+            this.hDerivativeTemp += " + " //change to users chosen operator
+            if (this.productInputForm.get('hBXBox')?.value && !this.productInputForm.get('hBPowerBox')?.value) {
+              this.hTemp += String(this.productInputForm.get('hB')?.value + "x");
+              this.hDerivativeTemp += String(this.productInputForm.get('hB')?.value);
+            } else if (this.productInputForm.get('hBXBox')?.value && this.productInputForm.get('hBPowerBox')?.value) {
+              this.hTemp += String(this.productInputForm.get('hB')?.value + "x<sup>" + this.productInputForm.get('hNB')?.value + "</sup>");
+              this.hDerivativeTemp += String(this.productInputForm.get('hNB')?.value * this.productInputForm.get('hB')?.value + "x<sup>" + (this.productInputForm.get('hNB')?.value - 1) + "</sup>");
+            } else if (!this.productInputForm.get('hBXBox')?.value) {
+              this.hTemp += String(this.productInputForm.get('hB')?.value);
+              this.hDerivativeTemp += "0";
+            }
+            h = this.hTemp;
+            hDerivative = this.hDerivativeTemp;
+            break;
           case "constant":
+            h = String(this.productInputForm.get('hC')?.value);
+            hDerivative = "0";
             break;
           case "constantMultiple":
             break;
           case "power":
             break;
         }
+        this.calculation += "(" + this.gDerivativeTemp + ")" + "(" + this.hTemp + ")" + " + " + "(" + this.gTemp + ")" + "(" + this.hDerivativeTemp + ")";
         break;
       case "quotient":
         break;
