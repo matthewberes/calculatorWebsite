@@ -1,7 +1,7 @@
 import { NgFor, NgIf } from '@angular/common';
 import { ChangeDetectorRef, Component, ElementRef, ViewChild } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
-
+//didn't realize how large this would become, this needs to be split into different components
 @Component({
   selector: 'app-derivative',
   standalone: true,
@@ -344,12 +344,16 @@ export class DerivativeComponent {
             gDerivative = this.gDerivativeTemp;
             break;
           case "constant":
-            g = String(this.productInputForm.get('gC')?.value);
-            gDerivative = "0";
+            this.gTemp = String(this.productInputForm.get('gC')?.value);
+            this.gDerivativeTemp = "0";
             break;
           case "constantMultiple":
+            this.gTemp = String((this.productInputForm.get('gC')?.value) + " * " + (this.productInputForm.get('gM')?.value ? this.productInputForm.get('gM')?.value : "") + "x<sup>" + (this.productInputForm.get('gN')?.value) + "</sup>");
+            this.gDerivativeTemp = String((this.productInputForm.get('gC')?.value * this.productInputForm.get('gN')?.value * (this.productInputForm.get('gM')?.value ? this.productInputForm.get('gM')?.value : 1)) + "x<sup>" + (this.productInputForm.get('gN')?.value - 1) + "</sup>");
             break;
           case "power":
+            this.gTemp = String((this.productInputForm.get('gM')?.value && this.productInputForm.get('gM')?.value != 1 ? this.productInputForm.get('gM')?.value : "") + "x<sup>" + (this.productInputForm.get('gN')?.value) + "</sup>");
+            this.gDerivativeTemp = String(this.productInputForm.get('gN')?.value * (this.productInputForm.get('gM')?.value ? this.productInputForm.get('gM')?.value : 1) + "x<sup>" + (this.productInputForm.get('gN')?.value - 1) + "</sup>");
             break;
         }
         switch (this.selectH) {
@@ -380,15 +384,19 @@ export class DerivativeComponent {
             hDerivative = this.hDerivativeTemp;
             break;
           case "constant":
-            h = String(this.productInputForm.get('hC')?.value);
-            hDerivative = "0";
+            this.hTemp = String(this.productInputForm.get('hC')?.value);
+            this.hDerivativeTemp = "0";
             break;
           case "constantMultiple":
+            this.hTemp = String((this.productInputForm.get('hC')?.value) + " * " + (this.productInputForm.get('hM')?.value ? this.productInputForm.get('hM')?.value : "") + "x<sup>" + (this.productInputForm.get('hN')?.value) + "</sup>");
+            this.hDerivativeTemp = String((this.productInputForm.get('hC')?.value * this.productInputForm.get('hN')?.value * (this.productInputForm.get('hM')?.value ? this.productInputForm.get('hM')?.value : 1)) + "x<sup>" + (this.productInputForm.get('hN')?.value - 1) + "</sup>");
             break;
           case "power":
+            this.hTemp = String((this.productInputForm.get('hM')?.value && this.productInputForm.get('hM')?.value != 1 ? this.productInputForm.get('hM')?.value : "") + "x<sup>" + (this.productInputForm.get('hN')?.value) + "</sup>");
+            this.hDerivativeTemp = String(this.productInputForm.get('hN')?.value * (this.productInputForm.get('hM')?.value ? this.productInputForm.get('hM')?.value : 1) + "x<sup>" + (this.productInputForm.get('hN')?.value - 1) + "</sup>");
             break;
         }
-        this.calculation += "(" + this.gDerivativeTemp + ")" + "(" + this.hTemp + ")" + " + " + "(" + this.gTemp + ")" + "(" + this.hDerivativeTemp + ")";
+        this.calculation += "(" + this.gTemp + ")" + "(" + this.hDerivativeTemp + ")" + " + " + "(" + this.gDerivativeTemp + ")" + "(" + this.hTemp + ")";
         break;
       case "quotient":
         break;
