@@ -186,7 +186,7 @@
             <div style="display: flex; justify-content: center; flex-wrap: wrap;">
                     <div style="padding: 10px; text-align: right;">
                         <label>g(x): </label>
-                        <select #selectionG id="selectionG" name="selectionG" (change)="updateProductRule('G', selectionG.value)" style="width: 108px;">
+                        <select #selectionG id="selectionG" name="selectionG" (change)="updateProductRule('g', selectionG.value)" style="width: 108px;">
                             <option value="binomial">Binomial</option>
                             <option value="constant">Constant</option>
                             <option value="constantMultiple">Constant Multiple</option>
@@ -210,6 +210,10 @@
                                 <input type="checkbox" id="gAPowerBox" name="gAPowerBox" formControlName="gAPowerBox" (input)="setPower('g', 'a', $event)">
                             </ng-container>
                             <br>
+                            <select #gOperator id="gOperator" name="gOperator" (change)="updateProductOperator('g', gOperator.value)" style="margin-top:10px; margin-bottom:10px; width:35px; height:20px">
+                                <option value="+">+</option>
+                                <option value="-">-</option>
+                            </select>
                             <br>
                             <label>b: </label>
                             <input type="number" id="gB" name="gB" formControlName="gB" (input)="change('gB', $event)">
@@ -252,7 +256,7 @@
                     
                     <div style="padding: 10px; text-align: right;">  
                         <label>h(x): </label>  
-                        <select #selectionH id="selectionH" name="selectionH" (change)="updateProductRule('H', selectionH.value)" style="width: 108px;">
+                        <select #selectionH id="selectionH" name="selectionH" (change)="updateProductRule('h', selectionH.value)" style="width: 108px;">
                             <option value="binomial">Binomial</option>
                             <option value="constant">Constant</option>
                             <option value="constantMultiple">Constant Multiple</option>
@@ -276,6 +280,10 @@
                                 <input type="checkbox" id="hAPowerBox" name="hAPowerBox" formControlName="hAPowerBox" (input)="setPower('h', 'a', $event)">
                             </ng-container>
                             <br>
+                            <select #hOperator id="hOperator" name="hOperator" (change)="updateProductOperator('h', hOperator.value)" style="margin-top:10px; margin-bottom:10px; width:35px; height:20px">
+                                <option value="+">+</option>
+                                <option value="-">-</option>
+                            </select>
                             <br>
                             <label>b: </label>
                             <input type="number" id="hB" name="hB" formControlName="hB" (input)="change('hB', $event)">

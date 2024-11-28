@@ -75,6 +75,8 @@ export class DerivativeComponent {
   })
   selectG: string = "binomial";
   selectH: string = "binomial";
+  operatorG: string = "+";
+  operatorH: string = "+";
   gBinomialAX: boolean = false;
   gBinomialBX: boolean = false;
   gBinomialAPower: boolean = false;
@@ -194,11 +196,22 @@ export class DerivativeComponent {
 
   updateProductRule(letter: string, val: any) {
     switch (letter) {
-      case "G":
+      case "g":
         this.selectG = val;
         break;
-      case "H":
+      case "h":
         this.selectH = val;
+        break;
+    }
+  }
+
+  updateProductOperator(letter: string, val: string) {
+    switch (letter) {
+      case "g":
+        this.operatorG = val;
+        break;
+      case "h":
+        this.operatorH = val;
         break;
     }
   }
@@ -308,10 +321,6 @@ export class DerivativeComponent {
         break;
       case "product":
         this.calculation = "f'(x) = ";
-        let g: string; //lol
-        let gDerivative: string;
-        let h: string;
-        let hDerivative: string;
         this.gTemp = "";
         this.gDerivativeTemp = "";
         this.hTemp = "";
@@ -328,8 +337,8 @@ export class DerivativeComponent {
               this.gTemp += String(this.productInputForm.get('gA')?.value);
               this.gDerivativeTemp += "0";
             }
-            this.gTemp += " + " //change to users chosen operator
-            this.gDerivativeTemp += " + " //change to users chosen operator
+            this.gTemp += " " + this.operatorG + " ";
+            this.gDerivativeTemp += " " + this.operatorG + " ";
             if (this.productInputForm.get('gBXBox')?.value && !this.productInputForm.get('gBPowerBox')?.value) {
               this.gTemp += String(this.productInputForm.get('gB')?.value + "x");
               this.gDerivativeTemp += String(this.productInputForm.get('gB')?.value);
@@ -340,8 +349,6 @@ export class DerivativeComponent {
               this.gTemp += String(this.productInputForm.get('gB')?.value);
               this.gDerivativeTemp += "0";
             }
-            g = this.gTemp;
-            gDerivative = this.gDerivativeTemp;
             break;
           case "constant":
             this.gTemp = String(this.productInputForm.get('gC')?.value);
@@ -368,8 +375,8 @@ export class DerivativeComponent {
               this.hTemp += String(this.productInputForm.get('hA')?.value);
               this.hDerivativeTemp += "0";
             }
-            this.hTemp += " + " //change to users chosen operator
-            this.hDerivativeTemp += " + " //change to users chosen operator
+            this.hTemp += " " + this.operatorH + " ";
+            this.hDerivativeTemp += " " + this.operatorH + " ";
             if (this.productInputForm.get('hBXBox')?.value && !this.productInputForm.get('hBPowerBox')?.value) {
               this.hTemp += String(this.productInputForm.get('hB')?.value + "x");
               this.hDerivativeTemp += String(this.productInputForm.get('hB')?.value);
@@ -380,8 +387,6 @@ export class DerivativeComponent {
               this.hTemp += String(this.productInputForm.get('hB')?.value);
               this.hDerivativeTemp += "0";
             }
-            h = this.hTemp;
-            hDerivative = this.hDerivativeTemp;
             break;
           case "constant":
             this.hTemp = String(this.productInputForm.get('hC')?.value);
