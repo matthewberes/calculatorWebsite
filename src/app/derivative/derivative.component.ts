@@ -328,11 +328,19 @@ export class DerivativeComponent {
         switch (this.selectG) {
           case "binomial":
             if (this.productInputForm.get('gAXBox')?.value && !this.productInputForm.get('gAPowerBox')?.value) {
-              this.gTemp += String(this.productInputForm.get('gA')?.value + "x");
-              this.gDerivativeTemp += String(this.productInputForm.get('gA')?.value);
+              this.gTemp += String(this.productInputForm.get('gA')?.value && (this.productInputForm.get('gA')?.value != 1 ? this.productInputForm.get('gA')?.value : "") + "x");
+              this.gDerivativeTemp += String(this.productInputForm.get('gA')?.value && this.productInputForm.get('gA')?.value != 1 ? this.productInputForm.get('gA')?.value : 1);
             } else if (this.productInputForm.get('gAXBox')?.value && this.productInputForm.get('gAPowerBox')?.value) {
-              this.gTemp += String(this.productInputForm.get('gA')?.value + "x<sup>" + this.productInputForm.get('gNA')?.value + "</sup>");
-              this.gDerivativeTemp += String(this.productInputForm.get('gNA')?.value * this.productInputForm.get('gA')?.value + "x<sup>" + (this.productInputForm.get('gNA')?.value - 1) + "</sup>");
+              if (this.productInputForm.get('gNA')?.value - 1 != 1 && this.productInputForm.get('gNA')?.value - 1 != 0) {
+                this.gTemp += String(this.productInputForm.get('gA')?.value + "x<sup>" + this.productInputForm.get('gNA')?.value + "</sup>");
+                this.gDerivativeTemp += String(this.productInputForm.get('gNA')?.value * this.productInputForm.get('gA')?.value + "x<sup>" + (this.productInputForm.get('gNA')?.value - 1) + "</sup>");
+              } else if (this.productInputForm.get('gNA')?.value - 1 == 1) {
+                this.gTemp += String(this.productInputForm.get('gA')?.value + "x<sup>" + this.productInputForm.get('gNA')?.value + "</sup>");
+                this.gDerivativeTemp += String(this.productInputForm.get('gNA')?.value * this.productInputForm.get('gA')?.value + "x");
+              } else if (this.productInputForm.get('gNA')?.value - 1 == 0) {
+                this.gTemp += String(this.productInputForm.get('gA')?.value + "x");
+                this.gDerivativeTemp += String(this.productInputForm.get('gA')?.value);
+              }
             } else if (!this.productInputForm.get('gAXBox')?.value) {
               this.gTemp += String(this.productInputForm.get('gA')?.value);
               this.gDerivativeTemp += "0";
@@ -340,11 +348,19 @@ export class DerivativeComponent {
             this.gTemp += " " + this.operatorG + " ";
             this.gDerivativeTemp += " " + this.operatorG + " ";
             if (this.productInputForm.get('gBXBox')?.value && !this.productInputForm.get('gBPowerBox')?.value) {
-              this.gTemp += String(this.productInputForm.get('gB')?.value + "x");
-              this.gDerivativeTemp += String(this.productInputForm.get('gB')?.value);
+              this.gTemp += String(this.productInputForm.get('gB')?.value && (this.productInputForm.get('gB')?.value != 1 ? this.productInputForm.get('gB')?.value : "") + "x");
+              this.gDerivativeTemp += String(this.productInputForm.get('gB')?.value && this.productInputForm.get('gB')?.value != 1 ? this.productInputForm.get('gB')?.value : 1);
             } else if (this.productInputForm.get('gBXBox')?.value && this.productInputForm.get('gBPowerBox')?.value) {
-              this.gTemp += String(this.productInputForm.get('gB')?.value + "x<sup>" + this.productInputForm.get('gNB')?.value + "</sup>");
-              this.gDerivativeTemp += String(this.productInputForm.get('gNB')?.value * this.productInputForm.get('gB')?.value + "x<sup>" + (this.productInputForm.get('gNB')?.value - 1) + "</sup>");
+              if (this.productInputForm.get('gNB')?.value - 1 != 1 && this.productInputForm.get('gNB')?.value - 1 != 0) {
+                this.gTemp += String(this.productInputForm.get('gB')?.value + "x<sup>" + this.productInputForm.get('gNB')?.value + "</sup>");
+                this.gDerivativeTemp += String(this.productInputForm.get('gNB')?.value * this.productInputForm.get('gB')?.value + "x<sup>" + (this.productInputForm.get('gNB')?.value - 1) + "</sup>");
+              } else if (this.productInputForm.get('gNB')?.value - 1 == 1) {
+                this.gTemp += String(this.productInputForm.get('gB')?.value + "x<sup>" + this.productInputForm.get('gNB')?.value + "</sup>");
+                this.gDerivativeTemp += String(this.productInputForm.get('gNB')?.value * this.productInputForm.get('gB')?.value + "x");
+              } else if (this.productInputForm.get('gNB')?.value - 1 == 0) {
+                this.gTemp += String(this.productInputForm.get('gB')?.value + "x");
+                this.gDerivativeTemp += String(this.productInputForm.get('gB')?.value);
+              }
             } else if (!this.productInputForm.get('gBXBox')?.value) {
               this.gTemp += String(this.productInputForm.get('gB')?.value);
               this.gDerivativeTemp += "0";
@@ -355,22 +371,30 @@ export class DerivativeComponent {
             this.gDerivativeTemp = "0";
             break;
           case "constantMultiple":
-            this.gTemp = String((this.productInputForm.get('gC')?.value) + " * " + (this.productInputForm.get('gM')?.value ? this.productInputForm.get('gM')?.value : "") + "x<sup>" + (this.productInputForm.get('gN')?.value) + "</sup>");
-            this.gDerivativeTemp = String((this.productInputForm.get('gC')?.value * this.productInputForm.get('gN')?.value * (this.productInputForm.get('gM')?.value ? this.productInputForm.get('gM')?.value : 1)) + "x<sup>" + (this.productInputForm.get('gN')?.value - 1) + "</sup>");
+            this.gTemp = String((this.productInputForm.get('gC')?.value) + " * " + (this.productInputForm.get('gM')?.value ? this.productInputForm.get('gM')?.value : "") + (this.productInputForm.get('gN')?.value != 1 && this.productInputForm.get('gN')?.value != 0 ? "x<sup>" + (this.productInputForm.get('gN')?.value) + "</sup>" : "x"));
+            this.gDerivativeTemp = String((this.productInputForm.get('gC')?.value * this.productInputForm.get('gN')?.value * (this.productInputForm.get('gM')?.value ? this.productInputForm.get('gM')?.value : 1)) + (this.productInputForm.get('gN')?.value - 1 != 1 && this.productInputForm.get('gN')?.value - 1 != 0 ? "x<sup>" + (this.productInputForm.get('gN')?.value - 1) + "</sup>" : (this.productInputForm.get('gN')?.value - 1 != 0 ? "x" : "")));
             break;
           case "power":
-            this.gTemp = String((this.productInputForm.get('gM')?.value && this.productInputForm.get('gM')?.value != 1 ? this.productInputForm.get('gM')?.value : "") + "x<sup>" + (this.productInputForm.get('gN')?.value) + "</sup>");
-            this.gDerivativeTemp = String(this.productInputForm.get('gN')?.value * (this.productInputForm.get('gM')?.value ? this.productInputForm.get('gM')?.value : 1) + "x<sup>" + (this.productInputForm.get('gN')?.value - 1) + "</sup>");
+            this.gTemp = String((this.productInputForm.get('gM')?.value && this.productInputForm.get('gM')?.value != 1 ? this.productInputForm.get('gM')?.value : "") + (this.productInputForm.get('gN')?.value != 1 && this.productInputForm.get('gN')?.value != 0 ? "x<sup>" + (this.productInputForm.get('gN')?.value) + "</sup>" : "x"));
+            this.gDerivativeTemp = String(this.productInputForm.get('gN')?.value * (this.productInputForm.get('gM')?.value ? this.productInputForm.get('gM')?.value : 1) + (this.productInputForm.get('gN')?.value - 1 != 1 && this.productInputForm.get('gN')?.value - 1 != 0 ? "x<sup>" + (this.productInputForm.get('gN')?.value - 1) + "</sup>" : (this.productInputForm.get('gN')?.value - 1 != 0 ? "x" : "")));
             break;
         }
         switch (this.selectH) {
           case "binomial":
             if (this.productInputForm.get('hAXBox')?.value && !this.productInputForm.get('hAPowerBox')?.value) {
-              this.hTemp += String(this.productInputForm.get('hA')?.value + "x");
-              this.hDerivativeTemp += String(this.productInputForm.get('hA')?.value);
+              this.hTemp += String(this.productInputForm.get('hA')?.value && (this.productInputForm.get('hA')?.value != 1 ? this.productInputForm.get('hA')?.value : "") + "x");
+              this.hDerivativeTemp += String(this.productInputForm.get('hA')?.value && this.productInputForm.get('hA')?.value != 1 ? this.productInputForm.get('hA')?.value : 1);
             } else if (this.productInputForm.get('hAXBox')?.value && this.productInputForm.get('hAPowerBox')?.value) {
-              this.hTemp += String(this.productInputForm.get('hA')?.value + "x<sup>" + this.productInputForm.get('hNA')?.value + "</sup>");
-              this.hDerivativeTemp += String(this.productInputForm.get('hNA')?.value * this.productInputForm.get('hA')?.value + "x<sup>" + (this.productInputForm.get('hNA')?.value - 1) + "</sup>");
+              if (this.productInputForm.get('hNA')?.value - 1 != 1 && this.productInputForm.get('hNA')?.value - 1 != 0) {
+                this.hTemp += String(this.productInputForm.get('hA')?.value + "x<sup>" + this.productInputForm.get('hNA')?.value + "</sup>");
+                this.hDerivativeTemp += String(this.productInputForm.get('hNA')?.value * this.productInputForm.get('hA')?.value + "x<sup>" + (this.productInputForm.get('hNA')?.value - 1) + "</sup>");
+              } else if (this.productInputForm.get('hNA')?.value - 1 == 1) {
+                this.hTemp += String(this.productInputForm.get('hA')?.value + "x<sup>" + this.productInputForm.get('hNA')?.value + "</sup>");
+                this.hDerivativeTemp += String(this.productInputForm.get('hNA')?.value * this.productInputForm.get('hA')?.value + "x");
+              } else if (this.productInputForm.get('hNA')?.value - 1 == 0) {
+                this.hTemp += String(this.productInputForm.get('hA')?.value + "x");
+                this.hDerivativeTemp += String(this.productInputForm.get('hA')?.value);
+              }
             } else if (!this.productInputForm.get('hAXBox')?.value) {
               this.hTemp += String(this.productInputForm.get('hA')?.value);
               this.hDerivativeTemp += "0";
@@ -378,11 +402,19 @@ export class DerivativeComponent {
             this.hTemp += " " + this.operatorH + " ";
             this.hDerivativeTemp += " " + this.operatorH + " ";
             if (this.productInputForm.get('hBXBox')?.value && !this.productInputForm.get('hBPowerBox')?.value) {
-              this.hTemp += String(this.productInputForm.get('hB')?.value + "x");
-              this.hDerivativeTemp += String(this.productInputForm.get('hB')?.value);
+              this.hTemp += String(this.productInputForm.get('hB')?.value && (this.productInputForm.get('hB')?.value != 1 ? this.productInputForm.get('hB')?.value : "") + "x");
+              this.hDerivativeTemp += String(this.productInputForm.get('hB')?.value && this.productInputForm.get('hB')?.value != 1 ? this.productInputForm.get('hB')?.value : 1);
             } else if (this.productInputForm.get('hBXBox')?.value && this.productInputForm.get('hBPowerBox')?.value) {
-              this.hTemp += String(this.productInputForm.get('hB')?.value + "x<sup>" + this.productInputForm.get('hNB')?.value + "</sup>");
-              this.hDerivativeTemp += String(this.productInputForm.get('hNB')?.value * this.productInputForm.get('hB')?.value + "x<sup>" + (this.productInputForm.get('hNB')?.value - 1) + "</sup>");
+              if (this.productInputForm.get('hNB')?.value - 1 != 1 && this.productInputForm.get('hNB')?.value - 1 != 0) {
+                this.hTemp += String(this.productInputForm.get('hB')?.value + "x<sup>" + this.productInputForm.get('hNB')?.value + "</sup>");
+                this.hDerivativeTemp += String(this.productInputForm.get('hNB')?.value * this.productInputForm.get('hB')?.value + "x<sup>" + (this.productInputForm.get('hNB')?.value - 1) + "</sup>");
+              } else if (this.productInputForm.get('hNB')?.value - 1 == 1) {
+                this.hTemp += String(this.productInputForm.get('hB')?.value + "x<sup>" + this.productInputForm.get('hNB')?.value + "</sup>");
+                this.hDerivativeTemp += String(this.productInputForm.get('hNB')?.value * this.productInputForm.get('hB')?.value + "x");
+              } else if (this.productInputForm.get('hNB')?.value - 1 == 0) {
+                this.hTemp += String(this.productInputForm.get('hB')?.value + "x");
+                this.hDerivativeTemp += String(this.productInputForm.get('hB')?.value);
+              }
             } else if (!this.productInputForm.get('hBXBox')?.value) {
               this.hTemp += String(this.productInputForm.get('hB')?.value);
               this.hDerivativeTemp += "0";
@@ -393,12 +425,12 @@ export class DerivativeComponent {
             this.hDerivativeTemp = "0";
             break;
           case "constantMultiple":
-            this.hTemp = String((this.productInputForm.get('hC')?.value) + " * " + (this.productInputForm.get('hM')?.value ? this.productInputForm.get('hM')?.value : "") + "x<sup>" + (this.productInputForm.get('hN')?.value) + "</sup>");
-            this.hDerivativeTemp = String((this.productInputForm.get('hC')?.value * this.productInputForm.get('hN')?.value * (this.productInputForm.get('hM')?.value ? this.productInputForm.get('hM')?.value : 1)) + "x<sup>" + (this.productInputForm.get('hN')?.value - 1) + "</sup>");
+            this.hTemp = String((this.productInputForm.get('hC')?.value) + " * " + (this.productInputForm.get('hM')?.value ? this.productInputForm.get('hM')?.value : "") + (this.productInputForm.get('hN')?.value != 1 && this.productInputForm.get('hN')?.value != 0 ? "x<sup>" + (this.productInputForm.get('hN')?.value) + "</sup>" : "x"));
+            this.hDerivativeTemp = String((this.productInputForm.get('hC')?.value * this.productInputForm.get('hN')?.value * (this.productInputForm.get('hM')?.value ? this.productInputForm.get('hM')?.value : 1)) + (this.productInputForm.get('hN')?.value - 1 != 1 && this.productInputForm.get('hN')?.value - 1 != 0 ? "x<sup>" + (this.productInputForm.get('hN')?.value - 1) + "</sup>" : (this.productInputForm.get('hN')?.value - 1 != 0 ? "x" : "")));
             break;
           case "power":
-            this.hTemp = String((this.productInputForm.get('hM')?.value && this.productInputForm.get('hM')?.value != 1 ? this.productInputForm.get('hM')?.value : "") + "x<sup>" + (this.productInputForm.get('hN')?.value) + "</sup>");
-            this.hDerivativeTemp = String(this.productInputForm.get('hN')?.value * (this.productInputForm.get('hM')?.value ? this.productInputForm.get('hM')?.value : 1) + "x<sup>" + (this.productInputForm.get('hN')?.value - 1) + "</sup>");
+            this.hTemp = String((this.productInputForm.get('hM')?.value && this.productInputForm.get('hM')?.value != 1 ? this.productInputForm.get('hM')?.value : "") + (this.productInputForm.get('hN')?.value != 1 && this.productInputForm.get('hN')?.value != 0 ? "x<sup>" + (this.productInputForm.get('hN')?.value) + "</sup>" : "x"));
+            this.hDerivativeTemp = String(this.productInputForm.get('hN')?.value * (this.productInputForm.get('hM')?.value ? this.productInputForm.get('hM')?.value : 1) + (this.productInputForm.get('hN')?.value - 1 != 1 && this.productInputForm.get('hN')?.value - 1 != 0 ? "x<sup>" + (this.productInputForm.get('hN')?.value - 1) + "</sup>" : (this.productInputForm.get('hN')?.value - 1 != 0 ? "x" : "")));
             break;
         }
         this.calculation += "(" + this.gTemp + ")" + "(" + this.hDerivativeTemp + ")" + " + " + "(" + this.gDerivativeTemp + ")" + "(" + this.hTemp + ")";
