@@ -170,7 +170,80 @@
 
     <ng-container *ngIf="currRule == 'product'">
         <h2>f(x) = g(x) * h(x) → g(x) * h'(x) + g'(x) * h(x)</h2>
-        <br>
+        <div style="display: flex; align-items: center; justify-content: center;">
+            <h2>g(x) = 
+                <span *ngIf="selectG == 'binomial'">
+                    (<span *ngIf="gAValue == ''"><i>a</i></span>
+                    <span *ngIf="gAValue != ''">{{gAValue}}</span>
+                    <span *ngIf="gBinomialAX">x</span>
+                    <span *ngIf="gBinomialAPower">
+                        <sup>
+                            <span *ngIf="gANValue == ''">
+                                <i>n</i>
+                            </span>
+                            <span *ngIf="gANValue != ''">{{gANValue}}</span>
+                        </sup>
+                    </span>
+                    <span> {{this.operatorG}} </span>
+                    <span *ngIf="gBValue == ''"><i>b</i></span>
+                    <span *ngIf="gBValue != ''">{{gBValue}}</span>
+                    <span *ngIf="gBinomialBX">x</span>
+                    <span *ngIf="gBinomialBPower">
+                        <sup>
+                            <span *ngIf="gBNValue == ''">
+                                <i>n</i>
+                            </span>
+                            <span *ngIf="gBNValue != ''">{{gBNValue}}</span>
+                        </sup>
+                    </span>)
+                </span>
+                <span *ngIf="selectG == 'constant'">
+
+                </span>
+                <span *ngIf="selectG == 'constantMultiple'">
+
+                </span>
+                <span *ngIf="selectG == 'power'">
+
+                </span>
+            </h2>
+            <h2>&nbsp;&nbsp;&nbsp;</h2>
+            <h2>h(x) = 
+                <span *ngIf="selectH == 'binomial'">
+                    (<span *ngIf="hAValue == ''"><i>a</i></span>
+                    <span *ngIf="hAValue != ''">{{hAValue}}</span>
+                    <span *ngIf="hBinomialAX">x</span>
+                    <span *ngIf="hBinomialAPower">
+                        <sup>
+                            <span *ngIf="hANValue == ''">
+                                <i>n</i>
+                            </span>
+                            <span *ngIf="hANValue != ''">{{hANValue}}</span>
+                        </sup>
+                    </span>
+                    <span> {{operatorH}} </span>
+                    <span *ngIf="hBValue == ''"><i>b</i></span>
+                    <span *ngIf="hBValue != ''">{{hBValue}}</span>
+                    <span *ngIf="hBinomialBX">x</span>
+                    <span *ngIf="hBinomialBPower">
+                        <sup>
+                            <span *ngIf="hBNValue == ''">
+                                <i>n</i>
+                            </span>
+                            <span *ngIf="hBNValue != ''">{{hBNValue}}</span>
+                        </sup>
+                    </span>)
+                </span>
+                <span *ngIf="selectH == 'constant'">
+
+                </span>
+                <span *ngIf="selectH == 'constantMultiple'">
+
+                </span>
+                <span *ngIf="selectH == 'power'">
+
+                </span></h2>
+        </div>
         <form id="productInputForm" [formGroup]="productInputForm">
             <div style="display: flex; justify-content: center; flex-wrap: wrap;">
                     <div style="padding: 10px; text-align: right;">

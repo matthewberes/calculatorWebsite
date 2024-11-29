@@ -73,6 +73,20 @@ export class DerivativeComponent {
     hAPowerBox: new FormControl(false),
     hBPowerBox: new FormControl(false),
   })
+  gAValue: string = "";
+  gANValue: string = "";
+  gBValue: string = "";
+  gBNValue: string = "";
+  gCValue: string = "";
+  gMValue: string = "";
+  gNValue: string = "";
+  hAValue: string = "";
+  hANValue: string = "";
+  hBValue: string = "";
+  hBNValue: string = "";
+  hCValue: string = "";
+  hMValue: string = "";
+  hNValue: string = "";
   selectG: string = "binomial";
   selectH: string = "binomial";
   operatorG: string = "+";
@@ -159,6 +173,118 @@ export class DerivativeComponent {
           this.sumInputsM[num ? num : 0] = "";
         } else {
           this.sumInputsM[num ? num : 0] = String(this.sumInputForm.get(String((num ? num : 0) + box))?.value);
+        }
+        break;
+      case "gA":
+        if (!this.productInputForm.get("gA")?.value) {
+          this.gAValue = "";
+        } else {
+          this.gAValue = String(this.productInputForm.get("gA")?.value);
+        }
+        break;
+      case "gNA":
+        if (!this.productInputForm.get("gNA")?.value) {
+          this.gANValue = "";
+        } else {
+          this.gANValue = String(this.productInputForm.get("gNA")?.value);
+        }
+        break;
+      case "gNB":
+        if (!this.productInputForm.get("gNB")?.value) {
+          this.gBNValue = "";
+        } else {
+          this.gBNValue = String(this.productInputForm.get("gNB")?.value);
+        }
+        break;
+      case "gB":
+        if (!this.productInputForm.get("gB")?.value) {
+          this.gBValue = "";
+        } else {
+          this.gBValue = String(this.productInputForm.get("gB")?.value);
+        }
+        break;
+      case "gBA":
+        if (!this.productInputForm.get("gNB")?.value) {
+          this.gBNValue = "";
+        } else {
+          this.gBNValue = String(this.productInputForm.get("gNB")?.value);
+        }
+        break;
+      case "gC":
+        if (!this.productInputForm.get("gC")?.value) {
+          this.gCValue = "";
+        } else {
+          this.gCValue = String(this.productInputForm.get("gC")?.value);
+        }
+        break;
+      case "gM":
+        if (!this.productInputForm.get("gM")?.value) {
+          this.gMValue = "";
+        } else {
+          this.gMValue = String(this.productInputForm.get("gM")?.value);
+        }
+        break;
+      case "gN":
+        if (!this.productInputForm.get("gN")?.value) {
+          this.gNValue = "";
+        } else {
+          this.gNValue = String(this.productInputForm.get("gN")?.value);
+        }
+        break;
+      case "hA":
+        if (!this.productInputForm.get("hA")?.value) {
+          this.hAValue = "";
+        } else {
+          this.hAValue = String(this.productInputForm.get("hA")?.value);
+        }
+        break;
+      case "hNA":
+        if (!this.productInputForm.get("hNA")?.value) {
+          this.hANValue = "";
+        } else {
+          this.hANValue = String(this.productInputForm.get("hNA")?.value);
+        }
+        break;
+      case "hNB":
+        if (!this.productInputForm.get("hNB")?.value) {
+          this.hBNValue = "";
+        } else {
+          this.hBNValue = String(this.productInputForm.get("hNB")?.value);
+        }
+        break;
+      case "hB":
+        if (!this.productInputForm.get("hB")?.value) {
+          this.hBValue = "";
+        } else {
+          this.hBValue = String(this.productInputForm.get("hB")?.value);
+        }
+        break;
+      case "hBA":
+        if (!this.productInputForm.get("hNB")?.value) {
+          this.hBNValue = "";
+        } else {
+          this.hBNValue = String(this.productInputForm.get("hNB")?.value);
+        }
+        break;
+      case "hC":
+        if (!this.productInputForm.get("hC")?.value) {
+          this.hCValue = "";
+        } else {
+          this.hCValue = String(this.productInputForm.get("hC")?.value);
+        }
+        break;
+      case "hM":
+        if (!this.productInputForm.get("hM")?.value) {
+          this.hMValue = "";
+        } else {
+          this.hMValue = String(this.productInputForm.get("hM")?.value);
+        }
+        break;
+      case "hN":
+        if (!this.productInputForm.get("hN")?.value) {
+          this.hNValue = "";
+        } else {
+          this.hNValue = String(this.productInputForm.get("hN")?.value);
         }
         break;
     }
