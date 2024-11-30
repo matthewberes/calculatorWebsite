@@ -170,7 +170,7 @@
 
     <ng-container *ngIf="currRule == 'product'">
         <h2>f(x) = g(x) * h(x) → g(x) * h'(x) + g'(x) * h(x)</h2>
-        <div style="display: flex; align-items: center; justify-content: center;">
+        <div style="display: flex; align-items: center; justify-content: center; margin-top: -20px;">
             <h2>g(x) = 
                 <span *ngIf="selectG == 'binomial'">
                     (<span *ngIf="gAValue == ''"><i>a</i></span>
@@ -198,13 +198,25 @@
                     </span>)
                 </span>
                 <span *ngIf="selectG == 'constant'">
-
+                    <span *ngIf="gCValue == ''">
+                        <i>c</i>
+                    </span>
+                    <span *ngIf="gCValue != ''">
+                        {{gCValue}}
+                    </span>
                 </span>
                 <span *ngIf="selectG == 'constantMultiple'">
-
+                    <span *ngIf="gCValue == ''"><i>c</i></span>
+                    <span *ngIf="gCValue != ''">{{gCValue}}</span>
+                    <span> * </span>
+                    <span *ngIf="gMValue == ''"><i>m</i></span>
+                    <span *ngIf="gMValue != ''">{{gMValue}}</span>x<span *ngIf="gNValue == ''"><sup><i>n</i></sup></span>
+                    <span *ngIf="gNValue != ''"><sup>{{gNValue}}</sup></span>
                 </span>
                 <span *ngIf="selectG == 'power'">
-
+                    <span *ngIf="gMValue == ''"><i>m</i></span>
+                    <span *ngIf="gMValue != ''">{{gMValue}}</span>x<span *ngIf="gNValue == ''"><sup><i>n</i></sup></span>
+                    <span *ngIf="gNValue != ''"><sup>{{gNValue}}</sup></span>
                 </span>
             </h2>
             <h2>&nbsp;&nbsp;&nbsp;</h2>
@@ -235,14 +247,27 @@
                     </span>)
                 </span>
                 <span *ngIf="selectH == 'constant'">
-
+                    <span *ngIf="hCValue == ''">
+                        <i>c</i>
+                    </span>
+                    <span *ngIf="hCValue != ''">
+                        {{hCValue}}
+                    </span>
                 </span>
                 <span *ngIf="selectH == 'constantMultiple'">
-
+                    <span *ngIf="hCValue == ''"><i>c</i></span>
+                    <span *ngIf="hCValue != ''">{{hCValue}}</span>
+                    <span> * </span>
+                    <span *ngIf="hMValue == ''"><i>m</i></span>
+                    <span *ngIf="hMValue != ''">{{hMValue}}</span>x<span *ngIf="hNValue == ''"><sup><i>n</i></sup></span>
+                    <span *ngIf="hNValue != ''"><sup>{{hNValue}}</sup></span>
                 </span>
                 <span *ngIf="selectH == 'power'">
-
-                </span></h2>
+                    <span *ngIf="hMValue == ''"><i>m</i></span>
+                    <span *ngIf="hMValue != ''">{{hMValue}}</span>x<span *ngIf="hNValue == ''"><sup><i>n</i></sup></span>
+                    <span *ngIf="hNValue != ''"><sup>{{hNValue}}</sup></span>
+                </span>
+            </h2>
         </div>
         <form id="productInputForm" [formGroup]="productInputForm">
             <div style="display: flex; justify-content: center; flex-wrap: wrap;">
