@@ -9,3 +9,13 @@ h2 {
 input {
     width: 50px;
 }
+
+.top {
+    border-bottom: solid black 1px;
+    display: inline-block;
+}
+
+.bottom {
+    display: inline-block;
+    clear: left;
+}

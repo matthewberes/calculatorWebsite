@@ -104,6 +104,31 @@ export class DerivativeComponent {
   hTemp: string = "";
   hDerivativeTemp: string = "";
 
+  quotientForm = new FormGroup({
+    gA: new FormControl(),
+    gB: new FormControl(),
+    gC: new FormControl(),
+    gM: new FormControl(),
+    gN: new FormControl(),
+    gNA: new FormControl(),
+    gNB: new FormControl(),
+    gAXBox: new FormControl(),
+    gBXBox: new FormControl(),
+    gAPowerBox: new FormControl(),
+    gBPowerBox: new FormControl(),
+    hA: new FormControl(),
+    hB: new FormControl(),
+    hC: new FormControl(),
+    hM: new FormControl(),
+    hN: new FormControl(),
+    hNA: new FormControl(),
+    hNB: new FormControl(),
+    hAXBox: new FormControl(false),
+    hBXBox: new FormControl(false),
+    hAPowerBox: new FormControl(false),
+    hBPowerBox: new FormControl(false),
+  })
+
   selectChange() {
     this.currRule = this.rule.nativeElement.value;
     this.showCalculation = false;
