@@ -312,6 +312,118 @@ export class DerivativeComponent {
           this.hNValue = String(this.productInputForm.get("hN")?.value);
         }
         break;
+      case "gAQuotient":
+        if (!this.quotientForm.get("gA")?.value) {
+          this.gAValue = "";
+        } else {
+          this.gAValue = String(this.quotientForm.get("gA")?.value);
+        }
+        break;
+      case "gNAQuotient":
+        if (!this.quotientForm.get("gNA")?.value) {
+          this.gANValue = "";
+        } else {
+          this.gANValue = String(this.quotientForm.get("gNA")?.value);
+        }
+        break;
+      case "gNBQuotient":
+        if (!this.quotientForm.get("gNB")?.value) {
+          this.gBNValue = "";
+        } else {
+          this.gBNValue = String(this.quotientForm.get("gNB")?.value);
+        }
+        break;
+      case "gBQuotient":
+        if (!this.quotientForm.get("gB")?.value) {
+          this.gBValue = "";
+        } else {
+          this.gBValue = String(this.quotientForm.get("gB")?.value);
+        }
+        break;
+      case "gBAQuotient":
+        if (!this.quotientForm.get("gNB")?.value) {
+          this.gBNValue = "";
+        } else {
+          this.gBNValue = String(this.quotientForm.get("gNB")?.value);
+        }
+        break;
+      case "gCQuotient":
+        if (!this.quotientForm.get("gC")?.value) {
+          this.gCValue = "";
+        } else {
+          this.gCValue = String(this.quotientForm.get("gC")?.value);
+        }
+        break;
+      case "gMQuotient":
+        if (!this.quotientForm.get("gM")?.value) {
+          this.gMValue = "";
+        } else {
+          this.gMValue = String(this.quotientForm.get("gM")?.value);
+        }
+        break;
+      case "gNQuotient":
+        if (!this.quotientForm.get("gN")?.value) {
+          this.gNValue = "";
+        } else {
+          this.gNValue = String(this.quotientForm.get("gN")?.value);
+        }
+        break;
+      case "hAQuotient":
+        if (!this.quotientForm.get("hA")?.value) {
+          this.hAValue = "";
+        } else {
+          this.hAValue = String(this.quotientForm.get("hA")?.value);
+        }
+        break;
+      case "hNAQuotient":
+        if (!this.quotientForm.get("hNA")?.value) {
+          this.hANValue = "";
+        } else {
+          this.hANValue = String(this.quotientForm.get("hNA")?.value);
+        }
+        break;
+      case "hNBQuotient":
+        if (!this.quotientForm.get("hNB")?.value) {
+          this.hBNValue = "";
+        } else {
+          this.hBNValue = String(this.quotientForm.get("hNB")?.value);
+        }
+        break;
+      case "hBQuotient":
+        if (!this.quotientForm.get("hB")?.value) {
+          this.hBValue = "";
+        } else {
+          this.hBValue = String(this.quotientForm.get("hB")?.value);
+        }
+        break;
+      case "hBAQuotient":
+        if (!this.quotientForm.get("hNB")?.value) {
+          this.hBNValue = "";
+        } else {
+          this.hBNValue = String(this.quotientForm.get("hNB")?.value);
+        }
+        break;
+      case "hCQuotient":
+        if (!this.quotientForm.get("hC")?.value) {
+          this.hCValue = "";
+        } else {
+          this.hCValue = String(this.quotientForm.get("hC")?.value);
+        }
+        break;
+      case "hMQuotient":
+        if (!this.quotientForm.get("hM")?.value) {
+          this.hMValue = "";
+        } else {
+          this.hMValue = String(this.quotientForm.get("hM")?.value);
+        }
+        break;
+      case "hNQuotient":
+        if (!this.quotientForm.get("hN")?.value) {
+          this.hNValue = "";
+        } else {
+          this.hNValue = String(this.quotientForm.get("hN")?.value);
+        }
+        break;
     }
   }
 

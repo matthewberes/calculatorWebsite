@@ -551,11 +551,11 @@
                         <br>
                         <ng-container *ngIf="selectionG.value == 'binomial'">
                             <label>a: </label>
-                            <input type="number" id="gA" name="gA" formControlName="gA" (input)="change('gA', $event)">
+                            <input type="number" id="gA" name="gA" formControlName="gA" (input)="change('gAQuotient', $event)">
                             <ng-container *ngIf="this.gBinomialAPower">
                                 <br>
                                 <label>n: </label>
-                                <input type="number" id="gNA" name="gNA" formControlName="gNA" (input)="change('gNA', $event)">
+                                <input type="number" id="gNA" name="gNA" formControlName="gNA" (input)="change('gNAQuotient', $event)">
                             </ng-container>
                             <br>
                             <label>Does it contain x? </label>
@@ -572,11 +572,11 @@
                             </select>
                             <br>
                             <label>b: </label>
-                            <input type="number" id="gB" name="gB" formControlName="gB" (input)="change('gB', $event)">
+                            <input type="number" id="gB" name="gB" formControlName="gB" (input)="change('gBQuotient', $event)">
                             <ng-container *ngIf="this.gBinomialBPower">
                                 <br>
                                 <label>n: </label>
-                                <input type="number" id="gNB" name="gNB" formControlName="gNB" (input)="change('gNB', $event)">
+                                <input type="number" id="gNB" name="gNB" formControlName="gNB" (input)="change('gNBQuotient', $event)">
                             </ng-container>
                             <br>
                             <label>Does it contain x? </label>
@@ -589,24 +589,24 @@
                         </ng-container>
                         <ng-container *ngIf="selectionG.value == 'constant'">
                             <label>c: </label>
-                            <input type="number" id="gC" name="gC" formControlName="gC" (input)="change('gC', $event)">
+                            <input type="number" id="gC" name="gC" formControlName="gC" (input)="change('gCQuotient', $event)">
                         </ng-container> 
                         <ng-container *ngIf="selectionG.value == 'constantMultiple'">
                             <label>c: </label>
-                            <input type="number" id="gC" name="gC" formControlName="gC" (input)="change('gC', $event)">
+                            <input type="number" id="gC" name="gC" formControlName="gC" (input)="change('gCQuotient', $event)">
                             <br>
                             <label>n: </label>
-                            <input type="number" id="gN" name="gN" formControlName="gN" (input)="change('gN', $event)">
+                            <input type="number" id="gN" name="gN" formControlName="gN" (input)="change('gNQuotient', $event)">
                             <br>
                             <label>m: </label>            
-                            <input type="number" id="gM" name="gM" formControlName="gM" placeholder="1" (input)="change('gM', $event)">        
+                            <input type="number" id="gM" name="gM" formControlName="gM" placeholder="1" (input)="change('gMQuotient', $event)">        
                         </ng-container> 
                         <ng-container *ngIf="selectionG.value == 'power'">
                             <label>n: </label>
-                            <input type="number" id="gN" name="gN" formControlName="gN" (input)="change('gN', $event)">
+                            <input type="number" id="gN" name="gN" formControlName="gN" (input)="change('gNQuotient', $event)">
                             <br>
                             <label>m: </label>            
-                            <input type="number" id="gM" name="gM" formControlName="gM" placeholder="1" (input)="change('gM', $event)">            
+                            <input type="number" id="gM" name="gM" formControlName="gM" placeholder="1" (input)="change('gMQuotient', $event)">            
                         </ng-container>
                     </div>
                     
@@ -621,11 +621,11 @@
                         <br>
                         <ng-container *ngIf="selectionH.value == 'binomial'">
                             <label>a: </label>
-                            <input type="number" id="hA" name="hA" formControlName="hA" (input)="change('hA', $event)">
+                            <input type="number" id="hA" name="hA" formControlName="hA" (input)="change('hAQuotient', $event)">
                             <ng-container *ngIf="this.hBinomialAPower">
                                 <br>
                                 <label>n: </label>
-                                <input type="number" id="hNA" name="hNA" formControlName="hNA" (input)="change('hNA', $event)">
+                                <input type="number" id="hNA" name="hNA" formControlName="hNA" (input)="change('hNAQuotient', $event)">
                             </ng-container>
                             <br>
                             <label>Does it contain x? </label>
@@ -642,11 +642,11 @@
                             </select>
                             <br>
                             <label>b: </label>
-                            <input type="number" id="hB" name="hB" formControlName="hB" (input)="change('hB', $event)">
+                            <input type="number" id="hB" name="hB" formControlName="hB" (input)="change('hBQuotient', $event)">
                             <ng-container *ngIf="this.hBinomialBPower">
                                 <br>
                                 <label>n: </label>
-                                <input type="number" id="hNB" name="hNB" formControlName="hNB" (input)="change('hNB', $event)">
+                                <input type="number" id="hNB" name="hNB" formControlName="hNB" (input)="change('hNBQuotient', $event)">
                             </ng-container>
                             <br>
                             <label>Does it contain x? </label>
@@ -659,24 +659,24 @@
                         </ng-container>
                         <ng-container *ngIf="selectionH.value == 'constant'">
                             <label>c: </label>
-                            <input type="number" id="hC" name="hC" formControlName="hC" (input)="change('hC', $event)">
+                            <input type="number" id="hC" name="hC" formControlName="hC" (input)="change('hCQuotient', $event)">
                         </ng-container> 
                         <ng-container *ngIf="selectionH.value == 'constantMultiple'">
                             <label>c: </label>
-                            <input type="number" id="hC" name="hC" formControlName="hC" (input)="change('hC', $event)">
+                            <input type="number" id="hC" name="hC" formControlName="hC" (input)="change('hCQuotient', $event)">
                             <br>
                             <label>n: </label>
-                            <input type="number" id="hN" name="hN" formControlName="hN" (input)="change('hN', $event)">
+                            <input type="number" id="hN" name="hN" formControlName="hN" (input)="change('hNQuotient', $event)">
                             <br>
                             <label>m: </label>            
-                            <input type="number" id="hM" name="hM" formControlName="hM" placeholder="1" (input)="change('hM', $event)">        
+                            <input type="number" id="hM" name="hM" formControlName="hM" placeholder="1" (input)="change('hMQuotient', $event)">        
                         </ng-container> 
                         <ng-container *ngIf="selectionH.value == 'power'">
                             <label>n: </label>
-                            <input type="number" id="hN" name="hN" formControlName="hN" (input)="change('hN', $event)">
+                            <input type="number" id="hN" name="hN" formControlName="hN" (input)="change('hNQuotient', $event)">
                             <br>
                             <label>m: </label>            
-                            <input type="number" id="hM" name="hM" formControlName="hM" placeholder="1" (input)="change('hM', $event)">            
+                            <input type="number" id="hM" name="hM" formControlName="hM" placeholder="1" (input)="change('hMQuotient', $event)">            
                         </ng-container>
                                 <br>
                                 <button style='margin-top: 5px; float:right' (click)="clear()">Clear</button>
