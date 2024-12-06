@@ -692,9 +692,22 @@
         <button style='margin-top: 15px;' (click)="calculate()">Calculate</button>
     </ng-container>
 
-    <ng-container *ngIf="showCalculation">
+    <ng-container *ngIf="showCalculation&& currRule != 'quotient'">
         <div class="answer-div">
             <h2><span [innerHTML]="calculation"></span></h2>
+        </div>
+    </ng-container>
+
+    <ng-container *ngIf="showCalculation && currRule == 'quotient'">
+        <div class="answer-div">
+            <h2 style="display: flex; justify-content: center; flex-wrap: wrap;">
+                <span>f'(x) =&nbsp;</span>
+                <div>
+                    <span [innerHTML]="calculation" class="top"></span>
+                    <br>
+                    <span [innerHTML]="calculationDenominator" class="bottom"></span>
+                </div>
+            </h2>
         </div>
     </ng-container>
 </div>

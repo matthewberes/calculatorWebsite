@@ -13,6 +13,7 @@ export class DerivativeComponent {
   constructor(private cdr: ChangeDetectorRef) { }
 
   calculation: string = "";
+  calculationDenominator: string = "";
   showCalculation: boolean = false;
   currRule: string = "constant";
   @ViewChild('rule') rule!: ElementRef;
@@ -699,6 +700,121 @@ export class DerivativeComponent {
         this.calculation += "(" + this.gTemp + ")" + "(" + this.hDerivativeTemp + ")" + " + " + "(" + this.gDerivativeTemp + ")" + "(" + this.hTemp + ")";
         break;
       case "quotient":
+        this.calculation = "";
+        this.gTemp = "";
+        this.gDerivativeTemp = "";
+        this.hTemp = "";
+        this.hDerivativeTemp = "";
+        switch (this.selectG) {
+          case "binomial":
+            if (this.quotientForm.get('gAXBox')?.value && !this.quotientForm.get('gAPowerBox')?.value) {
+              this.gTemp += String(this.quotientForm.get('gA')?.value && (this.quotientForm.get('gA')?.value != 1 ? this.quotientForm.get('gA')?.value : "") + "x");
+              this.gDerivativeTemp += String(this.quotientForm.get('gA')?.value && this.quotientForm.get('gA')?.value != 1 ? this.quotientForm.get('gA')?.value : 1);
+            } else if (this.quotientForm.get('gAXBox')?.value && this.quotientForm.get('gAPowerBox')?.value) {
+              if (this.quotientForm.get('gNA')?.value - 1 != 1 && this.quotientForm.get('gNA')?.value - 1 != 0) {
+                this.gTemp += String(this.quotientForm.get('gA')?.value + "x<sup>" + this.quotientForm.get('gNA')?.value + "</sup>");
+                this.gDerivativeTemp += String(this.quotientForm.get('gNA')?.value * this.quotientForm.get('gA')?.value + "x<sup>" + (this.quotientForm.get('gNA')?.value - 1) + "</sup>");
+              } else if (this.quotientForm.get('gNA')?.value - 1 == 1) {
+                this.gTemp += String(this.quotientForm.get('gA')?.value + "x<sup>" + this.quotientForm.get('gNA')?.value + "</sup>");
+                this.gDerivativeTemp += String(this.quotientForm.get('gNA')?.value * this.quotientForm.get('gA')?.value + "x");
+              } else if (this.quotientForm.get('gNA')?.value - 1 == 0) {
+                this.gTemp += String(this.quotientForm.get('gA')?.value + "x");
+                this.gDerivativeTemp += String(this.quotientForm.get('gA')?.value);
+              }
+            } else if (!this.quotientForm.get('gAXBox')?.value) {
+              this.gTemp += String(this.quotientForm.get('gA')?.value);
+              this.gDerivativeTemp += "0";
+            }
+            this.gTemp += " " + this.operatorG + " ";
+            this.gDerivativeTemp += " " + this.operatorG + " ";
+            if (this.quotientForm.get('gBXBox')?.value && !this.quotientForm.get('gBPowerBox')?.value) {
+              this.gTemp += String(this.quotientForm.get('gB')?.value && (this.quotientForm.get('gB')?.value != 1 ? this.quotientForm.get('gB')?.value : "") + "x");
+              this.gDerivativeTemp += String(this.quotientForm.get('gB')?.value && this.quotientForm.get('gB')?.value != 1 ? this.quotientForm.get('gB')?.value : 1);
+            } else if (this.quotientForm.get('gBXBox')?.value && this.quotientForm.get('gBPowerBox')?.value) {
+              if (this.quotientForm.get('gNB')?.value - 1 != 1 && this.quotientForm.get('gNB')?.value - 1 != 0) {
+                this.gTemp += String(this.quotientForm.get('gB')?.value + "x<sup>" + this.quotientForm.get('gNB')?.value + "</sup>");
+                this.gDerivativeTemp += String(this.quotientForm.get('gNB')?.value * this.quotientForm.get('gB')?.value + "x<sup>" + (this.quotientForm.get('gNB')?.value - 1) + "</sup>");
+              } else if (this.quotientForm.get('gNB')?.value - 1 == 1) {
+                this.gTemp += String(this.quotientForm.get('gB')?.value + "x<sup>" + this.quotientForm.get('gNB')?.value + "</sup>");
+                this.gDerivativeTemp += String(this.quotientForm.get('gNB')?.value * this.quotientForm.get('gB')?.value + "x");
+              } else if (this.quotientForm.get('gNB')?.value - 1 == 0) {
+                this.gTemp += String(this.quotientForm.get('gB')?.value + "x");
+                this.gDerivativeTemp += String(this.quotientForm.get('gB')?.value);
+              }
+            } else if (!this.quotientForm.get('gBXBox')?.value) {
+              this.gTemp += String(this.quotientForm.get('gB')?.value);
+              this.gDerivativeTemp += "0";
+            }
+            break;
+          case "constant":
+            this.gTemp = String(this.quotientForm.get('gC')?.value);
+            this.gDerivativeTemp = "0";
+            break;
+          case "constantMultiple":
+            this.gTemp = String((this.quotientForm.get('gC')?.value) + " * " + (this.quotientForm.get('gM')?.value ? this.quotientForm.get('gM')?.value : "") + (this.quotientForm.get('gN')?.value != 1 && this.quotientForm.get('gN')?.value != 0 ? "x<sup>" + (this.quotientForm.get('gN')?.value) + "</sup>" : "x"));
+            this.gDerivativeTemp = String((this.quotientForm.get('gC')?.value * this.quotientForm.get('gN')?.value * (this.quotientForm.get('gM')?.value ? this.quotientForm.get('gM')?.value : 1)) + (this.quotientForm.get('gN')?.value - 1 != 1 && this.quotientForm.get('gN')?.value - 1 != 0 ? "x<sup>" + (this.quotientForm.get('gN')?.value - 1) + "</sup>" : (this.quotientForm.get('gN')?.value - 1 != 0 ? "x" : "")));
+            break;
+          case "power":
+            this.gTemp = String((this.quotientForm.get('gM')?.value && this.quotientForm.get('gM')?.value != 1 ? this.quotientForm.get('gM')?.value : "") + (this.quotientForm.get('gN')?.value != 1 && this.quotientForm.get('gN')?.value != 0 ? "x<sup>" + (this.quotientForm.get('gN')?.value) + "</sup>" : "x"));
+            this.gDerivativeTemp = String(this.quotientForm.get('gN')?.value * (this.quotientForm.get('gM')?.value ? this.quotientForm.get('gM')?.value : 1) + (this.quotientForm.get('gN')?.value - 1 != 1 && this.quotientForm.get('gN')?.value - 1 != 0 ? "x<sup>" + (this.quotientForm.get('gN')?.value - 1) + "</sup>" : (this.quotientForm.get('gN')?.value - 1 != 0 ? "x" : "")));
+            break;
+        }
+        switch (this.selectH) {
+          case "binomial":
+            if (this.quotientForm.get('hAXBox')?.value && !this.quotientForm.get('hAPowerBox')?.value) {
+              this.hTemp += String(this.quotientForm.get('hA')?.value && (this.quotientForm.get('hA')?.value != 1 ? this.quotientForm.get('hA')?.value : "") + "x");
+              this.hDerivativeTemp += String(this.quotientForm.get('hA')?.value && this.quotientForm.get('hA')?.value != 1 ? this.quotientForm.get('hA')?.value : 1);
+            } else if (this.quotientForm.get('hAXBox')?.value && this.quotientForm.get('hAPowerBox')?.value) {
+              if (this.quotientForm.get('hNA')?.value - 1 != 1 && this.quotientForm.get('hNA')?.value - 1 != 0) {
+                this.hTemp += String(this.quotientForm.get('hA')?.value + "x<sup>" + this.quotientForm.get('hNA')?.value + "</sup>");
+                this.hDerivativeTemp += String(this.quotientForm.get('hNA')?.value * this.quotientForm.get('hA')?.value + "x<sup>" + (this.quotientForm.get('hNA')?.value - 1) + "</sup>");
+              } else if (this.quotientForm.get('hNA')?.value - 1 == 1) {
+                this.hTemp += String(this.quotientForm.get('hA')?.value + "x<sup>" + this.quotientForm.get('hNA')?.value + "</sup>");
+                this.hDerivativeTemp += String(this.quotientForm.get('hNA')?.value * this.quotientForm.get('hA')?.value + "x");
+              } else if (this.quotientForm.get('hNA')?.value - 1 == 0) {
+                this.hTemp += String(this.quotientForm.get('hA')?.value + "x");
+                this.hDerivativeTemp += String(this.quotientForm.get('hA')?.value);
+              }
+            } else if (!this.quotientForm.get('hAXBox')?.value) {
+              this.hTemp += String(this.quotientForm.get('hA')?.value);
+              this.hDerivativeTemp += "0";
+            }
+            this.hTemp += " " + this.operatorH + " ";
+            this.hDerivativeTemp += " " + this.operatorH + " ";
+            if (this.quotientForm.get('hBXBox')?.value && !this.quotientForm.get('hBPowerBox')?.value) {
+              this.hTemp += String(this.quotientForm.get('hB')?.value && (this.quotientForm.get('hB')?.value != 1 ? this.quotientForm.get('hB')?.value : "") + "x");
+              this.hDerivativeTemp += String(this.quotientForm.get('hB')?.value && this.quotientForm.get('hB')?.value != 1 ? this.quotientForm.get('hB')?.value : 1);
+            } else if (this.quotientForm.get('hBXBox')?.value && this.quotientForm.get('hBPowerBox')?.value) {
+              if (this.quotientForm.get('hNB')?.value - 1 != 1 && this.quotientForm.get('hNB')?.value - 1 != 0) {
+                this.hTemp += String(this.quotientForm.get('hB')?.value + "x<sup>" + this.quotientForm.get('hNB')?.value + "</sup>");
+                this.hDerivativeTemp += String(this.quotientForm.get('hNB')?.value * this.quotientForm.get('hB')?.value + "x<sup>" + (this.quotientForm.get('hNB')?.value - 1) + "</sup>");
+              } else if (this.quotientForm.get('hNB')?.value - 1 == 1) {
+                this.hTemp += String(this.quotientForm.get('hB')?.value + "x<sup>" + this.quotientForm.get('hNB')?.value + "</sup>");
+                this.hDerivativeTemp += String(this.quotientForm.get('hNB')?.value * this.quotientForm.get('hB')?.value + "x");
+              } else if (this.quotientForm.get('hNB')?.value - 1 == 0) {
+                this.hTemp += String(this.quotientForm.get('hB')?.value + "x");
+                this.hDerivativeTemp += String(this.quotientForm.get('hB')?.value);
+              }
+            } else if (!this.quotientForm.get('hBXBox')?.value) {
+              this.hTemp += String(this.quotientForm.get('hB')?.value);
+              this.hDerivativeTemp += "0";
+            }
+            break;
+          case "constant":
+            this.hTemp = String(this.quotientForm.get('hC')?.value);
+            this.hDerivativeTemp = "0";
+            break;
+          case "constantMultiple":
+            this.hTemp = String((this.quotientForm.get('hC')?.value) + " * " + (this.quotientForm.get('hM')?.value ? this.quotientForm.get('hM')?.value : "") + (this.quotientForm.get('hN')?.value != 1 && this.quotientForm.get('hN')?.value != 0 ? "x<sup>" + (this.quotientForm.get('hN')?.value) + "</sup>" : "x"));
+            this.hDerivativeTemp = String((this.quotientForm.get('hC')?.value * this.quotientForm.get('hN')?.value * (this.quotientForm.get('hM')?.value ? this.quotientForm.get('hM')?.value : 1)) + (this.quotientForm.get('hN')?.value - 1 != 1 && this.quotientForm.get('hN')?.value - 1 != 0 ? "x<sup>" + (this.quotientForm.get('hN')?.value - 1) + "</sup>" : (this.quotientForm.get('hN')?.value - 1 != 0 ? "x" : "")));
+            break;
+          case "power":
+            this.hTemp = String((this.quotientForm.get('hM')?.value && this.quotientForm.get('hM')?.value != 1 ? this.quotientForm.get('hM')?.value : "") + (this.quotientForm.get('hN')?.value != 1 && this.quotientForm.get('hN')?.value != 0 ? "x<sup>" + (this.quotientForm.get('hN')?.value) + "</sup>" : "x"));
+            this.hDerivativeTemp = String(this.quotientForm.get('hN')?.value * (this.quotientForm.get('hM')?.value ? this.quotientForm.get('hM')?.value : 1) + (this.quotientForm.get('hN')?.value - 1 != 1 && this.quotientForm.get('hN')?.value - 1 != 0 ? "x<sup>" + (this.quotientForm.get('hN')?.value - 1) + "</sup>" : (this.quotientForm.get('hN')?.value - 1 != 0 ? "x" : "")));
+            break;
+        }
+        this.calculation += "<span class='top'>" + "(" + this.gDerivativeTemp + ")" + "(" + this.hTemp + ")" + " - " + "(" + this.gTemp + ")" + "(" + this.hDerivativeTemp + ")" + "</span><br><span class='bottom>" + this.hTemp + "<sup>2</sup></span>";
+        this.calculationDenominator = "(" + this.hTemp + ")" + "<sup>2</sup>";
         break;
       case "chain":
         break;
