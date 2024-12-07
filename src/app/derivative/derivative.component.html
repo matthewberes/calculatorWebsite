@@ -688,7 +688,67 @@
     <ng-container *ngIf="currRule == 'chain'">
         <h2>f(x) = 
             <span *ngIf="this.selectionG.value == 'binomial'">
-                (a+b)<sup>p</sup> → f'(x) = p(a+b)<sup>p-1</sup> * (a+b)'
+                    (<span *ngIf="gAValue == ''"><i>a</i></span>
+                    <span *ngIf="gAValue != ''">{{gAValue}}</span>
+                    <span *ngIf="gBinomialAX">x</span>
+                    <span *ngIf="gBinomialAPower">
+                        <sup>
+                            <span *ngIf="gANValue == ''">
+                                <i>n</i>
+                            </span>
+                            <span *ngIf="gANValue != ''">{{gANValue}}</span>
+                        </sup>
+                    </span>
+                    <span> {{this.operatorG}} </span>
+                    <span *ngIf="gBValue == ''"><i>b</i></span>
+                    <span *ngIf="gBValue != ''">{{gBValue}}</span>
+                    <span *ngIf="gBinomialBX">x</span>
+                    <span *ngIf="gBinomialBPower">
+                        <sup>
+                            <span *ngIf="gBNValue == ''">
+                                <i>n</i>
+                            </span>
+                            <span *ngIf="gBNValue != ''">{{gBNValue}}</span>
+                        </sup>
+                    </span>)<sup><span *ngIf="pValue == ''">p</span><span *ngIf="pValue != ''">{{pValue}}</span></sup> → f'(x) = 
+                <span *ngIf="pValue == ''">p</span><span *ngIf="pValue != ''">{{pValue}}</span>(<span *ngIf="gAValue == ''"><i>a</i></span>
+                    <span *ngIf="gAValue != ''">{{gAValue}}</span>
+                    <span *ngIf="gBinomialAX">x</span>
+                    <span *ngIf="gBinomialAPower">
+                        <sup>
+                            <span *ngIf="gANValue == ''">
+                                <i>n</i>
+                            </span>
+                            <span *ngIf="gANValue != ''">{{gANValue}}</span>
+                        </sup>
+                    </span>
+                    <span> {{this.operatorG}} </span>
+                    <span *ngIf="gBValue == ''"><i>b</i></span>
+                    <span *ngIf="gBValue != ''">{{gBValue}}</span>
+                    <span *ngIf="gBinomialBX">x</span>
+                    <span *ngIf="gBinomialBPower">
+                        <sup>
+                            <span *ngIf="gBNValue == ''">
+                                <i>n</i>
+                            </span>
+                            <span *ngIf="gBNValue != ''">{{gBNValue}}</span>
+                        </sup>
+                    </span>)<sup><span *ngIf="pValue == ''">p</span><span *ngIf="pValue != ''">{{pValue}}</span>-1</sup> * 
+                    (<span *ngIf="!gBinomialAX">0</span>
+                    <span *ngIf="gBinomialAX && !gBinomialAPower">
+                        <span *ngIf="gAValue == ''">a</span><span *ngIf="gAValue != ''">{{gAValue}}</span>
+                    </span>
+                    <span *ngIf="gBinomialAX && gBinomialAPower">
+                        <span *ngIf="gANValue == ''">n</span><span *ngIf="gANValue != ''">{{gANValue}}</span><span *ngIf="gAValue == ''">a</span><span *ngIf="gAValue != ''"> * {{gAValue}}</span>x<sup><span *ngIf="gANValue == ''">n</span><span *ngIf="gANValue != ''">{{gANValue}}</span>-1</sup>
+                    </span>
+                    <span> {{this.operatorG}} </span>
+                    <span *ngIf="!gBinomialBX">0</span>
+                    <span *ngIf="gBinomialBX && !gBinomialBPower">
+                        <span *ngIf="gBValue == ''">b</span><span *ngIf="gBValue != ''">{{gBValue}}</span>
+                    </span>
+                    <span *ngIf="gBinomialBX && gBinomialBPower">
+                        <span *ngIf="gBNValue == ''">n</span><span *ngIf="gBNValue != ''">{{gBNValue}}</span><span *ngIf="gBValue == ''">b</span><span *ngIf="gBValue != ''"> * {{gBValue}}</span>x<sup><span *ngIf="gBNValue == ''">n</span><span *ngIf="gBNValue != ''">{{gBNValue}}</span>-1</sup>
+                    </span>)
             </span>
             <span *ngIf="this.selectionG.value == 'constant'">
                 (c)<sup>p</sup> → f'(x) = p(c)<sup>p-1</sup> * (0)
@@ -705,7 +765,7 @@
             <div style="display: flex; justify-content: center; flex-wrap: wrap;">
                     <div style="padding: 10px; text-align: right;">
                             <label>p: </label>
-                            <input type="number" id="gP" name="gP" formControlName="gP" (input)="change('gPChain', $event)">
+                            <input type="number" id="p" name="p" formControlName="p" (input)="change('pChain', $event)">
                             <br>
                             <br>
                         <label>g(x): </label>

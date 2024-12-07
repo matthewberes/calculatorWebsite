@@ -129,6 +129,7 @@ export class DerivativeComponent {
     hAPowerBox: new FormControl(false),
     hBPowerBox: new FormControl(false),
   })
+  pValue: string = "";
 
   chainForm = new FormGroup({
     gA: new FormControl(),
@@ -136,7 +137,7 @@ export class DerivativeComponent {
     gC: new FormControl(),
     gM: new FormControl(),
     gN: new FormControl(),
-    gP: new FormControl(),
+    p: new FormControl(),
     gNA: new FormControl(),
     gNB: new FormControl(),
     gAXBox: new FormControl(),
@@ -439,6 +440,69 @@ export class DerivativeComponent {
           this.hNValue = "";
         } else {
           this.hNValue = String(this.quotientForm.get("hN")?.value);
+        }
+        break;
+      case "gAChain":
+        if (!this.chainForm.get("gA")?.value) {
+          this.gAValue = "";
+        } else {
+          this.gAValue = String(this.chainForm.get("gA")?.value);
+        }
+        break;
+      case "gNAChain":
+        if (!this.chainForm.get("gNA")?.value) {
+          this.gANValue = "";
+        } else {
+          this.gANValue = String(this.chainForm.get("gNA")?.value);
+        }
+        break;
+      case "gNBChain":
+        if (!this.chainForm.get("gNB")?.value) {
+          this.gBNValue = "";
+        } else {
+          this.gBNValue = String(this.chainForm.get("gNB")?.value);
+        }
+        break;
+      case "gBChain":
+        if (!this.chainForm.get("gB")?.value) {
+          this.gBValue = "";
+        } else {
+          this.gBValue = String(this.chainForm.get("gB")?.value);
+        }
+        break;
+      case "gBAChain":
+        if (!this.chainForm.get("gNB")?.value) {
+          this.gBNValue = "";
+        } else {
+          this.gBNValue = String(this.chainForm.get("gNB")?.value);
+        }
+        break;
+      case "gCChain":
+        if (!this.chainForm.get("gC")?.value) {
+          this.gCValue = "";
+        } else {
+          this.gCValue = String(this.chainForm.get("gC")?.value);
+        }
+        break;
+      case "gMChain":
+        if (!this.chainForm.get("gM")?.value) {
+          this.gMValue = "";
+        } else {
+          this.gMValue = String(this.chainForm.get("gM")?.value);
+        }
+        break;
+      case "gNChain":
+        if (!this.chainForm.get("gN")?.value) {
+          this.gNValue = "";
+        } else {
+          this.gNValue = String(this.chainForm.get("gN")?.value);
+        }
+        break;
+      case "pChain":
+        if (!this.chainForm.get("p")?.value) {
+          this.pValue = "";
+        } else {
+          this.pValue = String(this.chainForm.get("p")?.value);
         }
         break;
     }
