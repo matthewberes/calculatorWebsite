@@ -130,6 +130,22 @@ export class DerivativeComponent {
     hBPowerBox: new FormControl(false),
   })
 
+  chainForm = new FormGroup({
+    gA: new FormControl(),
+    gB: new FormControl(),
+    gC: new FormControl(),
+    gM: new FormControl(),
+    gN: new FormControl(),
+    gP: new FormControl(),
+    gNA: new FormControl(),
+    gNB: new FormControl(),
+    gAXBox: new FormControl(),
+    gBXBox: new FormControl(),
+    gAPowerBox: new FormControl(),
+    gBPowerBox: new FormControl(),
+  })
+
+
   selectChange() {
     this.currRule = this.rule.nativeElement.value;
     this.showCalculation = false;
