@@ -710,8 +710,8 @@
                             </span>
                             <span *ngIf="gBNValue != ''">{{gBNValue}}</span>
                         </sup>
-                    </span>)<sup><span *ngIf="pValue == ''">p</span><span *ngIf="pValue != ''">{{pValue}}</span></sup> → f'(x) = 
-                <span *ngIf="pValue == ''">p</span><span *ngIf="pValue != ''">{{pValue}}</span>(<span *ngIf="gAValue == ''"><i>a</i></span>
+                    </span>)<sup><span *ngIf="pValue == ''"><i>p</i></span><span *ngIf="pValue != ''">{{pValue}}</span></sup> → f'(x) = 
+                <span *ngIf="pValue == ''"><i>p</i></span><span *ngIf="pValue != ''">{{pValue}}</span>(<span *ngIf="gAValue == ''"><i>a</i></span>
                     <span *ngIf="gAValue != ''">{{gAValue}}</span>
                     <span *ngIf="gBinomialAX">x</span>
                     <span *ngIf="gBinomialAPower">
@@ -733,31 +733,57 @@
                             </span>
                             <span *ngIf="gBNValue != ''">{{gBNValue}}</span>
                         </sup>
-                    </span>)<sup><span *ngIf="pValue == ''">p</span><span *ngIf="pValue != ''">{{pValue}}</span>-1</sup> * 
+                    </span>)<sup><span *ngIf="pValue == ''"><i>p</i></span><span *ngIf="pValue != ''">{{pValue}}</span>-1</sup> * 
                     (<span *ngIf="!gBinomialAX">0</span>
                     <span *ngIf="gBinomialAX && !gBinomialAPower">
-                        <span *ngIf="gAValue == ''">a</span><span *ngIf="gAValue != ''">{{gAValue}}</span>
+                        <span *ngIf="gAValue == ''"><i>a</i></span><span *ngIf="gAValue != ''">{{gAValue}}</span>
                     </span>
                     <span *ngIf="gBinomialAX && gBinomialAPower">
-                        <span *ngIf="gANValue == ''">n</span><span *ngIf="gANValue != ''">{{gANValue}}</span><span *ngIf="gAValue == ''">a</span><span *ngIf="gAValue != ''"> * {{gAValue}}</span>x<sup><span *ngIf="gANValue == ''">n</span><span *ngIf="gANValue != ''">{{gANValue}}</span>-1</sup>
+                        <span *ngIf="gANValue == ''"><i>n</i></span><span *ngIf="gANValue != ''">{{gANValue}}</span><span *ngIf="gAValue == ''"><i>a</i></span><span *ngIf="gAValue != ''"> * {{gAValue}}</span>x<sup><span *ngIf="gANValue == ''"><i>n</i></span><span *ngIf="gANValue != ''">{{gANValue}}</span>-1</sup>
                     </span>
                     <span> {{this.operatorG}} </span>
                     <span *ngIf="!gBinomialBX">0</span>
                     <span *ngIf="gBinomialBX && !gBinomialBPower">
-                        <span *ngIf="gBValue == ''">b</span><span *ngIf="gBValue != ''">{{gBValue}}</span>
+                        <span *ngIf="gBValue == ''"><i>b</i></span><span *ngIf="gBValue != ''">{{gBValue}}</span>
                     </span>
                     <span *ngIf="gBinomialBX && gBinomialBPower">
-                        <span *ngIf="gBNValue == ''">n</span><span *ngIf="gBNValue != ''">{{gBNValue}}</span><span *ngIf="gBValue == ''">b</span><span *ngIf="gBValue != ''"> * {{gBValue}}</span>x<sup><span *ngIf="gBNValue == ''">n</span><span *ngIf="gBNValue != ''">{{gBNValue}}</span>-1</sup>
+                        <span *ngIf="gBNValue == ''"><i>n</i></span><span *ngIf="gBNValue != ''">{{gBNValue}}</span><span *ngIf="gBValue == ''"><i>b</i></span><span *ngIf="gBValue != ''"> * {{gBValue}}</span>x<sup><span *ngIf="gBNValue == ''"><i>n</i></span><span *ngIf="gBNValue != ''">{{gBNValue}}</span>-1</sup>
                     </span>)
             </span>
             <span *ngIf="this.selectionG.value == 'constant'">
-                (c)<sup>p</sup> → f'(x) = p(c)<sup>p-1</sup> * (0)
+                (<span *ngIf="gCValue == ''"><i>c</i></span><span *ngIf="gCValue != ''">{{gCValue}}</span>)<sup><span *ngIf="pValue == ''"><i>p</i></span><span *ngIf="pValue != ''">{{pValue}}</span></sup> → f'(x) = 
+                <span *ngIf="pValue == ''"><i>p</i></span><span *ngIf="pValue != ''">{{pValue}}</span>(<span *ngIf="gCValue == ''"><i>c</i></span><span *ngIf="gCValue != ''">{{gCValue}}</span>)<sup><span *ngIf="pValue == ''"><i>p</i></span><span *ngIf="pValue != ''">{{pValue}}</span>-1</sup> * (0)
             </span>
             <span *ngIf="this.selectionG.value == 'constantMultiple'">
-                (c * mx<sup>n</sup>)<sup>p</sup> → f'(x) = p(c * mx<sup>n</sup>)<sup>p-1</sup> * (c * nmx<sup>n-1</sup>)
+                (<span *ngIf="gCValue == ''"><i>c</i></span>
+                <span *ngIf="gCValue != ''">{{gCValue}}</span>
+                <span> * </span>
+                <span *ngIf="gMValue == ''"><i>m</i></span>
+                <span *ngIf="gMValue != ''">{{gMValue}}</span>x<span *ngIf="gNValue == ''"><sup><i>n</i></sup></span>
+                <span *ngIf="gNValue != ''"><sup>{{gNValue}}</sup></span>)<sup><span *ngIf="pValue == ''"><i>p</i></span><span *ngIf="pValue != ''">{{pValue}}</span></sup> → f'(x) = 
+                <span *ngIf="pValue == ''"><i>p</i></span><span *ngIf="pValue != ''">{{pValue}}</span>(<span *ngIf="gCValue == ''"><i>c</i></span>
+                <span *ngIf="gCValue != ''">{{gCValue}}</span>
+                <span> * </span>
+                <span *ngIf="gMValue == ''"><i>m</i></span>
+                <span *ngIf="gMValue != ''">{{gMValue}}</span>x<span *ngIf="gNValue == ''"><sup><i>n</i></sup></span>
+                <span *ngIf="gNValue != ''"><sup>{{gNValue}}</sup></span>)<sup><span *ngIf="pValue == ''"><i>p</i></span><span *ngIf="pValue != ''">{{pValue}}</span>-1</sup> * (<span *ngIf="gCValue == ''"><i>c</i></span>
+                <span *ngIf="gCValue != ''">{{gCValue}}</span>
+                <span> * </span>
+                <span *ngIf="gNValue == ''"><i>n</i></span>
+                <span *ngIf="gNValue != ''">{{gNValue}}<span *ngIf="gMValue != ''"> * </span></span>
+                <span *ngIf="gMValue == ''"><i>m</i></span><span *ngIf="gMValue != ''">{{gMValue}}</span>x<span *ngIf="gNValue == ''"><sup><i>n</i>-1</sup></span>
+                <span *ngIf="gNValue != ''"><sup>{{gNValue}}-1</sup></span>)
             </span>
             <span *ngIf="this.selectionG.value == 'power'">
-                (mx<sup>n</sup>)<sup>p</sup> → f'(x) = p(mx<sup>n</sup>)<sup>p-1</sup> * (nmx<sup>n-1</sup>)
+                (<span *ngIf="gMValue == ''"><i>m</i></span>
+                <span *ngIf="gMValue != ''">{{gMValue}}</span>x<span *ngIf="gNValue == ''"><sup><i>n</i></sup></span>
+                <span *ngIf="gNValue != ''"><sup>{{gNValue}}</sup></span>)<sup><span *ngIf="pValue == ''"><i>p</i></span><span *ngIf="pValue != ''">{{pValue}}</span></sup>
+                → f'(x) = <span *ngIf="pValue == ''"><i>p</i></span><span *ngIf="pValue != ''">{{pValue}}</span>(<span *ngIf="gMValue == ''"><i>m</i></span>
+                <span *ngIf="gMValue != ''">{{gMValue}}</span>x<span *ngIf="gNValue == ''"><sup><i>n</i></sup></span>
+                <span *ngIf="gNValue != ''"><sup>{{gNValue}}</sup></span>)<sup><span *ngIf="pValue == ''"><i>p</i>-1</span><span *ngIf="pValue != ''">{{pValue}}-1</span></sup> * (<span *ngIf="gNValue == ''"><i>n</i></span>
+                <span *ngIf="gNValue != ''">{{gNValue}}<span *ngIf="gMValue != ''"> * </span></span>
+                <span *ngIf="gMValue == ''"><i>m</i></span><span *ngIf="gMValue != ''">{{gMValue}}</span>x<span *ngIf="gNValue == ''"><sup><i>n</i>-1</sup></span>
+                <span *ngIf="gNValue != ''"><sup>{{gNValue}}-1</sup></span>)
             </span>
         </h2>
 

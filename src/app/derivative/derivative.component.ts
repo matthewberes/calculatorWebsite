@@ -897,7 +897,67 @@ export class DerivativeComponent {
         this.calculationDenominator = "(" + this.hTemp + ")" + "<sup>2</sup>";
         break;
       case "chain":
+        this.calculation = "";
+        this.gTemp = "";
+        this.gDerivativeTemp = "";
+        this.hTemp = "";
+        this.hDerivativeTemp = "";
+        switch (this.selectG) {
+          case "binomial":
+            if (this.chainForm.get('gAXBox')?.value && !this.chainForm.get('gAPowerBox')?.value) {
+              this.gTemp += String(this.chainForm.get('gA')?.value && (this.chainForm.get('gA')?.value != 1 ? this.chainForm.get('gA')?.value : "") + "x");
+              this.gDerivativeTemp += String(this.chainForm.get('gA')?.value && this.chainForm.get('gA')?.value != 1 ? this.chainForm.get('gA')?.value : 1);
+            } else if (this.chainForm.get('gAXBox')?.value && this.chainForm.get('gAPowerBox')?.value) {
+              if (this.chainForm.get('gNA')?.value - 1 != 1 && this.chainForm.get('gNA')?.value - 1 != 0) {
+                this.gTemp += String(this.chainForm.get('gA')?.value + "x<sup>" + this.chainForm.get('gNA')?.value + "</sup>");
+                this.gDerivativeTemp += String(this.chainForm.get('gNA')?.value * this.chainForm.get('gA')?.value + "x<sup>" + (this.chainForm.get('gNA')?.value - 1) + "</sup>");
+              } else if (this.chainForm.get('gNA')?.value - 1 == 1) {
+                this.gTemp += String(this.chainForm.get('gA')?.value + "x<sup>" + this.chainForm.get('gNA')?.value + "</sup>");
+                this.gDerivativeTemp += String(this.chainForm.get('gNA')?.value * this.chainForm.get('gA')?.value + "x");
+              } else if (this.chainForm.get('gNA')?.value - 1 == 0) {
+                this.gTemp += String(this.chainForm.get('gA')?.value + "x");
+                this.gDerivativeTemp += String(this.chainForm.get('gA')?.value);
+              }
+            } else if (!this.chainForm.get('gAXBox')?.value) {
+              this.gTemp += String(this.chainForm.get('gA')?.value);
+              this.gDerivativeTemp += "0";
+            }
+            this.gTemp += " " + this.operatorG + " ";
+            this.gDerivativeTemp += " " + this.operatorG + " ";
+            if (this.chainForm.get('gBXBox')?.value && !this.chainForm.get('gBPowerBox')?.value) {
+              this.gTemp += String(this.chainForm.get('gB')?.value && (this.chainForm.get('gB')?.value != 1 ? this.chainForm.get('gB')?.value : "") + "x");
+              this.gDerivativeTemp += String(this.chainForm.get('gB')?.value && this.chainForm.get('gB')?.value != 1 ? this.chainForm.get('gB')?.value : 1);
+            } else if (this.chainForm.get('gBXBox')?.value && this.chainForm.get('gBPowerBox')?.value) {
+              if (this.chainForm.get('gNB')?.value - 1 != 1 && this.chainForm.get('gNB')?.value - 1 != 0) {
+                this.gTemp += String(this.chainForm.get('gB')?.value + "x<sup>" + this.chainForm.get('gNB')?.value + "</sup>");
+                this.gDerivativeTemp += String(this.chainForm.get('gNB')?.value * this.chainForm.get('gB')?.value + "x<sup>" + (this.chainForm.get('gNB')?.value - 1) + "</sup>");
+              } else if (this.chainForm.get('gNB')?.value - 1 == 1) {
+                this.gTemp += String(this.chainForm.get('gB')?.value + "x<sup>" + this.chainForm.get('gNB')?.value + "</sup>");
+                this.gDerivativeTemp += String(this.chainForm.get('gNB')?.value * this.chainForm.get('gB')?.value + "x");
+              } else if (this.chainForm.get('gNB')?.value - 1 == 0) {
+                this.gTemp += String(this.chainForm.get('gB')?.value + "x");
+                this.gDerivativeTemp += String(this.chainForm.get('gB')?.value);
+              }
+            } else if (!this.chainForm.get('gBXBox')?.value) {
+              this.gTemp += String(this.chainForm.get('gB')?.value);
+              this.gDerivativeTemp += "0";
+            }
+            break;
+          case "constant":
+            this.gTemp = String(this.chainForm.get('gC')?.value);
+            this.gDerivativeTemp = "0";
+            break;
+          case "constantMultiple":
+            this.gTemp = String((this.chainForm.get('gC')?.value) + " * " + (this.chainForm.get('gM')?.value ? this.chainForm.get('gM')?.value : "") + (this.chainForm.get('gN')?.value != 1 && this.chainForm.get('gN')?.value != 0 ? "x<sup>" + (this.chainForm.get('gN')?.value) + "</sup>" : "x"));
+            this.gDerivativeTemp = String((this.chainForm.get('gC')?.value * this.chainForm.get('gN')?.value * (this.chainForm.get('gM')?.value ? this.chainForm.get('gM')?.value : 1)) + (this.chainForm.get('gN')?.value - 1 != 1 && this.chainForm.get('gN')?.value - 1 != 0 ? "x<sup>" + (this.chainForm.get('gN')?.value - 1) + "</sup>" : (this.chainForm.get('gN')?.value - 1 != 0 ? "x" : "")));
+            break;
+          case "power":
+            this.gTemp = String((this.chainForm.get('gM')?.value && this.chainForm.get('gM')?.value != 1 ? this.chainForm.get('gM')?.value : "") + (this.chainForm.get('gN')?.value != 1 && this.chainForm.get('gN')?.value != 0 ? "x<sup>" + (this.chainForm.get('gN')?.value) + "</sup>" : "x"));
+            this.gDerivativeTemp = String(this.chainForm.get('gN')?.value * (this.chainForm.get('gM')?.value ? this.chainForm.get('gM')?.value : 1) + (this.chainForm.get('gN')?.value - 1 != 1 && this.chainForm.get('gN')?.value - 1 != 0 ? "x<sup>" + (this.chainForm.get('gN')?.value - 1) + "</sup>" : (this.chainForm.get('gN')?.value - 1 != 0 ? "x" : "")));
+            break;
+        }
         break;
+        this.calculation = "";
     }
     this.showCalculation = true;
   }
