@@ -781,6 +781,7 @@ export class DerivativeComponent {
         break;
       case "quotient":
         this.calculation = "";
+        this.calculationDenominator = "";
         this.gTemp = "";
         this.gDerivativeTemp = "";
         this.hTemp = "";
@@ -965,23 +966,139 @@ export class DerivativeComponent {
   clear() {
     this.calculation = "";
     this.showCalculation = false;
-    switch (this.currRule) {
-      case "constant":
-        break;
-      case "constantMultiple":
-        break;
-      case "power":
-        break;
-      case "sum":
-        break;
-      case "difference":
-        break;
-      case "product":
-        break;
-      case "quotient":
-        break;
-      case "chain":
-        break;
-    }
+    // constant
+    this.constantForm = new FormGroup({
+      c: new FormControl()
+    });
+    this.constantC = "";
+
+    // constantMultiple":
+    this.constantMultipleForm = new FormGroup({
+      c: new FormControl(),
+      m: new FormControl,
+      n: new FormControl
+    })
+    this.constantMultipleC = "";
+    this.constantMultipleN = "";
+    this.constantMultipleM = "";
+
+    // power":
+    this.powerForm = new FormGroup({
+      n: new FormControl(),
+      m: new FormControl()
+    });
+    this.powerN = "";
+    this.powerM = "";
+
+    // case "sum":
+    this.sumSetUpForm = new FormGroup({
+      numberOfInputs: new FormControl()
+    })
+    this.inputs = [];
+    this.inputOptions = [];
+    this.operators = [];
+    this.sumInputForm = new FormGroup({})
+    this.sumInputsC = [];
+    this.sumInputsN = [];
+    this.sumInputsM = [];
+
+    // case "product":
+    this.productInputForm = new FormGroup({
+      gA: new FormControl(),
+      gB: new FormControl(),
+      gC: new FormControl(),
+      gM: new FormControl(),
+      gN: new FormControl(),
+      gNA: new FormControl(),
+      gNB: new FormControl(),
+      gAXBox: new FormControl(),
+      gBXBox: new FormControl(),
+      gAPowerBox: new FormControl(),
+      gBPowerBox: new FormControl(),
+      hA: new FormControl(),
+      hB: new FormControl(),
+      hC: new FormControl(),
+      hM: new FormControl(),
+      hN: new FormControl(),
+      hNA: new FormControl(),
+      hNB: new FormControl(),
+      hAXBox: new FormControl(false),
+      hBXBox: new FormControl(false),
+      hAPowerBox: new FormControl(false),
+      hBPowerBox: new FormControl(false),
+    })
+    this.gAValue = "";
+    this.gANValue = "";
+    this.gBValue = "";
+    this.gBNValue = "";
+    this.gCValue = "";
+    this.gMValue = "";
+    this.gNValue = "";
+    this.hAValue = "";
+    this.hANValue = "";
+    this.hBValue = "";
+    this.hBNValue = "";
+    this.hCValue = "";
+    this.hMValue = "";
+    this.hNValue = "";
+    this.selectG = "binomial";
+    this.selectH = "binomial";
+    this.operatorG = "+";
+    this.operatorH = "+";
+    this.gBinomialAX = false;
+    this.gBinomialBX = false;
+    this.gBinomialAPower = false;
+    this.gBinomialBPower = false;
+    this.hBinomialAX = false;
+    this.hBinomialBX = false;
+    this.hBinomialAPower = false;
+    this.hBinomialBPower = false;
+    this.gTemp = "";
+    this.gDerivativeTemp = "";
+    this.hTemp = "";
+    this.hDerivativeTemp = "";
+
+    // case "quotient":
+    this.calculationDenominator = "";
+    this.quotientForm = new FormGroup({
+      gA: new FormControl(),
+      gB: new FormControl(),
+      gC: new FormControl(),
+      gM: new FormControl(),
+      gN: new FormControl(),
+      gNA: new FormControl(),
+      gNB: new FormControl(),
+      gAXBox: new FormControl(),
+      gBXBox: new FormControl(),
+      gAPowerBox: new FormControl(),
+      gBPowerBox: new FormControl(),
+      hA: new FormControl(),
+      hB: new FormControl(),
+      hC: new FormControl(),
+      hM: new FormControl(),
+      hN: new FormControl(),
+      hNA: new FormControl(),
+      hNB: new FormControl(),
+      hAXBox: new FormControl(false),
+      hBXBox: new FormControl(false),
+      hAPowerBox: new FormControl(false),
+      hBPowerBox: new FormControl(false),
+    })
+    this.pValue = "";
+    // case "chain":
+    this.chainForm = new FormGroup({
+      gA: new FormControl(),
+      gB: new FormControl(),
+      gC: new FormControl(),
+      gM: new FormControl(),
+      gN: new FormControl(),
+      p: new FormControl(),
+      gNA: new FormControl(),
+      gNB: new FormControl(),
+      gAXBox: new FormControl(),
+      gBXBox: new FormControl(),
+      gAPowerBox: new FormControl(),
+      gBPowerBox: new FormControl(),
+    })
   }
 }
