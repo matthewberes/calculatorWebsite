@@ -956,8 +956,8 @@ export class DerivativeComponent {
             this.gDerivativeTemp = String(this.chainForm.get('gN')?.value * (this.chainForm.get('gM')?.value ? this.chainForm.get('gM')?.value : 1) + (this.chainForm.get('gN')?.value - 1 != 1 && this.chainForm.get('gN')?.value - 1 != 0 ? "x<sup>" + (this.chainForm.get('gN')?.value - 1) + "</sup>" : (this.chainForm.get('gN')?.value - 1 != 0 ? "x" : "")));
             break;
         }
+        this.calculation = String(this.chainForm.get('p')?.value + "(" + this.gTemp + ")" + (this.chainForm.get('p')?.value - 1 != 1 ? "<sup>" + (this.chainForm.get('p')?.value - 1) + "</sup>" : "") + " * (" + this.gDerivativeTemp + ")");
         break;
-        this.calculation = "";
     }
     this.showCalculation = true;
   }
